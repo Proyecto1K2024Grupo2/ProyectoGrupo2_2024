@@ -8,5 +8,5 @@ El recepcionista de cada centro es responsable de gestionar la lista de clientes
 Cada cliente debe tener como mínimo una mascota registrada en el sistema. Las mascotas se clasifican en especies, y las especies se dividen en razas. Además, de cada mascota se guarda información como su nombre, especie, raza, edad y el historial médico (tratamientos previos, enfermedades, veterinario/cirujano que lo atendió…).
 
 
-El recepcionista se encarga de gestionar las citas de cada veterinario y sala correspondiente. Los tratamientos asignados a cada mascota los gestionan los veterinarios.
+El recepcionista se encarga de gestionar las citas las cuales sabemos la (fecha, hora,sala correspondiente y centro). Los tratamientos asignados a cada mascota los gestionan los veterinarios.
 En uno de los centros habrá un departamento de logística que se encarga de gestionar el inventario de medicamentos y equipos médicos del resto de centros.
