@@ -1,7 +1,7 @@
 # ProyectoGrupo2_2024
 ## Sistema de Información
 Nuestro negocio es una empresa formada por tres centros veterinarios.
-De los centros se sabe (nombre, dirección y código postal), cada centro está dividido en varias salas, como consultas, quirófano y áreas de hospitalización etc.
+De los centros se sabe el nombre, dirección, código postal y el número de trabajadores individualmente. Cada centro está dividido en varias salas, como consultas, quirófano y áreas de hospitalización etc.
 Cada centro cuenta con sus propios empleados, que incluye veterinarios, cirujanos, recepcionistas y cuidadores. De cada empleado se sabe (el DNI, nombre, teléfono, sueldo, número de cuenta)
 
 El recepcionista de cada centro es responsable de gestionar la lista de clientes, de los cuales se sabe el DNI, nombre y teléfono. 
