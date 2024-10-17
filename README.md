@@ -10,3 +10,6 @@ Cada cliente debe tener como mínimo una mascota registrada en el sistema. Las m
 
 El recepcionista se encarga de gestionar las citas las cuales sabemos la (fecha, hora,sala correspondiente y centro). Los tratamientos asignados a cada mascota los gestionan los veterinarios.
 En uno de los centros habrá un departamento de logística que se encarga de gestionar el inventario de medicamentos y equipos médicos del resto de centros.
+
+## Diagrama entidad relación en papel
+![Imagen](https://github.com/user-attachments/assets/75f16496-f3b9-4151-ad57-1dcbf918fde0)
