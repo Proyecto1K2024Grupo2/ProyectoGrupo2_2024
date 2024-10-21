@@ -12,4 +12,5 @@ El recepcionista se encarga de gestionar las citas las cuales sabemos la (fecha,
 En uno de los centros habrá un departamento de logística que se encarga de gestionar el inventario de medicamentos y equipos médicos del resto de centros.
 
 ## Diagrama entidad relación en papel
-![Imagen](https://github.com/user-attachments/assets/75f16496-f3b9-4151-ad57-1dcbf918fde0)
+![er2](https://github.com/user-attachments/assets/cf9e078b-66a5-4a33-a1c0-1addbccac52c)
+
