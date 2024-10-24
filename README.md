@@ -13,4 +13,5 @@ El recepcionista se encarga de gestionar las citas las cuales sabemos la (fecha,
 ## Diagrama entidad relación en papel
 ![er3](https://github.com/user-attachments/assets/65f0c4f0-e29c-42f7-a794-7940a82f11e0)
 
-
+## Diagrama entidad relación hecho con ERDplus
+![image (3)](https://github.com/user-attachments/assets/d0fe8b60-9a19-48f9-8e1e-dd767a1af459)
