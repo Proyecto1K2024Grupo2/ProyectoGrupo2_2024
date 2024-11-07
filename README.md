@@ -57,9 +57,9 @@ FK: (dniRecepcionista) → RECEPCIONISTA\
 
 \
 **TRATAMIENTO** (<u>id</u>, tratamiento, medicina, posologia, dniCuidador*, fechaCuidador, horaCuidador, dniVeterinario*, fechaVeterinario, horaVeterinario, dniCirujano*, fechaCirujano, horaCirujano)\
-PK: (id)
-FK: (dniCuidador) -> CUIDADOR
-FK: (dniVeterinario) -> VETERINARIO
+PK: (id)\
+FK: (dniCuidador) -> CUIDADOR\
+FK: (dniVeterinario) -> VETERINARIO\
 FK: (dniCirujano) -> CIRUJANO
 
 \
