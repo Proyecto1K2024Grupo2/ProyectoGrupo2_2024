@@ -127,7 +127,7 @@ FK: (dni) → EMPLEADO
 |------------|--------------|---------------------------------------------------|
 | dni        | VARCHAR (9)  | Clave primaria, código identificador del cliente. |
 | nombre     | VARCHAR (64) | Nombre del cliente                                |
-| numTeléfono| INT (9)      | Dirección del cliente                             |
+| numTeléfono| INT (9)      | Clave foranea, referencia a TELEFONO              |
 
 \
 **Teléfono**
@@ -170,12 +170,21 @@ FK: (dni) → EMPLEADO
 \
 **TRATAMIENTO**
 
-| Atributo    | Tipo           | Descripción                                   |
-|-------------|----------------|-----------------------------------------------|
-| id          | INT            | Clave primaria, identificador del tratamiento |
-| tratamiento | VARCHAR (1500) | Descripción del tratamiento                   |
-| medicamento | VARCHAR (64)   | Medicamento utilizado en el tratamiento       |
-| posología   | VARCHAR (64)   | Posología del medicamento                     |
+| Atributo         | Tipo           | Descripción                                                       |
+|------------------|----------------|-------------------------------------------------------------------|
+| id               | INT            | Clave primaria, identificador del tratamiento                     |
+| tratamiento      | VARCHAR (1500) | Descripción del tratamiento                                       |
+| medicamento      | VARCHAR (64)   | Medicamento utilizado en el tratamiento                           |
+| posología        | VARCHAR (64)   | Posología del medicamento                                         |
+| dniCuidador      | VARCHAR (9)    | Clave foránea, referencia a CUIDADOR                              |
+| fechaCuidador    | DATE           | Fecha del tratamienento proporcionado por el cuidador             |
+| horaCuidador     | TIME           | Hora del tratamienento proporcionado por el cuidador              |
+| dniVeterinario   | VARCHAR (9)    | Clave foránea, referencia a VETERINARIO                           |
+| fechaVeterinario | DATE           | Fecha del tratamienento proporcionado por el veterinario          |
+| horaVeterinario  | TIME           | Hora del tratamienento proporcionado por el veterinario           |
+| dniCirujano      | VARCHAR (9)    | Clave foránea, referencia a CIRUJANO                              |
+| fechaCirujano    | DATE           | Fecha del tratamienento proporcionado por el cirujano             |
+| horaCirujano     | TIME           | Hora del tratamienento proporcionado por el cirujano              |
 
 \
 **HISTORIAL**
