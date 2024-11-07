@@ -56,8 +56,11 @@ FK: (nombreSala) → SALA\
 FK: (dniRecepcionista) → RECEPCIONISTA\
 
 \
-**TRATAMIENTO** (<u>id</u>, tratamiento, medicina, posologia)\
+**TRATAMIENTO** (<u>id</u>, tratamiento, medicina, posologia, dniCuidador*, fechaCuidador, horaCuidador, dniVeterinario*, fechaVeterinario, horaVeterinario, dniCirujano*, fechaCirujano, horaCirujano)\
 PK: (id)
+FK: (dniCuidador) -> CUIDADOR
+FK: (dniVeterinario) -> VETERINARIO
+FK: (dniCirujano) -> CIRUJANO
 
 \
 **HISTORIAL** (<u>id_cita, id_tratamiento</u>, id_animal)\
