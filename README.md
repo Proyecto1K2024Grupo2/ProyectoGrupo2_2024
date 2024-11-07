@@ -30,9 +30,14 @@ FK: (dni_empleado) → EMPLEADO\
 FK: (cod_centro) → CENTRO
 
 \
-**CLIENTE** (<u>dni</u>, nombre, telefono)\
+**CLIENTE** (<u>dni</u>, nombre, numTelefono*)\
  PK: (dni)
+ FK: (numTelefono) -> TELEFONO
 
+\
+**TELEFONO** (<u>teléfono</u>)\
+ PK: (teléfono)
+ 
 \
 **ANIMAL** (<u>id</u>, dni_cliente*, nombre, especie, raza, edad)\
 PK: (id)\
