@@ -46,9 +46,9 @@ FK: (cod_centro) → CENTRO
 
 \
 **CITA** (<u>id</u>, fecha, hora, nombreSala*, dniRecepcionista*)\
-PK: (id)
-FK: (nombreSala) → SALA
-FK: (dniRecepcionista) → RECEPCIONISTA
+PK: (id)\
+FK: (nombreSala) → SALA\
+FK: (dniRecepcionista) → RECEPCIONISTA\
 
 \
 **TRATAMIENTO** (<u>id</u>, tratamiento, medicina, posologia)\
