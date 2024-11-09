@@ -103,6 +103,34 @@ FK: (id_animal) → ANIMAL
 | sueldo    | DOUBLE       | Sueldo del empleado                              |
 
 \
+**VETERINARIO**
+
+| Atributo | Tipo           | Descripción                             |
+|----------|----------------|-----------------------------------------|
+| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
+
+\
+**CIRUJANO**
+
+| Atributo | Tipo           | Descripción                             |
+|----------|----------------|-----------------------------------------|
+| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
+
+\
+**CUIDADOR**
+
+| Atributo | Tipo           | Descripción                             |
+|----------|----------------|-----------------------------------------|
+| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
+
+\
+**RECEPCIONISTA**
+
+| Atributo | Tipo           | Descripción                             |
+|----------|----------------|-----------------------------------------|
+| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
+
+\
 **CENTRO**
 
 | Atributo  | Tipo         | Descripción                             |
@@ -119,6 +147,26 @@ FK: (id_animal) → ANIMAL
 |--------------|-----------|--------------------------------------|
 | dni_empleado | INT (9)   | Clave foránea, referencia a EMPLEADO |
 | cod_centro   | INT       | Clave foránea, referencia a CENTRO   |
+
+\
+**SALA**
+
+| Atributo     | Tipo         | Descripción                                     |
+|--------------|--------------|-------------------------------------------------|
+| nombre       | VARCHAR (32) | Clave primaria, código identificador de la sala |
+| Cod_centro   | INT          | Clave primaria, código único del centro         |
+
+\
+**CITA**
+
+| Atributo          | Tipo         | Descripción                                                                       |
+|-------------------|--------------|-----------------------------------------------------------------------------------|
+| id                | INT          | Clave primaria, identificador único de la cita                                    |
+| cod_sala          | INT          | Clave foránea, referencia a SALA                                                  |
+| fecha             | DATE         | Fecha de la cita                                                                  |
+| hora              | TIME         | Hora de la cita                                                                   |
+| nombreSala        | VARCHAR (32) | Clave primaria, código identificador de la sala, clave foránea, referencia a SALA |
+| dniRecepcionista  | VARCHAR (9)  | Clave foránea, referencia a RECEPCIONISTA                                         |
 
 \
 **CLIENTE**
@@ -148,26 +196,6 @@ FK: (id_animal) → ANIMAL
 | edad        | INT          | Edad del animal en años                        |
 
 \
-**SALA**
-
-| Atributo     | Tipo         | Descripción                                     |
-|--------------|--------------|-------------------------------------------------|
-| nombre       | VARCHAR (32) | Clave primaria, código identificador de la sala |
-| Cod_centro   | INT          | Clave primaria, código único del centro         |
-
-\
-**CITA**
-
-| Atributo          | Tipo         | Descripción                                                                       |
-|-------------------|--------------|-----------------------------------------------------------------------------------|
-| id                | INT          | Clave primaria, identificador único de la cita                                    |
-| cod_sala          | INT          | Clave foránea, referencia a SALA                                                  |
-| fecha             | DATE         | Fecha de la cita                                                                  |
-| hora              | TIME         | Hora de la cita                                                                   |
-| nombreSala        | VARCHAR (32) | Clave primaria, código identificador de la sala, clave foránea, referencia a SALA |
-| dniRecepcionista  | VARCHAR (9)  | Clave foránea, referencia a RECEPCIONISTA                                         |
-
-\
 **TRATAMIENTO**
 
 | Atributo         | Tipo           | Descripción                                                       |
@@ -195,31 +223,5 @@ FK: (id_animal) → ANIMAL
 | id_tratamiento | INT   | Clave primaria, clave ajena identifica el tratamiento |
 | Id_animal      | INT   | Clave primaria, clave ajena identifica al animal      |
 
-\
-**VETERINARIO**
 
-| Atributo | Tipo           | Descripción                             |
-|----------|----------------|-----------------------------------------|
-| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
-
-\
-**CIRUJANO**
-
-| Atributo | Tipo           | Descripción                             |
-|----------|----------------|-----------------------------------------|
-| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
-
-\
-**CUIDADOR**
-
-| Atributo | Tipo           | Descripción                             |
-|----------|----------------|-----------------------------------------|
-| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
-
-\
-**RECEPCIONISTA**
-
-| Atributo | Tipo           | Descripción                             |
-|----------|----------------|-----------------------------------------|
-| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
 
