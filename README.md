@@ -19,6 +19,26 @@ El recepcionista se encarga de gestionar las citas las cuales sabemos la (fecha,
 **EMPLEADO** (<u>dni</u>, nombre, telefono, numcuenta, sueldo)\
  PK: (dni)
 
+ \
+**VETERINARIO** (<u>dni*</u>)\
+PK: (dni)\
+FK: (dni) → EMPLEADO
+
+\
+**CIRUJANO** (<u>dni*</u>)\
+PK: (dni)\
+FK: (dni) → EMPLEADO
+
+\
+**CUIDADOR** (<u>dni*</u>)\
+PK: (dni)\
+FK: (dni) → EMPLEADO
+
+\
+**RECEPCIONISTA** (<u>dni*</u>)\
+PK: (dni)\
+FK: (dni) → EMPLEADO
+
 \
 **CENTRO** (<u>cod</u>, nombre, direccion, cp)\
  PK: (cod)
@@ -68,26 +88,6 @@ PK: (id_cita, id_tratamiento)\
 FK: (id_cita) → CITA\
 FK: (id_tratamiento) → TRATAMIENTO\
 FK: (id_animal) → ANIMAL
-
-\
-**VETERINARIO** (<u>dni*</u>)\
-PK: (dni)\
-FK: (dni) → EMPLEADO
-
-\
-**CIRUJANO** (<u>dni*</u>)\
-PK: (dni)\
-FK: (dni) → EMPLEADO
-
-\
-**CUIDADOR** (<u>dni*</u>)\
-PK: (dni)\
-FK: (dni) → EMPLEADO
-
-\
-**RECEPCIONISTA** (<u>dni*</u>)\
-PK: (dni)\
-FK: (dni) → EMPLEADO
 
 
 ## Diccionario de datos
