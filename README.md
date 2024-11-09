@@ -72,7 +72,7 @@ FK: (dniRecepcionista) → RECEPCIONISTA\
 \
 **ANIMAL** (<u>id</u>, dni_cliente*, nombre, especie, raza, edad)\
 PK: (id)\
-FK: (dni_cliente) → CLIENTE
+FK: (dni_cliente) → CLIENTE\
 VNN: (dni_cliente)
 
 \
