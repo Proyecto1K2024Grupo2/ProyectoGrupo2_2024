@@ -61,13 +61,13 @@ FK: (nombreSala) → SALA\
 FK: (dniRecepcionista) → RECEPCIONISTA\
 
 \
-**CLIENTE** (<u>dni</u>, nombre, numTelefono*)\
+**CLIENTE** (<u>dni</u>, nombre,)\
  PK: (dni)
- FK: (numTelefono) -> TELEFONO
 
 \
-**TELEFONO** (<u>teléfono</u>)\
+**TELEFONO** (<u>teléfono</u>, dniCliente*)\
  PK: (teléfono)
+ FK: (dniCliente) -> CLIENTE
  
 \
 **ANIMAL** (<u>id</u>, dni_cliente*, nombre, especie, raza, edad)\
@@ -127,13 +127,13 @@ FK: (id_animal) → ANIMAL
 |------------|--------------|---------------------------------------------------|
 | dni        | VARCHAR (9)  | Clave primaria, código identificador del cliente. |
 | nombre     | VARCHAR (64) | Nombre del cliente                                |
-| numTeléfono| INT (9)      | Clave foranea, referencia a TELEFONO              |
 
 \
 **Teléfono**
 | Atributo   | Tipo         | Descripción                                       |
 |------------|--------------|---------------------------------------------------|
 | telefono   | INT (9)      | Télefono del cliente                              |
+| dniCliente | VARCHAR (9)  | DNI del dueño del telefono                        |
 
 \
 **ANIMAL**
