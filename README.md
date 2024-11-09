@@ -66,7 +66,7 @@ FK: (dniRecepcionista) → RECEPCIONISTA\
 
 \
 **TELEFONO** (<u>teléfono</u>, dniCliente*)\
- PK: (teléfono)
+ PK: (teléfono)\
  FK: (dniCliente) -> CLIENTE
  
 \
@@ -129,7 +129,7 @@ FK: (id_animal) → ANIMAL
 | nombre     | VARCHAR (64) | Nombre del cliente                                |
 
 \
-**Teléfono**
+**TELEFONO**
 | Atributo   | Tipo         | Descripción                                       |
 |------------|--------------|---------------------------------------------------|
 | telefono   | INT (9)      | Télefono del cliente                              |
