@@ -50,6 +50,17 @@ FK: (dni_empleado) → EMPLEADO\
 FK: (cod_centro) → CENTRO
 
 \
+**SALA** (<u>cod_sala</u>, nombre, cod_centro*)\
+PK: (cod_sala)\
+FK: (cod_centro) → CENTRO
+
+\
+**CITA** (<u>id</u>, fecha, hora, nombreSala*, dniRecepcionista*)\
+PK: (id)\
+FK: (nombreSala) → SALA\
+FK: (dniRecepcionista) → RECEPCIONISTA\
+
+\
 **CLIENTE** (<u>dni</u>, nombre, numTelefono*)\
  PK: (dni)
  FK: (numTelefono) -> TELEFONO
@@ -63,17 +74,6 @@ FK: (cod_centro) → CENTRO
 PK: (id)\
 FK: (dni_cliente) → CLIENTE
 VNN: (dni_cliente)
-
-\
-**SALA** (<u>cod_sala</u>, nombre, cod_centro*)\
-PK: (cod_sala)\
-FK: (cod_centro) → CENTRO
-
-\
-**CITA** (<u>id</u>, fecha, hora, nombreSala*, dniRecepcionista*)\
-PK: (id)\
-FK: (nombreSala) → SALA\
-FK: (dniRecepcionista) → RECEPCIONISTA\
 
 \
 **TRATAMIENTO** (<u>id</u>, tratamiento, medicina, posologia, dniCuidador*, fechaCuidador, horaCuidador, dniVeterinario*, fechaVeterinario, horaVeterinario, dniCirujano*, fechaCirujano, horaCirujano)\
