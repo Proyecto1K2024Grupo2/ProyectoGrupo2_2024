@@ -1,6 +1,6 @@
 # ProyectoGrupo2_2024
 
-## Miembros\
+## Miembros
 Juan Carlos Grcia\
 Martin Davia Mora\
 Raul Quilez Ruiz\
