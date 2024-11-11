@@ -21,6 +21,14 @@ El recepcionista se encarga de gestionar las citas las cuales sabemos la (fecha,
 ![image (6)](https://github.com/user-attachments/assets/2c31f6bc-14a1-4a3b-8b8b-07eb9c0b11d7)
 
 
+### Justificación de decisiones
+Generalización\
+Se ha utilizado la generalización en el ER para representar los diferentes tipos de empleados (VETERINARIO, CIRUJANO, CUIDADOR, RECEPCIONISTA) a partir de la entidad EMPLEADO.\
+Lo que permite reutilizar atributos evitando redundancias, además de que cada tipo de empleado tiene sus funciones y relaciones particulares (como PROPORCIONAR tratamientos o GESTIONAR citas).
+
+Agregación\
+La agregación en HISTORIAL reúne toda la información sobre los tratamientos y visitas de cada animal en una sola entidad, además incluye la información sobre los tratamientos que se le han hecho, las fechas y motivos de sus citas.HISTORIAL hace más fácil el seguimiento de la información de los animales.
+
 
 ## Modelo Relacional
 
