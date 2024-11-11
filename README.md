@@ -115,28 +115,28 @@ FK: (id_animal) → ANIMAL
 
 | Atributo | Tipo           | Descripción                             |
 |----------|----------------|-----------------------------------------|
-| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
+| dni      | VARCHAR (9)    | Clave primaria, referencia a EMPLEADO   |
 
 \
 **CIRUJANO**
 
 | Atributo | Tipo           | Descripción                             |
 |----------|----------------|-----------------------------------------|
-| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
+| dni      | VARCHAR (9)    | Clave primaria, referencia a EMPLEADO   |
 
 \
 **CUIDADOR**
 
 | Atributo | Tipo           | Descripción                             |
 |----------|----------------|-----------------------------------------|
-| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
+| dni      | VARCHAR (9)    | Clave primaria, referencia a EMPLEADO   |
 
 \
 **RECEPCIONISTA**
 
 | Atributo | Tipo           | Descripción                             |
 |----------|----------------|-----------------------------------------|
-| dni      | INT            | Clave primaria, referencia a EMPLEADO   |
+| dni      | VARCHAR (9)    | Clave primaria, referencia a EMPLEADO   |
 
 \
 **CENTRO**
@@ -151,10 +151,10 @@ FK: (id_animal) → ANIMAL
 \
 **TRABAJAR**
 
-| Atributo     | Tipo      | Descripción                          |
-|--------------|-----------|--------------------------------------|
-| dni_empleado | INT (9)   | Clave foránea, referencia a EMPLEADO |
-| cod_centro   | INT       | Clave foránea, referencia a CENTRO   |
+| Atributo     | Tipo          | Descripción                          |
+|--------------|---------------|--------------------------------------|
+| dni_empleado | VARCHAR (9)   | Clave foránea, referencia a EMPLEADO |
+| cod_centro   | INT           | Clave foránea, referencia a CENTRO   |
 
 \
 **SALA**
