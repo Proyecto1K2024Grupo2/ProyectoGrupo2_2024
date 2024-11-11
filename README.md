@@ -1,9 +1,9 @@
 # ProyectoGrupo2_2024
 
-## Miembros
-Juan Carlos Grcia
-Martin Davia Mora
-Raul Quilez Ruiz
+## Miembros\
+Juan Carlos Grcia\
+Martin Davia Mora\
+Raul Quilez Ruiz\
 Rubén Expósito Vicente
 
 ## Sistema de Información
