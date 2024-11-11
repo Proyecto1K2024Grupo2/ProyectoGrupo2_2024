@@ -1,4 +1,11 @@
 # ProyectoGrupo2_2024
+
+## Miembros
+Juan Carlos Grcia
+Martin Davia Mora
+Raul Quilez Ruiz
+Rubén Expósito Vicente
+
 ## Sistema de Información
 Nuestro negocio es una empresa formada por tres centros veterinarios.
 De los centros se sabe el nombre, dirección, código postal y el número de trabajadores individualmente. Cada centro está dividido en varias salas, como recepción, consultas, quirófano y salas de hospitalización etc.
