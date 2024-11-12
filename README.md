@@ -121,30 +121,30 @@ FK: (id_animal) → ANIMAL
 \
 **VETERINARIO**
 
-| Atributo | Tipo           | Descripción                             |
-|----------|----------------|-----------------------------------------|
-| dni      | VARCHAR (9)    | Clave primaria, referencia a EMPLEADO   |
+| Atributo | Tipo           | Descripción                                           |
+|----------|----------------|-------------------------------------------------------|
+| dni      | VARCHAR (9)    | Clave primaria, clave foranea referencia a EMPLEADO   |
 
 \
 **CIRUJANO**
 
-| Atributo | Tipo           | Descripción                             |
-|----------|----------------|-----------------------------------------|
-| dni      | VARCHAR (9)    | Clave primaria, referencia a EMPLEADO   |
+| Atributo | Tipo           | Descripción                                           |
+|----------|----------------|-------------------------------------------------------|
+| dni      | VARCHAR (9)    | Clave primaria, clave foranea referencia a EMPLEADO   |
 
 \
 **CUIDADOR**
 
-| Atributo | Tipo           | Descripción                             |
-|----------|----------------|-----------------------------------------|
-| dni      | VARCHAR (9)    | Clave primaria, referencia a EMPLEADO   |
+| Atributo | Tipo           | Descripción                                           |
+|----------|----------------|-------------------------------------------------------|
+| dni      | VARCHAR (9)    | Clave primaria, clave foranea referencia a EMPLEADO   |
 
 \
 **RECEPCIONISTA**
 
-| Atributo | Tipo           | Descripción                             |
-|----------|----------------|-----------------------------------------|
-| dni      | VARCHAR (9)    | Clave primaria, referencia a EMPLEADO   |
+| Atributo | Tipo           | Descripción                                           |
+|----------|----------------|-------------------------------------------------------|
+| dni      | VARCHAR (9)    | Clave primaria, clave foranea referencia a EMPLEADO   |
 
 \
 **CENTRO**
