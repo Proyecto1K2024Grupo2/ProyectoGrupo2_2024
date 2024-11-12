@@ -8,7 +8,7 @@ Rubén Expósito Vicente
 
 ## Sistema de Información
 Nuestro negocio es una empresa formada por tres centros veterinarios.
-De los centros se sabe el nombre, dirección, código postal y el número de trabajadores individualmente. Cada centro está dividido en varias salas, como recepción, consultas, quirófano y salas de hospitalización etc.
+De los centros se sabe el nombre, dirección y código postal. Cada centro está dividido en varias salas, como recepción, consultas, quirófano y salas de hospitalización etc.
 Cada centro cuenta con sus propios empleados, que incluye veterinarios, cirujanos, recepcionistas y cuidadores. De cada empleado se sabe (el DNI, nombre, teléfono, sueldo, número de cuenta)
 
 El recepcionista de cada centro es responsable de gestionar la lista de clientes, de los cuales se sabe el DNI, nombre y teléfono. 
@@ -28,6 +28,9 @@ Lo que permite reutilizar atributos evitando redundancias, además de que cada t
 
 Agregación\
 La agregación en HISTORIAL reúne toda la información sobre los tratamientos y visitas de cada animal en una sola entidad, además incluye la información sobre los tratamientos que se le han hecho, las fechas y motivos de sus citas.HISTORIAL hace más fácil el seguimiento de la información de los animales.
+
+Entidad teléfono\
+La entidad teléfono, es multievaluada en cliente pero en recepcionista no. Hemos decidido hacerlo así ya que a un cliente es más adecuado asignar un número de teléfono alternativo por si no está disponible, como en el caso de que el cliente sea un padre, trabaje por las mañanas y nos proporcione el número de su mujer que sí está disponible por las mañanas. En empleado es fijo ya que al empleado no le podemos asignar un número de teléfono alternativo.
 
 
 ## Modelo Relacional
