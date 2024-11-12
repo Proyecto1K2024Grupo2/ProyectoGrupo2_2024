@@ -1,7 +1,7 @@
 # ProyectoGrupo2_2024
 
 ## Miembros
-Juan Carlos Grcia\
+Juan Carlos Garcia Andreu\
 Martin Davia Mora\
 Raul Quilez Ruiz\
 Rubén Expósito Vicente
