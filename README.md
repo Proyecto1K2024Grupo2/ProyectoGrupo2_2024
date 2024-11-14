@@ -1,10 +1,10 @@
 # ProyectoGrupo2_2024
 
 ## Miembros
-Juan Carlos Garcia Andreu\
-Martin Davia Mora\
-Raul Quilez Ruiz\
-Rubén Expósito Vicente
+[Juan Carlos Garcia Andreu](https://github.com/JuanCarlosgarcia86) \
+[Martin Davia Mora](https://github.com/Apolonelche) \
+[Raul Quilez Ruiz](https://github.com/Quilez42) \
+[Rubén Expósito Vicente](https://github.com/Rebirzt)
 
 ## Sistema de Información
 Nuestro negocio es una empresa formada por tres centros veterinarios.
