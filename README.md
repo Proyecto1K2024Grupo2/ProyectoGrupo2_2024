@@ -666,6 +666,6 @@ INSERT INTO historial (id_cita, id_animal, id_tratamiento) VALUES
 ```
 
 ## Reparto De Trabajo
-Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]
-Creación y comprobación de restricciones: [Martín, Raul]
+Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
+Creación y comprobación de restricciones: [Martín, Raul]\
 Inserción y comprobación de datos: Rubén, [Juan Carlos]
