@@ -664,3 +664,8 @@ INSERT INTO historial (id_cita, id_animal, id_tratamiento) VALUES
 (1, 1, 1), (2, 2, 2), (3, 3, 3), (4, 4, 4), (5, 5, 5), (6, 6, 6), (7, 7, 7), (8, 8, 8), (9, 9, 9), (10, 10, 10), 
 (11, 1, 11), (12, 2, 12), (13, 3, 13), (14, 4, 14), (15, 5, 15);
 ```
+
+## Reparto De Trabajo
+Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]
+Creación y comprobación de restricciones: [Martín, Raul]
+Inserción y comprobación de datos: Rubén, [Juan Carlos]
