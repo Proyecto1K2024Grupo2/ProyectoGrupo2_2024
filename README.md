@@ -12,7 +12,7 @@ De los centros se sabe el nombre, dirección y código postal. Cada centro está
 Cada centro cuenta con sus propios empleados, que incluye veterinarios, cirujanos, recepcionistas y cuidadores. De cada empleado se sabe (el DNI, nombre, teléfono, sueldo, número de cuenta)
 
 El recepcionista de cada centro es responsable de gestionar la lista de clientes, de los cuales se sabe el DNI, nombre y teléfono. 
-Cada cliente debe tener como mínimo una mascota registrada en el sistema. Las mascotas se clasifican en especies y razas. Además, de cada mascota se guarda información como su nombre, especie, raza, edad y el historial médico (tratamientos previos, enfermedades, veterinario/cirujano que lo atendió…).
+Cada cliente debe tener como mínimo una mascota registrada en el sistema. Las mascotas se clasifican en especies y razas. Además, de cada mascota se guarda información como su nombre, especie, raza, fecha de nacimiento y el historial médico (tratamientos previos, enfermedades, veterinario/cirujano que lo atendió…).
 
 
 El recepcionista se encarga de gestionar las citas las cuales sabemos la (fecha, hora,sala correspondiente y centro). Un tratamiento es una interacción de un trabajador con el animal, por ejemplo: cada operación es un tratamiento distinto, cada vez que el veterinario medica o interactúe cuenta como un tratamiento distinto o cada vez que un  cuidador tenga que cuidar al animal contará como un tratamiento. De cada tratamiento se sabe la fecha y la hora del mismo.
@@ -89,7 +89,7 @@ FK: (dniRecepcionista) → RECEPCIONISTA\
  FK: (dniCliente) -> CLIENTE
  
 \
-**ANIMAL** (<u>id</u>, dni_cliente*, nombre, especie, raza, edad)\
+**ANIMAL** (<u>id</u>, dni_cliente*, nombre, especie, raza, fnac)\
 PK: (id)\
 FK: (dni_cliente) → CLIENTE\
 VNN: (dni_cliente)
@@ -212,7 +212,7 @@ FK: (id_animal) → ANIMAL
 | nombre      | VARCHAR (64) | Nombre del animal                              |
 | especie     | VARCHAR (64) | Especie del animal                             |
 | raza        | VARCHAR (64) | Raza del animal                                |
-| edad        | INT          | Edad del animal en años                        |
+| fnac        | DATE         | Fecha de nacimento del animal                  |
 
 \
 **TRATAMIENTO**
@@ -369,7 +369,7 @@ CREATE TABLE animal(
     nombre VARCHAR(64),
     especie VARCHAR(32),
     raza VARCHAR(32),
-    edad INT,
+    fnac DATE,
     CONSTRAINT fk_dniCliente FOREIGN KEY (dni_cliente) REFERENCES cliente(dni)
         ON UPDATE CASCADE
         ON DELETE NO ACTION,
@@ -592,27 +592,28 @@ INSERT INTO cliente (dni, nombre) VALUES
 
 
 /*TABLA ANIMAL*/
-INSERT INTO animal (dni_cliente, nombre, especie, raza, edad) VALUES
-('11111111A', 'Max', 'Perro', 'Labrador', 3),
-('11111111B', 'Mia', 'Gato', 'Siames', 2),
-('11111111C', 'Rocky', 'Perro', 'Bulldog', 4),
-('11111111D', 'Luna', 'Gato', 'Persa', 1),
-('11111111E', 'Charlie', 'Conejo', 'Enano', 5),
-('11111111F', 'Toby', 'Perro', NULL, 4),
-('11111111G', 'Nala', 'Gato', 'Bengala', NULL),
-('11111111H', 'Simba', 'Perro', NULL, NULL),
-('11111111I', 'Daisy', 'Gato', 'Angora', 2),
-('11111111J', 'Bella', 'Conejo', 'Enano', NULL),
-('11111111K', 'Max', 'Perro', 'Boxer', 6),
-('11111111L', 'Lola', 'Gato', NULL, NULL),
-('11111111M', 'Rocky', 'Perro', 'Husky', NULL),
-('11111111N', 'Luna', 'Gato', 'Persa', 2),
-('11111111O', 'Charlie', 'Pájaro', NULL, 1),
-('11111111P', 'Coco', 'Pájaro', 'Loro', NULL),
-('11111111Q', 'Milo', 'Perro', NULL, NULL),
-('11111111R', 'Kira', 'Gato', 'Europeo', NULL),
-('11111111S', 'Bruno', 'Perro', NULL, 2),
-('11111111T', 'Mia', 'Conejo', NULL, NULL);
+INSERT INTO animal (dni_cliente, nombre, especie, raza, fnac) VALUES
+('11111111A', 'Max', 'Perro', 'Labrador', '2020-05-15'),
+('11111111B', 'Mia', 'Gato', 'Siames', '2021-11-03'),
+('11111111C', 'Rocky', 'Perro', 'Bulldog', '2019-08-22'),
+('11111111D', 'Luna', 'Gato', 'Persa', '2022-04-10'),
+('11111111E', 'Charlie', 'Conejo', 'Enano', '2018-12-25'),
+('11111111F', 'Toby', 'Perro', NULL, '2019-07-14'),
+('11111111G', 'Nala', 'Gato', 'Bengala', '2021-03-30'),
+('11111111H', 'Simba', 'Perro', NULL, '2020-01-20'),
+('11111111I', 'Daisy', 'Gato', 'Angora', '2021-09-15'),
+('11111111J', 'Bella', 'Conejo', 'Enano', '2020-06-11'),
+('11111111K', 'Max', 'Perro', 'Boxer', '2017-02-18'),
+('11111111L', 'Lola', 'Gato', NULL, '2019-10-05'),
+('11111111M', 'Rocky', 'Perro', 'Husky', '2020-11-27'),
+('11111111N', 'Luna', 'Gato', 'Persa', '2021-05-08'),
+('11111111O', 'Charlie', 'Pájaro', NULL, '2022-12-02'),
+('11111111P', 'Coco', 'Pájaro', 'Loro', '2021-07-09'),
+('11111111Q', 'Milo', 'Perro', NULL, '2020-03-25'),
+('11111111R', 'Kira', 'Gato', 'Europeo', '2020-10-13'),
+('11111111S', 'Bruno', 'Perro', NULL, '2021-02-17'),
+('11111111T', 'Mia', 'Conejo', NULL, '2022-06-30');
+
 
 /*TABLA TELEFONO*/
 INSERT INTO telefono (telefono, dniCliente) VALUES
