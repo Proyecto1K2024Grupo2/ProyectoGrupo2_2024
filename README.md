@@ -245,7 +245,7 @@ FK: (id_animal) → ANIMAL
 
 ## Instrucciones DDL
 
-```
+```sql
 CREATE TABLE empleado(
     dni VARCHAR(9),
     nombre VARCHAR(64),
@@ -405,7 +405,7 @@ CREATE TABLE historial(
 
 ## Instrucciones DML
 
-```
+```sql
 /*TABLA EMPLEADO*/
 INSERT INTO empleado (dni, nombre, telefono, numcuenta, sueldo) VALUES
 ('12345678A', 'Juan Pérez', 600123456, 'ES12345678901234567890', 2000.00),
@@ -666,6 +666,52 @@ INSERT INTO historial (id_cita, id_animal, id_tratamiento) VALUES
 (11, 1, 11), (12, 2, 12), (13, 3, 13), (14, 4, 14), (15, 5, 15);
 ```
 
+## Posibes consultas para la BD
+```sql
+-- 1. Devuelveme el nombre de empledado y sus numero de telefono.
+SELECT nombre,telefono from empleado;
+
+-- 2. Calcular el sueldo promedio de los empleados:
+SELECT AVG(sueldo) AS sueldo_promedio FROM empleado;
+
+-- 3. Lista el nombre y el DNI de los clientes cuyo nombre sea Hugo.
+SELECT dni, nombre FROM cliente WHERE nombre LIKE '%Hugo%';
+
+-- 4. devuelveme el nombre de los empleados recepcionuistas y su dni.
+SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
+
+-- 5. Muestra cuantas citas han habido en el mes de Enero
+SELECT COUNT(*) AS total_citas_diciembre FROM cita WHERE MONTH(fecha) = 1;
+
+-- 6. Devuelveme los veterinarios que trabajan en el centro 3.
+SELECT e.nombre, e.dni FROM empleado e JOIN veterinario v ON e.dni = v.dni JOIN trabajar t ON e.dni = t.dniEmpleado WHERE t.codCentro = 3;
+
+-- 7. Mostrar todas las salas ordenadas por el nombre del centro asociado:
+SELECT s.nombre AS sala, c.nombre AS centro FROM sala s
+JOIN centro c ON s.cod_centro = c.cod
+ORDER BY c.nombre;
+
+-- 8. Listar cuantos empleado trabajan en cada centro.
+SELECT c.nombre AS nombre_centro, c.cod AS codigo_centro, COUNT(t.dniEmpleado) AS numero_empleados FROM centro c
+LEFT JOIN trabajar t ON c.cod = t.codCentro
+GROUP BY c.cod, c.nombre
+ORDER BY numero_empleados DESC;
+
+-- 9.Muestra los clientes que han tenido cita el mes de Enero
+SELECT DISTINCT cl.nombre AS nombre_cliente, cl.dni
+FROM cita ci
+JOIN animal an ON ci.id_animal = an.id
+JOIN cliente cl ON an.dni_cliente = cl.dni
+WHERE MONTH(ci.fecha) = 1;
+
+-- 10. Mostrar tratamientos realizados por un veterinario Laura
+SELECT t.id AS id_tratamiento, t.tratamiento, t.medicamento, t.posologia, t.fechaVeterinario, t.horaVeterinario, e.nombre AS nombre_veterinario
+FROM tratamiento t
+JOIN veterinario v ON t.dni_veterinario = v.dni
+JOIN empleado e ON v.dni = e.dni
+WHERE e.nombre = 'Laura Sanchez'
+ORDER BY t.fechaVeterinario DESC, t.horaVeterinario DESC;
+```
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raul]\
