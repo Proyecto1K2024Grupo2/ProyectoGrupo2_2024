@@ -49,10 +49,11 @@ GROUP BY c.cod, c.nombre
 ORDER BY numero_empleados DESC;
 
 --Muestra los clientes que han tenido cita el mes de Enero
-SELECT DISTINCT cl.nombre AS nombre_cliente, cl.dni
-FROM cita ci
-JOIN animal an ON ci.id_animal = an.id
-JOIN cliente cl ON an.dni_cliente = cl.dni
+SELECT DISTINCT cl.*
+FROM cliente cl
+JOIN animal an ON cl.dni = an.dni_cliente
+JOIN historial hi ON hi.id_animal = an.id
+JOIN cita ci ON ci.id = hi.id_cita
 WHERE MONTH(ci.fecha) = 1;
 
 -- Mostrar tratamientos realizados por un veterinario Laura
