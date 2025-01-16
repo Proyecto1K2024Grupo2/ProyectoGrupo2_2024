@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <veterinario:empleados> <!-- 1 -->
+        <empleado:empleado>
+            <empleado:dni></empleado:dni>
+            <empleado:nombre></empleado:nombre>
+            <empleado:telefono></empleado:telefono>
+            <empleado:numCuenta></empleado:numCuenta>
+            <empleado:sueldo></empleado:sueldo>
+            <empleado:tipo></empleado:tipo> <!-- Veterinario, Cirujano, Cuidador, Recepcionista -->
+        </empleado:empleado>
+    </veterinario:empleados>
+
+    <veterinario:centros> <!-- 2 -->
+        <centro:centro>
+            <centro:cod></centro:cod>
+            <centro:nombre></centro:nombre>
+            <centro:direccion></centro:direccion>
+            <centro:cp></centro:cp>
+            <centro:salas>
+                <centro:sala>
+                    <centro:nombre></centro:nombre>
+                </centro:sala>
+            </centro:salas>
+        </centro:centro>
+    </veterinario:centros>
+
+    <veterinario:animales> <!-- 3 -->
+        <animal:animal>
+            <animal:id></animal:id>
+            <animal:nombre></animal:nombre>
+            <animal:especie></animal:especie>
+            <animal:raza></animal:raza>
+            <animal:edad></animal:edad>
+            <animal:dniPropietario></animal:dniPropietario>
+        </animal:animal>
+    </veterinario:animales>
+
+    <veterinario:clientes> <!-- 4 -->
+        <cliente:cliente>
+            <cliente:dni></cliente:dni>
+            <cliente:nombre></cliente:nombre>
+            <cliente:telefono></cliente:telefono>
+        </cliente:cliente>
+        <cliente:cliente>
+            <cliente:dni></cliente:dni>
+            <cliente:nombre></cliente:nombre>
+            <cliente:telefono></cliente:telefono>
+        </cliente:cliente>
+    </veterinario:clientes>
+
+    <veterinario:historiales> <!-- 5 -->
+        <historial:historial>
+            <historial:id></historial:id>
+            <historial:idAnimal></historial:idAnimal>
+            <historial:tratamientos>
+                <historial:tratamiento>
+                    <historial:id></historial:id>
+                    <historial:fecha></historial:fecha>
+                    <historial:hora></historial:hora>
+                    <historial:medicamento></historial:medicamento>
+                    <historial:posologia></historial:posologia>
+                </historial:tratamiento>
+            </historial:tratamientos>
+        </historial:historial>
+    </veterinario:historiales>
+
+    <veterinario:citas> <!-- 6 -->
+        <cita:cita>
+            <cita:id></cita:id>
+            <cita:fecha></cita:fecha>
+            <cita:hora></cita:hora>
+            <cita:sala></cita:sala>
+            <cita:animalId></cita:animalId>
+        </cita:cita>
+    </veterinario:citas>
+</root>

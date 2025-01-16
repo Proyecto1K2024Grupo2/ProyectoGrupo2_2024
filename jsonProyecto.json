@@ -1,0 +1,74 @@
+{
+    "veterinario:empleados": {
+      "empleado:empleado": {
+        "empleado:dni": "",
+        "empleado:nombre": "",
+        "empleado:telefono": "",
+        "empleado:numCuenta": "",
+        "empleado:sueldo": "",
+        "empleado:tipo": ""
+      }
+    },
+    "veterinario:centros": {
+      "centro:centro": {
+        "centro:cod": "",
+        "centro:nombre": "",
+        "centro:direccion": "",
+        "centro:cp": "",
+        "centro:salas": {
+          "centro:sala": {
+            "centro:nombre": ""
+          }
+        }
+      }
+    },
+    "veterinario:animales": {
+      "animal:animal": {
+        "animal:id": "",
+        "animal:nombre": "",
+        "animal:especie": "",
+        "animal:raza": "",
+        "animal:edad": "",
+        "animal:dniPropietario": ""
+      }
+    },
+    "veterinario:clientes": {
+      "cliente:cliente": [
+        {
+          "cliente:dni": "",
+          "cliente:nombre": "",
+          "cliente:telefono": ""
+        },
+        {
+          "cliente:dni": "",
+          "cliente:nombre": "",
+          "cliente:telefono": ""
+        }
+      ]
+    },
+    "veterinario:historiales": {
+      "historial:historial": {
+        "historial:id": "",
+        "historial:idAnimal": "",
+        "historial:tratamientos": {
+          "historial:tratamiento": {
+            "historial:id": "",
+            "historial:fecha": "",
+            "historial:hora": "",
+            "historial:medicamento": "",
+            "historial:posologia": ""
+          }
+        }
+      }
+    },
+    "veterinario:citas": {
+      "cita:cita": {
+        "cita:id": "",
+        "cita:fecha": "",
+        "cita:hora": "",
+        "cita:sala": "",
+        "cita:animalId": ""
+      }
+    }
+  }
+  
