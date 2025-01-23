@@ -1,28 +1,19 @@
-/**
- * 
- */
+
 public class Veterinario extends Empleado {
 
-    /**
-     * Default constructor
-     */
-    public Veterinario() {
+    public Veterinario(String dni, String nombre, int telefono, String numCuenta, double sueldo) {
+        super(dni, nombre, telefono, numCuenta, sueldo);
     }
 
     /**
-     * 
-     */
-    private String dni;
-
-    /**
-     * 
+     *
      */
     public void asignar() {
         // TODO implement here
     }
 
     /**
-     * 
+     *
      */
     public void desAsignar() {
         // TODO implement here

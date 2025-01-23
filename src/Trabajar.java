@@ -1,6 +1,3 @@
-/**
- * 
- */
 public class Trabajar {
 
     /**
@@ -10,12 +7,12 @@ public class Trabajar {
     }
 
     /**
-     * 
+     *
      */
     public String dniEmpleado;
 
     /**
-     * 
+     *
      */
     public int codCentro;
 
