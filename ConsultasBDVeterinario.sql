@@ -27,7 +27,7 @@ SELECT AVG(sueldo) AS sueldo_promedio FROM empleado;
 -- Lista el nombre y el DNI de los clientes cuyo nombre sea Hugo.
 SELECT dni, nombre FROM cliente WHERE nombre LIKE '%Hugo%';
 
--- devuelveme el nombre de los empleados recepcionuistas y su dni.
+-- devuelveme el nombre de los empleados recepcionistas y su dni.
 SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
 
 -- Muestra cuantas citas han habido en el mes de Enero
@@ -64,8 +64,13 @@ JOIN empleado e ON v.dni = e.dni
 WHERE e.nombre = 'Laura Sanchez'
 ORDER BY t.fechaVeterinario DESC, t.horaVeterinario DESC;
 
+--Mostrar los historiales de los animales junto con sus respectivos tratamientos.
+SELECT HISTORIAL.id, ANIMAL.nombre, TRATAMIENTO.tratamiento 
+FROM HISTORIAL
+JOIN ANIMAL ON HISTORIAL.id_animal = ANIMAL.id
+JOIN TRATAMIENTO ON HISTORIAL.id_tratamiento = TRATAMIENTO.id;
 
-
+--
 
 
 
