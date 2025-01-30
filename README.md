@@ -9,6 +9,7 @@
 ## Indice De Contenidos
 ### [Modelo Logico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Modelo%20Logico.md)
 ### [Modelo Fisico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Modelo%20Logico.md)
+### [DDL] (https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/DDL.sql)
 
 ## Instrucciones DDL
 
