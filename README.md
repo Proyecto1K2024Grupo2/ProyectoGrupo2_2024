@@ -38,7 +38,7 @@ SELECT AVG(sueldo) AS sueldo_promedio FROM empleado;
  -- +-----------------+
  -- 1 row in set (0.029 sec)
 ````
-
+\
 -- 3. Lista el nombre y el DNI de los clientes cuyo nombre sea Hugo.
 ```sql
 SELECT dni, nombre FROM cliente WHERE nombre LIKE '%Hugo%';
@@ -49,7 +49,7 @@ SELECT dni, nombre FROM cliente WHERE nombre LIKE '%Hugo%';
  -- +-----------+-------------+
  -- 1 row in set (0.002 sec)
 ````
-
+\
 -- 4. devuelveme el nombre de los empleados recepcionuistas y su dni.
 ```sql
 SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
@@ -69,6 +69,7 @@ SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
  -- +-------------------+-----------+
  -- 10 rows in set (0.004 sec)
 ````
+\
 -- 5. Muestra cuantas citas han habido en el mes de Enero
 ```sql
 SELECT COUNT(*) AS total_citas_diciembre FROM cita WHERE MONTH(fecha) = 1;
@@ -79,6 +80,7 @@ SELECT COUNT(*) AS total_citas_diciembre FROM cita WHERE MONTH(fecha) = 1;
  -- +-----------------------+
  -- 1 row in set (0.005 sec)
 ````
+\
 -- 6. Devuelveme los veterinarios que trabajan en el centro 3.
 ```sql
 SELECT e.nombre, e.dni FROM empleado e JOIN veterinario v ON e.dni = v.dni JOIN trabajar t ON e.dni = t.dniEmpleado WHERE t.codCentro = 3;
@@ -90,7 +92,7 @@ SELECT e.nombre, e.dni FROM empleado e JOIN veterinario v ON e.dni = v.dni JOIN 
  -- +------------------+-----------+
  -- 2 rows in set (0.005 sec)
 ````
-
+\
 -- 7. Mostrar todas las salas ordenadas por el nombre del centro asociado:
 ```sql
 SELECT s.nombre AS sala, c.nombre AS centro FROM sala s
@@ -113,7 +115,7 @@ ORDER BY c.nombre;
  -- +---------+----------------+
  -- 11 rows in set (0.003 sec)
 ````
-
+\
 -- 8. Listar cuantos empleado trabajan en cada centro.
 ```sql
 SELECT c.nombre AS nombre_centro, c.cod AS codigo_centro, COUNT(t.dniEmpleado) AS numero_empleados FROM centro c
@@ -131,7 +133,7 @@ ORDER BY numero_empleados DESC;
  -- +----------------+---------------+------------------+
  -- 5 rows in set (0.004 sec)
 ````
-
+\
 -- 9.Muestra los clientes que han tenido cita el mes de Enero
 ```sql
 SELECT DISTINCT cl.*
@@ -151,7 +153,7 @@ WHERE MONTH(ci.fecha) = 1;
  -- +-----------+---------------+
  -- 5 rows in set (0.011 sec)
 ````
-
+\
 -- 10. Mostrar tratamientos realizados por un veterinario Laura
 ```sql
 SELECT t.id AS id_tratamiento, t.tratamiento, t.medicamento, t.posologia, t.fechaVeterinario, t.horaVeterinario, e.nombre AS nombre_veterinario
@@ -169,7 +171,7 @@ ORDER BY t.fechaVeterinario DESC, t.horaVeterinario DESC;
  -- +----------------+-----------------------+---------------+-------------------+------------------+-----------------+--------------------+
  -- 3 rows in set (0.010 sec)
 ```
-
+\
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raul]\
