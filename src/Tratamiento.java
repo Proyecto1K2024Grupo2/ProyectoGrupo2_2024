@@ -51,15 +51,15 @@ public class Tratamiento {
         // TODO implement here
     }
 
-    public String empleadoToXML(){
-        StringBuilder xmlBuilder=new StringBuilder();
+    public String tratamientoToXML() {
+        StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <id>").append(id).append("</id>")
-                .append("      <tratamiento>").append(tratamiento).append("</tratamiento")
+                .append("      <tratamiento>").append(tratamiento).append("</tratamiento>")
                 .append("      <numCuenta>").append(medicamento).append("</numCuenta>")
                 .append("      <posologia>").append(posologia).append("</posologia>")
                 .append("      <fechaCuidador>").append(fechaCuidador).append("</fechaCuidador>")
                 .append("      <horaCuidador>").append(horaCuidador).append("</horaCuidador>")
-                .append("      <fechaVeterinario>").append(fechaVeterinario).append("</fechaVeterinario")
+                .append("      <fechaVeterinario>").append(fechaVeterinario).append("</fechaVeterinario>")
                 .append("      <horaVeterinario>").append(horaVeterinario).append("</horaVeterinario>")
                 .append("      <fechaCirujano>").append(fechaCirujano).append("</fechaCirujano>")
                 .append("      <horaCirujano>").append(horaCirujano).append("</horaCirujano>")
@@ -68,4 +68,25 @@ public class Tratamiento {
                 .append("      <dni_cirujano>").append(dni_cirujano).append("</dni_cirujano>");
         return xmlBuilder.toString();
     }
+
+    public String tratamientoToJSON() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"id\": \"").append(id).append("\", ")
+                .append("\"tratamiento\": \"").append(tratamiento).append("\", ")
+                .append("\"numCuenta\": \"").append(medicamento).append("\", ")
+                .append("\"posologia\": \"").append(posologia).append("\", ")
+                .append("\"fechaCuidador\": \"").append(fechaCuidador).append("\", ")
+                .append("\"horaCuidador\": \"").append(horaCuidador).append("\", ")
+                .append("\"fechaVeterinario\": \"").append(fechaVeterinario).append("\", ")
+                .append("\"horaVeterinario\": \"").append(horaVeterinario).append("\", ")
+                .append("\"fechaCirujano\": \"").append(fechaCirujano).append("\", ")
+                .append("\"horaCirujano\": \"").append(horaCirujano).append("\", ")
+                .append("\"dni_cuidador\": \"").append(dni_cuidador).append("\", ")
+                .append("\"dni_veterinario\": \"").append(dni_veterinario).append("\", ")
+                .append("\"dni_cirujano\": \"").append(dni_cirujano).append("\"")
+                .append("}");
+        return jsonBuilder.toString();
+    }
+
 }

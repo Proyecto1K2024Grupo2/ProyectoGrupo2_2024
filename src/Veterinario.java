@@ -19,4 +19,23 @@ public class Veterinario extends Empleado {
         // TODO implement here
     }
 
+    public String veterinarioToXML(){
+        StringBuilder xmlBuilder=new StringBuilder();
+        xmlBuilder.append("      <dni>").append(dni).append("</dni>")
+                .append("      <nombre>").append(nombre).append("</nombre>")
+                .append("      <telefono>").append(telefono).append("</telefono>")
+                .append("      <numCuenta>").append(numCuenta).append("</numCuenta>")
+                .append("      <sueldo>").append(sueldo).append("</sueldo>");
+        return xmlBuilder.toString();
+    }
+
+    public String veterinarioToJSON() {
+        return "{"
+                + "\"dni\":\"" + dni + "\","
+                + "\"nombre\":\"" + nombre + "\","
+                + "\"telefono\":\"" + telefono + "\","
+                + "\"numCuenta\":\"" + numCuenta + "\","
+                + "\"sueldo\":\"" + sueldo + "\""
+                + "}";
+    }
 }

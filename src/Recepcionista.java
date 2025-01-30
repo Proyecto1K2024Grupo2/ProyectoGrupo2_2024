@@ -31,10 +31,21 @@ public class Recepcionista extends Empleado {
     public String recepcionistaToXML(){
         StringBuilder xmlBuilder=new StringBuilder();
         xmlBuilder.append("      <dni>").append(dni).append("</dni>")
-                .append("      <nombre>").append(nombre).append("</nombre")
+                .append("      <nombre>").append(nombre).append("</nombre>")
                 .append("      <telefono>").append(telefono).append("</telefono>")
                 .append("      <numCuenta>").append(numCuenta).append("</numCuenta>")
                 .append("      <sueldo>").append(sueldo).append("</sueldo>");
         return xmlBuilder.toString();
     }
+
+    public String recepcionistaToJSON() {
+        return "{"
+                + "\"dni\":\"" + dni + "\","
+                + "\"nombre\":\"" + nombre + "\","
+                + "\"telefono\":\"" + telefono + "\","
+                + "\"numCuenta\":\"" + numCuenta + "\","
+                + "\"sueldo\":\"" + sueldo + "\""
+                + "}";
+    }
+
 }

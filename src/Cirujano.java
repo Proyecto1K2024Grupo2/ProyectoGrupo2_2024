@@ -33,4 +33,17 @@ public class Cirujano extends Empleado {
                 .append("      <sueldo>").append(sueldo).append("</sueldo>");
         return xmlBuilder.toString();
     }
+
+    public String cirujanoToJSON() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"dni\": \"").append(dni).append("\", ")
+                .append("\"nombre\": \"").append(nombre).append("\", ")
+                .append("\"telefono\": \"").append(telefono).append("\", ")
+                .append("\"numCuenta\": \"").append(numCuenta).append("\", ")
+                .append("\"sueldo\": ").append(sueldo)
+                .append("}");
+        return jsonBuilder.toString();
+    }
+
 }

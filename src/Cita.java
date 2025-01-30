@@ -48,13 +48,26 @@ public class Cita {
         // TODO implement here
     }
 
-    public String citaToXML(){
-        StringBuilder xmlBuilder=new StringBuilder();
+    public String citaToXML() {
+        StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <id>").append(id).append("</id>")
-                .append("      <nombre_sala>").append(nombre_sala).append("</nombre_sala")
+                .append("      <nombre_sala>").append(nombre_sala).append("</nombre_sala>")
                 .append("      <fecha>").append(fecha).append("</fecha>")
                 .append("      <hora>").append(hora).append("</hora>")
                 .append("      <dniRecepcionista>").append(dniReceocionista).append("</dniRecepcionista>");
         return xmlBuilder.toString();
     }
+
+    public String citaToJSON() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"id\": \"").append(id).append("\", ")
+                .append("\"nombre_sala\": \"").append(nombre_sala).append("\", ")
+                .append("\"fecha\": \"").append(fecha).append("\", ")
+                .append("\"hora\": \"").append(hora).append("\", ")
+                .append("\"dniRecepcionista\": \"").append(dniRecepcionista).append("\"")
+                .append("}");
+        return jsonBuilder.toString();
+    }
+
 }

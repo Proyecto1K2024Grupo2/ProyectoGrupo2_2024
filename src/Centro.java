@@ -48,4 +48,16 @@ public class Centro {
                 .append("      <cp>").append(cp).append("</cp>");
         return xmlBuilder.toString();
     }
+
+    public String centroToJSON() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"codigo\": \"").append(cod).append("\", ")
+                .append("\"nombre\": \"").append(nombre).append("\", ")
+                .append("\"direccion\": \"").append(direccion).append("\", ")
+                .append("\"cp\": \"").append(cp).append("\"")
+                .append("}");
+        return jsonBuilder.toString();
+    }
+
 }

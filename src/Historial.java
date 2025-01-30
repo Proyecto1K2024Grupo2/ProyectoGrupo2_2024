@@ -35,11 +35,22 @@ public class Historial {
         // TODO implement here
     }
 
-    public String historialToXML(){
-        StringBuilder xmlBuilder=new StringBuilder();
+    public String historialToXML() {
+        StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <id_cita>").append(id_cita).append("</id_cita>")
-                .append("      <id_animal>").append(id_animal).append("</id_animal")
+                .append("      <id_animal>").append(id_animal).append("</id_animal>")
                 .append("      <id_tratamiento>").append(id_tratamiento).append("</id_tratamiento>");
         return xmlBuilder.toString();
     }
+
+    public String historialToJSON() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"id_cita\": \"").append(id_cita).append("\", ")
+                .append("\"id_animal\": \"").append(id_animal).append("\", ")
+                .append("\"id_tratamiento\": \"").append(id_tratamiento).append("\"")
+                .append("}");
+        return jsonBuilder.toString();
+    }
+
 }

@@ -48,15 +48,28 @@ public class Animal {
         // TODO implement here
     }
 
-    public String animalToXML(){
-        StringBuilder xmlBuilder=new StringBuilder();
+    public String animalToXML() {
+        StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <id>").append(id).append("</id>")
-                .append("      <dni_cliente>").append(dni_cliente).append("</dni_cliente")
+                .append("      <dni_cliente>").append(dni_cliente).append("</dni_cliente>")
                 .append("      <nombre>").append(nombre).append("</nombre>")
                 .append("      <especie>").append(especie).append("</especie>")
                 .append("      <raza>").append(raza).append("</raza>")
-                .append("      <fnac>").append(fnac).append("</fnac");
+                .append("      <fnac>").append(fnac).append("</fnac>");
         return xmlBuilder.toString();
+    }
+
+    public String animalToJSON() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"id\": \"").append(id).append("\", ")
+                .append("\"dni_cliente\": \"").append(dni_cliente).append("\", ")
+                .append("\"nombre\": \"").append(nombre).append("\", ")
+                .append("\"especie\": \"").append(especie).append("\", ")
+                .append("\"raza\": \"").append(raza).append("\", ")
+                .append("\"fnac\": \"").append(fnac).append("\"")
+                .append("}");
+        return jsonBuilder.toString();
     }
 
 }

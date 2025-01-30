@@ -50,14 +50,28 @@ public class Empleado {
         // TODO implement here
     }
 
-    public String empleadoToXML(){
-        StringBuilder xmlBuilder=new StringBuilder();
+    public String empleadoToXML() {
+        StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <dni>").append(dni).append("</dni>")
-                .append("      <nombre>").append(nombre).append("</nombre")
+                .append("      <nombre>").append(nombre).append("</nombre>")
                 .append("      <telefono>").append(telefono).append("</telefono>")
                 .append("      <numCuenta>").append(numCuenta).append("</numCuenta>")
                 .append("      <sueldo>").append(sueldo).append("</sueldo>");
         return xmlBuilder.toString();
     }
+
+    public String empleadoToJSON() {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{")
+                .append("\"dni\": \"").append(dni).append("\", ")
+                .append("\"nombre\": \"").append(nombre).append("\", ")
+                .append("\"telefono\": \"").append(telefono).append("\", ")
+                .append("\"numCuenta\": \"").append(numCuenta).append("\", ")
+                .append("\"sueldo\": ").append(sueldo)
+                .append("}");
+        return jsonBuilder.toString();
+    }
+
+
 
 }

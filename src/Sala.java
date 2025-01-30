@@ -38,10 +38,18 @@ public class Sala {
         // TODO implement here
     }
 
-    public String empleadoToXML(){
+    public String salaToXML(){
         StringBuilder xmlBuilder=new StringBuilder();
         xmlBuilder.append("      <nombre>").append(nombre).append("</nombre>")
-                .append("      <cod_centro>").append(cod_centro).append("</cod_centro");
+                .append("      <cod_centro>").append(cod_centro).append("</cod_centro>");
         return xmlBuilder.toString();
     }
+
+    public String salaToJSON() {
+        return "{"
+                + "\"nombre\":\"" + nombre + "\","
+                + "\"cod_centro\":\"" + cod_centro + "\""
+                + "}";
+    }
+
 }
