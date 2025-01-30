@@ -27,8 +27,7 @@ SELECT nombre,telefono from empleado;
  -- +--------------------+-----------+
  -- 40 rows in set (0.005 sec)
 ````
-
-
+\
 -- 2. Calcular el sueldo promedio de los empleados:
 ```sql
 SELECT AVG(sueldo) AS sueldo_promedio FROM empleado;
