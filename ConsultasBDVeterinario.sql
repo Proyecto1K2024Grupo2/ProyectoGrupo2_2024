@@ -70,7 +70,7 @@ FROM HISTORIAL
 JOIN ANIMAL ON HISTORIAL.id_animal = ANIMAL.id
 JOIN TRATAMIENTO ON HISTORIAL.id_tratamiento = TRATAMIENTO.id;
 
---
+--Mostrar el total de 'Cirugía mayor' que han realizado cada cirujano para los animales que son perros.
 
 
 
