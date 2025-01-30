@@ -171,7 +171,7 @@ ORDER BY t.fechaVeterinario DESC, t.horaVeterinario DESC;
  -- +----------------+-----------------------+---------------+-------------------+------------------+-----------------+--------------------+
  -- 3 rows in set (0.010 sec)
 ```
-\
+
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raul]\
