@@ -117,7 +117,7 @@ ORDER BY numero_empleados DESC;
  -- | Centro Oeste   |             4 |                4 |
  -- | Centro Central |             5 |                4 |
  -- +----------------+---------------+------------------+
-5 rows in set (0.004 sec)
+ -- 5 rows in set (0.004 sec)
 
 -- 9.Muestra los clientes que han tenido cita el mes de Enero
 SELECT DISTINCT cl.*
