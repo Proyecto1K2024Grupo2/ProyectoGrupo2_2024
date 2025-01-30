@@ -11,7 +11,7 @@ public class Cita {
     public String nombre_sala;
     public LocalDate fecha;
     public LocalTime hora;
-    public String dniReceocionista;
+    public String dniRecepcionista;
 
     public Cita() {
     }
@@ -54,7 +54,7 @@ public class Cita {
                 .append("      <nombre_sala>").append(nombre_sala).append("</nombre_sala>")
                 .append("      <fecha>").append(fecha).append("</fecha>")
                 .append("      <hora>").append(hora).append("</hora>")
-                .append("      <dniRecepcionista>").append(dniReceocionista).append("</dniRecepcionista>");
+                .append("      <dniRecepcionista>").append(dniRecepcionista).append("</dniRecepcionista>");
         return xmlBuilder.toString();
     }
 
