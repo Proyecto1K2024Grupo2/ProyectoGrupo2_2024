@@ -43,7 +43,7 @@ SELECT dni, nombre FROM cliente WHERE nombre LIKE '%Hugo%';
  -- +-----------+-------------+
  -- | 11111111C | Hugo López  |
  -- +-----------+-------------+
-1 row in set (0.002 sec)
+ -- 1 row in set (0.002 sec)
 
 -- 4. devuelveme el nombre de los empleados recepcionuistas y su dni.
 SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
