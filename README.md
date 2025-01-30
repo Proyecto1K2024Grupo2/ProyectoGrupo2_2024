@@ -14,8 +14,8 @@
 
 
 ## Posibes consultas para la BD
-```sql
 -- 1. Devuelveme el nombre de empledado y sus numero de telefono.
+```sql
 SELECT nombre,telefono from empleado;
  -- +--------------------+-----------+
  -- | nombre             | telefono  |
@@ -26,8 +26,10 @@ SELECT nombre,telefono from empleado;
  -- | Cristina Martínez  | 801234567 |
  -- +--------------------+-----------+
  -- 40 rows in set (0.005 sec)
+````
 
 -- 2. Calcular el sueldo promedio de los empleados:
+```sql
 SELECT AVG(sueldo) AS sueldo_promedio FROM empleado;
  -- +-----------------+
  -- | sueldo_promedio |
@@ -35,8 +37,10 @@ SELECT AVG(sueldo) AS sueldo_promedio FROM empleado;
  -- |     2310.000000 |
  -- +-----------------+
  -- 1 row in set (0.029 sec)
+````
 
 -- 3. Lista el nombre y el DNI de los clientes cuyo nombre sea Hugo.
+```sql
 SELECT dni, nombre FROM cliente WHERE nombre LIKE '%Hugo%';
  -- +-----------+-------------+
  -- | dni       | nombre      |
@@ -44,8 +48,10 @@ SELECT dni, nombre FROM cliente WHERE nombre LIKE '%Hugo%';
  -- | 11111111C | Hugo López  |
  -- +-----------+-------------+
  -- 1 row in set (0.002 sec)
+````
 
 -- 4. devuelveme el nombre de los empleados recepcionuistas y su dni.
+```sql
 SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
  -- +-------------------+-----------+
  -- | nombre            | dni       |
@@ -62,8 +68,9 @@ SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
  -- | Elena Fernández   | 12345683E |
  -- +-------------------+-----------+
  -- 10 rows in set (0.004 sec)
-
+````
 -- 5. Muestra cuantas citas han habido en el mes de Enero
+```sql
 SELECT COUNT(*) AS total_citas_diciembre FROM cita WHERE MONTH(fecha) = 1;
  -- +-----------------------+
  -- | total_citas_diciembre |
@@ -71,8 +78,9 @@ SELECT COUNT(*) AS total_citas_diciembre FROM cita WHERE MONTH(fecha) = 1;
  -- |                     5 |
  -- +-----------------------+
  -- 1 row in set (0.005 sec)
-
+````
 -- 6. Devuelveme los veterinarios que trabajan en el centro 3.
+```sql
 SELECT e.nombre, e.dni FROM empleado e JOIN veterinario v ON e.dni = v.dni JOIN trabajar t ON e.dni = t.dniEmpleado WHERE t.codCentro = 3;
  -- +------------------+-----------+
  -- | nombre           | dni       |
@@ -81,8 +89,10 @@ SELECT e.nombre, e.dni FROM empleado e JOIN veterinario v ON e.dni = v.dni JOIN 
  -- | Juan Pérez       | 12345688J |
  -- +------------------+-----------+
  -- 2 rows in set (0.005 sec)
+````
 
 -- 7. Mostrar todas las salas ordenadas por el nombre del centro asociado:
+```sql
 SELECT s.nombre AS sala, c.nombre AS centro FROM sala s
 JOIN centro c ON s.cod_centro = c.cod
 ORDER BY c.nombre;
@@ -102,8 +112,10 @@ ORDER BY c.nombre;
  -- | Sala 9  | Centro Sur     |
  -- +---------+----------------+
  -- 11 rows in set (0.003 sec)
+````
 
 -- 8. Listar cuantos empleado trabajan en cada centro.
+```sql
 SELECT c.nombre AS nombre_centro, c.cod AS codigo_centro, COUNT(t.dniEmpleado) AS numero_empleados FROM centro c
 LEFT JOIN trabajar t ON c.cod = t.codCentro
 GROUP BY c.cod, c.nombre
@@ -118,8 +130,10 @@ ORDER BY numero_empleados DESC;
  -- | Centro Central |             5 |                4 |
  -- +----------------+---------------+------------------+
  -- 5 rows in set (0.004 sec)
+````
 
 -- 9.Muestra los clientes que han tenido cita el mes de Enero
+```sql
 SELECT DISTINCT cl.*
 FROM cliente cl
 JOIN animal an ON cl.dni = an.dni_cliente
@@ -136,8 +150,10 @@ WHERE MONTH(ci.fecha) = 1;
  -- | 11111111E | Pablo Díaz    |
  -- +-----------+---------------+
  -- 5 rows in set (0.011 sec)
+````
 
 -- 10. Mostrar tratamientos realizados por un veterinario Laura
+```sql
 SELECT t.id AS id_tratamiento, t.tratamiento, t.medicamento, t.posologia, t.fechaVeterinario, t.horaVeterinario, e.nombre AS nombre_veterinario
 FROM tratamiento t
 JOIN veterinario v ON t.dni_veterinario = v.dni
@@ -152,8 +168,8 @@ ORDER BY t.fechaVeterinario DESC, t.horaVeterinario DESC;
  -- |              1 | Chequeo anual         | Vacuna A      | Dosis única       | 2024-02-16       | 10:00:00        | Laura Sánchez      |
  -- +----------------+-----------------------+---------------+-------------------+------------------+-----------------+--------------------+
  -- 3 rows in set (0.010 sec)
-
 ```
+
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raul]\
