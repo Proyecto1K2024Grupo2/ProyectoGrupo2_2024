@@ -31,3 +31,50 @@ HAVING CitasConcedidas>10;
 SELECT id 
 from tratamiento
 where YEAR(fechaCirujano)=2019;
+--Mostrar los historiales de los animales junto con sus respectivos tratamientos.
+SELECT HISTORIAL.id, ANIMAL.nombre, TRATAMIENTO.tratamiento 
+FROM HISTORIAL
+JOIN ANIMAL ON HISTORIAL.id_animal = ANIMAL.id
+JOIN TRATAMIENTO ON HISTORIAL.id_tratamiento = TRATAMIENTO.id;
+
+-- Devuelve los centros que no ha tenido citas en los ultimos 3 meses.
+select c.cod from centro c
+join sala s on c.cod=s.cod_centro
+LEFT join cita ci on s.nombre=ci.nombre_sala
+where fehca < DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH);
+
+-- Obtener los clientes que tiene almenos un animal registrado.
+
+SELECT DISTINCT c.dni, c.nombre
+FROM cliente c
+JOIN animal a ON c.dni = a.dni_cliente
+WHERE a.especie = 'Perro';
+
+--Empleado que trabajan en más de un centro.
+SELECT e.dni, e.nombre, COUNT(t.codCentro) AS total_centros
+FROM empleado e
+JOIN trabajar t ON e.dni = t.dniEmpleado
+GROUP BY e.dni, e.nombre
+HAVING COUNT(t.codCentro) > 1;
+
+-- Veterinarios que han tenido más de 5 tratamientos en el último año.
+
+SELECT v.dni, e.nombre, COUNT(t.id) AS total_tratamientos
+FROM veterinario v
+JOIN empleado e ON v.dni = e.dni
+JOIN tratamiento t ON v.dni = t.dni_veterinario
+WHERE t.fecha >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+GROUP BY v.dni, e.nombre
+HAVING COUNT(t.id) > 5;
+
+-- Nombre de los cirujanos y la cantidad de citas que han tenido en los ultimos 6 meses.
+
+SELECT c.dni, e.nombre, COUNT(ci.id) AS total_citas
+FROM cirujano c
+JOIN empleado e ON c.dni = e.dni
+JOIN tratamiento t ON c.dni = t.dni_cirujano
+JOIN historial h ON t.id = h.id_tratamiento
+JOIN cita ci ON h.id_cita = ci.id
+WHERE ci.fecha >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+GROUP BY c.dni, e.nombre;
+
