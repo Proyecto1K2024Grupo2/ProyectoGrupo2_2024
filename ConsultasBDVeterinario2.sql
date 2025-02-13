@@ -78,3 +78,24 @@ JOIN cita ci ON h.id_cita = ci.id
 WHERE ci.fecha >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
 GROUP BY c.dni, e.nombre;
 
+--Los animales que mas ratamientos han tenido
+SELECT a.id, a.nombre, COUNT(h.id_tratamiento),
+RANK() OVER (ORDER BY COUNT(h.id_tratamiento) DESC) as ranking_tratamientos
+FROM historial h 
+JOIN animal a ON h.id_animal = a.id
+GROUP BY a.id;
+
+--Información de las citas
+CREATE VIEW vista_citas AS (
+SELECT c.id, c.nombre_sala, c.fecha, c.hora, e.nombre
+FROM cita c
+JOIN recepcionista r ON c.dniRecepcionista = r.dni
+JOIN empleado e ON r.dni = e.dni
+);
+
+--Datos de los clientess y sus animales
+CREATE VIEW vista_clientes_mascotas AS (
+SELECT c.dni, c.nombre, a.nombre, a.especie, a.raza, a.edad
+FROM cliente c
+JOIN animal a ON c.dni = a.dni_cliente
+);
