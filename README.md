@@ -14,9 +14,9 @@
 
 
 ## Posibes consultas para la BD
-### [Consultas_Veterinario_1](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/1.Consultas_Sencillas.sql)
-### [Consultas_Veterinario_2](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/2.Consultas_Agregadas.sql)
-### [Consultas_Veterinario_3](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/3.SubConsultas.sql)
+### [Consultas_Sencillas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/1.Consultas_Sencillas.sql)
+### [Consultas_Agregadas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/2.Consultas_Agregadas.sql)
+### [SubConsultas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/3.SubConsultas.sql)
 
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
