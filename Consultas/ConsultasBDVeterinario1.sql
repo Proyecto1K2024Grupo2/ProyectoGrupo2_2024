@@ -20,16 +20,10 @@
 
 1. Devuelve el nombre de empledado y sus número de teléfono.
 ```sql
-SELECT nombre,telefono from empleado;
- -- +--------------------+-----------+
- -- | nombre             | telefono  |
- -- +--------------------+-----------+
- -- | Juan Pérez         | 600123456 |
- -- | María López        | 600234567 |
- -- ...
- -- | Cristina Martínez  | 801234567 |
- -- +--------------------+-----------+
- -- 40 rows in set (0.005 sec)
+Select c.dni, c.nombre
+ from cliente c
+ join animal a on c.dni=a-dni_cliente
+ where a.especie='Perro';
 ````
 \
 2. Calcular el sueldo promedio de los empleados:
