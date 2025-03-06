@@ -7,10 +7,10 @@
 [**Rubén Expósito Vicente**](https://github.com/Rebirzt)
 
 ## Indice De Contenidos
-### [Modelo Logico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creacion/Modelo%20Logico.md)
-### [Modelo Fisico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creacion/Modelo%20Logico.md)
-### [DDL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creacion/DDL.sql)
-### [DML](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creacion/DML.sql)
+### [Modelo Logico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/Modelo%20Logico.md)
+### [Modelo Fisico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/Modelo%20Logico.md)
+### [DDL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/DDL.sql)
+### [DML](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/DML.sql)
 
 
 ## Posibes consultas para la BD
