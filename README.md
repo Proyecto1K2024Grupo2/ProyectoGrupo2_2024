@@ -7,16 +7,16 @@
 [**Rubén Expósito Vicente**](https://github.com/Rebirzt)
 
 ## Indice De Contenidos
-### [Modelo Logico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Modelo%20Logico.md)
-### [Modelo Fisico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Modelo%20Logico.md)
-### [DDL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/DDL.sql)
-### [DML](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/DML.sql)
+### [Modelo Logico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creacion/Modelo%20Logico.md)
+### [Modelo Fisico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creacion/Modelo%20Logico.md)
+### [DDL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creacion/DDL.sql)
+### [DML](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creacion/DML.sql)
 
 
 ## Posibes consultas para la BD
-### [Consultas_Veterinario_1](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/ConsultasBDVeterinario1.sql)
-### [Consultas_Veterinario_2](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/ConsultasBDVeterinario2.sql)
-### [Consultas_Veterinario_3](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/ConsultasBDVeterinario3.sql)
+### [Consultas_Veterinario_1](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/1.Consultas_Sencillas.sql)
+### [Consultas_Veterinario_2](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/2.Consultas_Agregadas.sql)
+### [Consultas_Veterinario_3](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/3.SubConsultas.sql)
 
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
