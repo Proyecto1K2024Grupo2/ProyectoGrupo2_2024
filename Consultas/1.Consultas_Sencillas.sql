@@ -18,7 +18,7 @@
 -- El informe debe indicar cómo se han repartido las tareas y qué ha realizado cada alumno/a.
 
 
-1. Devuelve el nombre de empledado y sus número de teléfono.
+-- 1. Devuelve el nombre de empledado y sus número de teléfono.
 ```sql
 Select c.dni, c.nombre
  from cliente c
@@ -26,14 +26,14 @@ Select c.dni, c.nombre
  where a.especie='Perro';
 ````
 \
-2. Calcular el sueldo promedio de los cirujanos.
+-- 2. Calcular el sueldo promedio de los cirujanos.
 ```sql
 SELECT AVG(e.sueldo) 
  FROM empleado e
  JOIN cirujano c on e.dni=c.dni;
 ````
 \
-3. Lista los animales que no tienen dueño.
+-- 3. Lista los animales que no tienen dueño.
 ```sql
 SELECT a.id, a.nombre, a.especie 
  FROM animal a
@@ -41,14 +41,14 @@ SELECT a.id, a.nombre, a.especie
  WHERE c.dni is null;
 ````
 \
-4. Devuelve el nombre, la cuenta bancaria y el sueldo de los recepcionistas.
+-- 4. Devuelve el nombre, la cuenta bancaria y el sueldo de los recepcionistas.
 ```sql
 SELECT e.nombre, e.numcuenta, e.sueldo 
  FROM empleado e 
  JOIN recepcionista r ON e.dni = r.dni;
 ````
 \
-5. Muestra cuantas citas han sido asignadas para enero.
+-- 5. Muestra cuantas citas han sido asignadas para enero.
 ```sql
 SELECT COUNT(*) AS total_citas_diciembre 
  FROM cita 
@@ -61,7 +61,7 @@ SELECT COUNT(*) AS total_citas_diciembre
  -- 1 row in set (0.005 sec)
 ````
 \
-6. Devuelve los veterinarios que trabajan en el centro 3.
+-- 6. Devuelve los veterinarios que trabajan en el centro 3.
 ```sql
 SELECT e.nombre, e.dni 
  FROM empleado e 
@@ -77,7 +77,7 @@ SELECT e.nombre, e.dni
  -- 2 rows in set (0.005 sec)
 ````
 \
-7. Muestra todas las salas ordenadas por centros.
+-- 7. Muestra todas las salas ordenadas por centros.
 ```sql
 SELECT s.nombre AS sala, c.nombre AS centro FROM sala s
 JOIN centro c ON s.cod_centro = c.cod
@@ -100,7 +100,7 @@ ORDER BY c.nombre;
  -- 11 rows in set (0.003 sec)
 ````
 \
-8. Lista cuantos empleados trabajan en cada centro.
+-- 8. Lista cuantos empleados trabajan en cada centro.
 ```sql
 SELECT c.nombre AS nombre_centro, c.cod AS codigo_centro, COUNT(t.dniEmpleado) AS numero_empleados 
 FROM centro c
@@ -119,7 +119,7 @@ ORDER BY numero_empleados DESC;
  -- 5 rows in set (0.004 sec)
 ````
 \
-9.Muestra los clientes que han tenido citas el mes de enero.
+-- 9.Muestra los clientes que han tenido citas el mes de enero.
 ```sql
 SELECT DISTINCT cl.*
 FROM cliente cl
@@ -139,7 +139,7 @@ WHERE MONTH(ci.fecha) = 1;
  -- 5 rows in set (0.011 sec)
 ````
 \
-10. Muestra tratamientos realizados por un la veterinaria Laura Sánchez ordenados por más reciente.
+-- 10. Muestra tratamientos realizados por un la veterinaria Laura Sánchez ordenados por más reciente.
 ```sql
 SELECT t.id AS id_tratamiento, t.tratamiento, t.medicamento, t.posologia, t.fechaVeterinario, t.horaVeterinario, e.nombre AS nombre_veterinario
 FROM tratamiento t
