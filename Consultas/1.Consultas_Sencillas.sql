@@ -18,16 +18,35 @@
 -- El informe debe indicar cómo se han repartido las tareas y qué ha realizado cada alumno/a.
 
 
--- 1. Devuelve el nombre de empledado y sus número de teléfono.
+-- 1. Devuelve los clientes que tienen perro.
 Select c.dni, c.nombre
  from cliente c
- join animal a on c.dni=a-dni_cliente
+ join animal a on c.dni=a.dni_cliente
  where a.especie='Perro';
+
+-- +-----------+-----------------+
+-- | dni       | nombre          |
+-- +-----------+-----------------+
+-- | 11111111A | Carlos Pérez    |
+-- | 11111111C | Hugo López      |
+-- | 11111111F | Sofía Ramírez   |
+-- | 11111111H | Claudia Vega    |
+-- | 11111111K | Lucas Herrera   |
+-- | 11111111M | Javier Morales  |
+-- | 11111111Q | Diego García    |
+-- | 11111111S | Fernando Pérez  |
+-- +-----------+-----------------+
 
 -- 2. Calcular el sueldo promedio de los cirujanos.
 SELECT AVG(e.sueldo) 
  FROM empleado e
  JOIN cirujano c on e.dni=c.dni;
+
+-- +---------------+
+-- | AVG(e.sueldo) |
+-- +---------------+
+-- |   2160.000000 |
+-- +---------------+
 
 -- 3. Lista los animales que no tienen dueño.
 
@@ -36,11 +55,28 @@ SELECT a.id, a.nombre, a.especie
  LEFT JOIN cliente c on a.dni_cliente=c.dni
  WHERE c.dni is null;
 
+-- Empty set (0.001 sec)
+
 -- 4. Devuelve el nombre, la cuenta bancaria y el sueldo de los recepcionistas.
 SELECT e.nombre, e.numcuenta, e.sueldo 
  FROM empleado e 
  JOIN recepcionista r ON e.dni = r.dni;
 
+-- +-------------------+------------------------+---------+
+-- | nombre            | numcuenta              | sueldo  |
+-- +-------------------+------------------------+---------+
+-- | Juan Pérez        | ES12345678901234567890 | 2000.00 |
+-- | María López       | ES12345678901234567891 | 2200.00 |
+-- | Pedro González    | ES12345678901234567892 | 2500.00 |
+-- | Ana Martín        | ES12345678901234567893 | 2300.00 |
+-- | Luis García       | ES12345678901234567894 | 2100.00 |
+-- | Laura Sánchez     | ES12345678901234567890 | 1800.00 |
+-- | Carlos Martínez   | ES12345678901234567891 | 2000.00 |
+-- | Ana Gómez         | ES12345678901234567892 | 1700.00 |
+-- | Miguel Rodríguez  | ES12345678901234567893 | 2200.00 |
+-- | Elena Fernández   | ES12345678901234567894 | 2100.00 |
+-- +-------------------+------------------------+---------+
+ 
 -- 5. Muestra cuantas citas han sido asignadas para enero.
 SELECT COUNT(*) AS total_citas_diciembre 
  FROM cita 
