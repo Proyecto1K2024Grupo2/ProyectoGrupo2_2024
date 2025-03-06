@@ -1,3 +1,5 @@
+-- CONSULTAS AGREGADAS
+
 --Los telefonos y dni de los clientes que tienen gatos
 SELECT t.dniCliente, t.telefono
 from telefono t 
@@ -5,7 +7,7 @@ join cliente c on t.dniCliente=c.dni
 join animal a on c.dni=a.dni_cliente
 WHERE a.especie LIKE 'Gato';
 
---Todos los clientes que han tenido una cita el 25 de cicembre de 2024
+--Todos los clientes que han tenido una cita el 25 de diciembre de 2024
 SELECT c.dni 
 from cliente c 
 JOIN animal a ON c.dni=a.dni_cliente 
@@ -13,7 +15,7 @@ JOIN historial h ON a.id=h.id_animal
 JOIN cita ci ON h.id_cita=ci.id 
 WHERE ci.fecha='2024-12-25';
 
---Dinero que nos gastamos en sueldos segun los centros
+--Dinero  invertido en sueldos por cada centro
 SELECT t.codCentro, SUM(e.sueldo)
 from trabajar t 
 join empleado e on t.dniempleado=e.dni 
@@ -27,28 +29,24 @@ JOIN cita c on r.dni=c.dniRecepcionista
 GROUP BY r.dni 
 HAVING CitasConcedidas>10;
 
---Todas las operaciones de 2019
+--Todas las operaciones realizadas en 2019
 SELECT id 
 from tratamiento
 where YEAR(fechaCirujano)=2019;
---Mostrar los historiales de los animales junto con sus respectivos tratamientos.
+
+--Mostrar los historiales, nombres y tratamientos de cada animal.
 SELECT HISTORIAL.id, ANIMAL.nombre, TRATAMIENTO.tratamiento 
 FROM HISTORIAL
 JOIN ANIMAL ON HISTORIAL.id_animal = ANIMAL.id
 JOIN TRATAMIENTO ON HISTORIAL.id_tratamiento = TRATAMIENTO.id;
 
--- Devuelve los centros que no ha tenido citas en los ultimos 3 meses.
+-- Devuelve los centros que no ha tenido citas en los ultimos 7 dias.
 select c.cod from centro c
 join sala s on c.cod=s.cod_centro
 LEFT join cita ci on s.nombre=ci.nombre_sala
-where fehca < DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH);
+where fehca < DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY);
 
--- Obtener los clientes que tiene almenos un animal registrado.
-
-SELECT DISTINCT c.dni, c.nombre
-FROM cliente c
-JOIN animal a ON c.dni = a.dni_cliente
-WHERE a.especie = 'Perro';
+-- FALTA CONSULTA --
 
 --Empleado que trabajan en más de un centro.
 SELECT e.dni, e.nombre, COUNT(t.codCentro) AS total_centros
@@ -57,7 +55,7 @@ JOIN trabajar t ON e.dni = t.dniEmpleado
 GROUP BY e.dni, e.nombre
 HAVING COUNT(t.codCentro) > 1;
 
--- Veterinarios que han tenido más de 5 tratamientos en el último año.
+-- Veterinarios que han realizado más de 5 tratamientos en el último año.
 
 SELECT v.dni, e.nombre, COUNT(t.id) AS total_tratamientos
 FROM veterinario v
@@ -78,7 +76,7 @@ JOIN cita ci ON h.id_cita = ci.id
 WHERE ci.fecha >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
 GROUP BY c.dni, e.nombre;
 
---Los animales que mas ratamientos han tenido
+--Los animales que mas tratamientos han tenido
 SELECT a.id, a.nombre, COUNT(h.id_tratamiento),
 RANK() OVER (ORDER BY COUNT(h.id_tratamiento) DESC) as ranking_tratamientos
 FROM historial h 
