@@ -26,9 +26,11 @@ Select c.dni, c.nombre
  where a.especie='Perro';
 ````
 \
-2. Calcular el sueldo promedio de los empleados:
+2. Calcular el sueldo promedio de los cirujanos:
 ```sql
-SELECT AVG(sueldo) AS sueldo_promedio FROM empleado;
+SELECT AVG(e.sueldo) 
+ FROM empleado e
+ JOIN cirujano c on e.dni=c.dni;
  -- +-----------------+
  -- | sueldo_promedio |
  -- +-----------------+
