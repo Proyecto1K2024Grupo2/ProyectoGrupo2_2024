@@ -29,10 +29,10 @@ JOIN cita c on r.dni=c.dniRecepcionista
 GROUP BY r.dni 
 HAVING CitasConcedidas>10;
 
---Todas las operaciones realizadas en 2019
-SELECT id 
-from tratamiento
-where YEAR(fechaCirujano)=2019;
+--Animal o animales que han tenido mas cirujías 
+select h.* 
+  from historial h join tratamiento t on h.id_tratamiento = t.id 
+  where dni_cirujano is not null;
 
 --Mostrar los historiales, nombres y tratamientos de cada animal.
 SELECT HISTORIAL.id, ANIMAL.nombre, TRATAMIENTO.tratamiento 
