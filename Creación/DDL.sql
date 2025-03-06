@@ -147,7 +147,7 @@ CREATE TABLE historial(
     CONSTRAINT fk_idAnimal FOREIGN KEY (id_animal) REFERENCES animal(id)
         ON UPDATE no action
         ON DELETE no action,
-    CONSTRAINT fk_idTratamie nto FOREIGN KEY (id_tratamiento) REFERENCES tratamiento(id)
+    CONSTRAINT fk_idTratamiento FOREIGN KEY (id_tratamiento) REFERENCES tratamiento(id)
         ON UPDATE no action
         ON DELETE no action,
     PRIMARY KEY (id_cita, id_animal, id_tratamiento)
