@@ -19,37 +19,29 @@
 
 
 -- 1. Devuelve el nombre de empledado y sus número de teléfono.
-```sql
 Select c.dni, c.nombre
  from cliente c
  join animal a on c.dni=a-dni_cliente
  where a.especie='Perro';
-````
-\
+
 -- 2. Calcular el sueldo promedio de los cirujanos.
-```sql
 SELECT AVG(e.sueldo) 
  FROM empleado e
  JOIN cirujano c on e.dni=c.dni;
-````
-\
+
 -- 3. Lista los animales que no tienen dueño.
-```sql
+
 SELECT a.id, a.nombre, a.especie 
  FROM animal a
  LEFT JOIN cliente c on a.dni_cliente=c.dni
  WHERE c.dni is null;
-````
-\
+
 -- 4. Devuelve el nombre, la cuenta bancaria y el sueldo de los recepcionistas.
-```sql
 SELECT e.nombre, e.numcuenta, e.sueldo 
  FROM empleado e 
  JOIN recepcionista r ON e.dni = r.dni;
-````
-\
+
 -- 5. Muestra cuantas citas han sido asignadas para enero.
-```sql
 SELECT COUNT(*) AS total_citas_diciembre 
  FROM cita 
  WHERE MONTH(fecha) = 1;
@@ -59,10 +51,8 @@ SELECT COUNT(*) AS total_citas_diciembre
  -- |                     5 |
  -- +-----------------------+
  -- 1 row in set (0.005 sec)
-````
-\
+
 -- 6. Devuelve los veterinarios que trabajan en el centro 3.
-```sql
 SELECT e.nombre, e.dni 
  FROM empleado e 
  JOIN veterinario v ON e.dni = v.dni 
@@ -75,10 +65,8 @@ SELECT e.nombre, e.dni
  -- | Juan Pérez       | 12345688J |
  -- +------------------+-----------+
  -- 2 rows in set (0.005 sec)
-````
-\
+
 -- 7. Muestra todas las salas ordenadas por centros.
-```sql
 SELECT s.nombre AS sala, c.nombre AS centro FROM sala s
 JOIN centro c ON s.cod_centro = c.cod
 ORDER BY c.nombre;
@@ -98,10 +86,8 @@ ORDER BY c.nombre;
  -- | Sala 9  | Centro Sur     |
  -- +---------+----------------+
  -- 11 rows in set (0.003 sec)
-````
-\
+
 -- 8. Lista cuantos empleados trabajan en cada centro.
-```sql
 SELECT c.nombre AS nombre_centro, c.cod AS codigo_centro, COUNT(t.dniEmpleado) AS numero_empleados 
 FROM centro c
 LEFT JOIN trabajar t ON c.cod = t.codCentro
@@ -117,10 +103,8 @@ ORDER BY numero_empleados DESC;
  -- | Centro Central |             5 |                4 |
  -- +----------------+---------------+------------------+
  -- 5 rows in set (0.004 sec)
-````
-\
+
 -- 9.Muestra los clientes que han tenido citas el mes de enero.
-```sql
 SELECT DISTINCT cl.*
 FROM cliente cl
 JOIN animal an ON cl.dni = an.dni_cliente
@@ -137,10 +121,8 @@ WHERE MONTH(ci.fecha) = 1;
  -- | 11111111E | Pablo Díaz    |
  -- +-----------+---------------+
  -- 5 rows in set (0.011 sec)
-```
-\
+
 -- 10. Muestra tratamientos realizados por un la veterinaria Laura Sánchez ordenados por más reciente.
-```sql
 SELECT t.id AS id_tratamiento, t.tratamiento, t.medicamento, t.posologia, t.fechaVeterinario, t.horaVeterinario, e.nombre AS nombre_veterinario
 FROM tratamiento t
 JOIN veterinario v ON t.dni_veterinario = v.dni
@@ -155,10 +137,3 @@ ORDER BY t.fechaVeterinario DESC, t.horaVeterinario DESC;
  -- |              1 | Chequeo anual         | Vacuna A      | Dosis única       | 2024-02-16       | 10:00:00        | Laura Sánchez      |
  -- +----------------+-----------------------+---------------+-------------------+------------------+-----------------+--------------------+
  -- 3 rows in set (0.010 sec)
-```
-
-
-
-
-
-
