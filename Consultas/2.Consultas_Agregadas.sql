@@ -5,15 +5,18 @@ SELECT DISTINCT(t.dniCliente, t.telefono)
 from telefono t 
 join cliente c on t.dniCliente=c.dni
 join animal a on c.dni=a.dni_cliente
-WHERE a.especie LIKE 'Gato';
+WHERE a.especie LIKE 'Gato'
+GROUP BY t.dni;
 
 --Todos los clientes que han tenido una cita el 25 de diciembre de 2024.
-SELECT c.dni 
-from cliente c 
-JOIN animal a ON c.dni=a.dni_cliente 
-JOIN historial h ON a.id=h.id_animal
-JOIN cita ci ON h.id_cita=ci.id 
-WHERE ci.fecha='2024-12-25';
+SELECT e.nombre, e.telefono
+FROM empleado e
+JOIN cirujano c on e.dni=c.dni
+JOIN tratamiento t on c.dni=t.dni_cirujano
+JOIN historial h on t.id=h.id_cita
+JOIN animal a on h.id_animal=a.id
+WHERE a.especie='Gato'
+
 
 --Dinero  invertido en sueldos por cada centro.
 SELECT t.codCentro, SUM(e.sueldo)
