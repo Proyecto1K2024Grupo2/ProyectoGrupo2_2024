@@ -49,7 +49,6 @@ SELECT AVG(e.sueldo)
 -- +---------------+
 
 -- 3. Lista los animales que no tienen dueño.
-
 SELECT a.id, a.nombre, a.especie 
  FROM animal a
  LEFT JOIN cliente c on a.dni_cliente=c.dni
