@@ -39,7 +39,9 @@ SELECT AVG(sueldo) AS sueldo_promedio FROM empleado;
 \
 3. Lista el nombre y el DNI de los clientes cuyo nombre sea Hugo.
 ```sql
-SELECT dni, nombre FROM cliente WHERE nombre LIKE '%Hugo%';
+SELECT dni, nombre 
+ FROM cliente 
+ WHERE nombre LIKE '%Hugo%';
  -- +-----------+-------------+
  -- | dni       | nombre      |
  -- +-----------+-------------+
