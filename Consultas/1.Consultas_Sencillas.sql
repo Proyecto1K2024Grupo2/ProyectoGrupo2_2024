@@ -41,24 +41,11 @@ SELECT a.id, a.nombre, a.especie
  WHERE c.dni is null;
 ````
 \
-4. devuelveme el nombre de los empleados recepcionistas y su DNI.
+4. Devuelve el nombre, la cuenta bancaria y el sueldo de los recepcionistas.
 ```sql
-SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
- -- +-------------------+-----------+
- -- | nombre            | dni       |
- -- +-------------------+-----------+
- -- | Juan Pérez        | 12345678A |
- -- | María López       | 12345678B |
- -- | Pedro González    | 12345678C |
- -- | Ana Martín        | 12345678D |
- -- | Luis García       | 12345678E |
- -- | Laura Sánchez     | 12345679A |
- -- | Carlos Martínez   | 12345680B |
- -- | Ana Gómez         | 12345681C |
- -- | Miguel Rodríguez  | 12345682D |
- -- | Elena Fernández   | 12345683E |
- -- +-------------------+-----------+
- -- 10 rows in set (0.004 sec)
+SELECT e.nombre, e.numcuenta, e.sueldo 
+ FROM empleado e 
+ JOIN recepcionista r ON e.dni = r.dni;
 ````
 \
 5. Muestra cuantas citas han habido en el mes de enero
