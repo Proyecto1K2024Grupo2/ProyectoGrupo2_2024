@@ -137,7 +137,7 @@ WHERE MONTH(ci.fecha) = 1;
  -- | 11111111E | Pablo Díaz    |
  -- +-----------+---------------+
  -- 5 rows in set (0.011 sec)
-````
+```
 \
 -- 10. Muestra tratamientos realizados por un la veterinaria Laura Sánchez ordenados por más reciente.
 ```sql
