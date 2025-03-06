@@ -26,7 +26,7 @@ Select c.dni, c.nombre
  where a.especie='Perro';
 ````
 \
-2. Calcular el sueldo promedio de los cirujanos:
+2. Calcular el sueldo promedio de los cirujanos.
 ```sql
 SELECT AVG(e.sueldo) 
  FROM empleado e
@@ -48,9 +48,11 @@ SELECT e.nombre, e.numcuenta, e.sueldo
  JOIN recepcionista r ON e.dni = r.dni;
 ````
 \
-5. Muestra cuantas citas han habido en el mes de enero
+5. Muestra cuantas citas han sido asignadas para enero.
 ```sql
-SELECT COUNT(*) AS total_citas_diciembre FROM cita WHERE MONTH(fecha) = 1;
+SELECT COUNT(*) AS total_citas_diciembre 
+ FROM cita 
+ WHERE MONTH(fecha) = 1;
  -- +-----------------------+
  -- | total_citas_diciembre |
  -- +-----------------------+
@@ -61,7 +63,11 @@ SELECT COUNT(*) AS total_citas_diciembre FROM cita WHERE MONTH(fecha) = 1;
 \
 6. Devuelve los veterinarios que trabajan en el centro 3.
 ```sql
-SELECT e.nombre, e.dni FROM empleado e JOIN veterinario v ON e.dni = v.dni JOIN trabajar t ON e.dni = t.dniEmpleado WHERE t.codCentro = 3;
+SELECT e.nombre, e.dni 
+ FROM empleado e 
+ JOIN veterinario v ON e.dni = v.dni 
+ JOIN trabajar t ON e.dni = t.dniEmpleado 
+ WHERE t.codCentro = 3;
  -- +------------------+-----------+
  -- | nombre           | dni       |
  -- +------------------+-----------+
@@ -71,7 +77,7 @@ SELECT e.nombre, e.dni FROM empleado e JOIN veterinario v ON e.dni = v.dni JOIN 
  -- 2 rows in set (0.005 sec)
 ````
 \
-7. Muestra todas las salas ordenadas por el nombre del centro asociado:
+7. Muestra todas las salas ordenadas por centros.
 ```sql
 SELECT s.nombre AS sala, c.nombre AS centro FROM sala s
 JOIN centro c ON s.cod_centro = c.cod
@@ -96,7 +102,8 @@ ORDER BY c.nombre;
 \
 8. Lista cuantos empleados trabajan en cada centro.
 ```sql
-SELECT c.nombre AS nombre_centro, c.cod AS codigo_centro, COUNT(t.dniEmpleado) AS numero_empleados FROM centro c
+SELECT c.nombre AS nombre_centro, c.cod AS codigo_centro, COUNT(t.dniEmpleado) AS numero_empleados 
+FROM centro c
 LEFT JOIN trabajar t ON c.cod = t.codCentro
 GROUP BY c.cod, c.nombre
 ORDER BY numero_empleados DESC;
@@ -112,7 +119,7 @@ ORDER BY numero_empleados DESC;
  -- 5 rows in set (0.004 sec)
 ````
 \
-9.Muestra los clientes que han tenido cita el mes de enero
+9.Muestra los clientes que han tenido citas el mes de enero.
 ```sql
 SELECT DISTINCT cl.*
 FROM cliente cl
@@ -132,7 +139,7 @@ WHERE MONTH(ci.fecha) = 1;
  -- 5 rows in set (0.011 sec)
 ````
 \
-10. Muestra tratamientos realizados por un la veterinaria Laura
+10. Muestra tratamientos realizados por un la veterinaria Laura Sánchez ordenados por más reciente.
 ```sql
 SELECT t.id AS id_tratamiento, t.tratamiento, t.medicamento, t.posologia, t.fechaVeterinario, t.horaVeterinario, e.nombre AS nombre_veterinario
 FROM tratamiento t
