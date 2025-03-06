@@ -31,28 +31,17 @@ Select c.dni, c.nombre
 SELECT AVG(e.sueldo) 
  FROM empleado e
  JOIN cirujano c on e.dni=c.dni;
- -- +-----------------+
- -- | sueldo_promedio |
- -- +-----------------+
- -- |     2310.000000 |
- -- +-----------------+
- -- 1 row in set (0.029 sec)
 ````
 \
-3. Lista el nombre y el DNI de los clientes cuyo nombre sea Hugo.
+3. Lista los animales que no tienen dueño.
 ```sql
-SELECT dni, nombre 
- FROM cliente 
- WHERE nombre LIKE '%Hugo%';
- -- +-----------+-------------+
- -- | dni       | nombre      |
- -- +-----------+-------------+
- -- | 11111111C | Hugo López  |
- -- +-----------+-------------+
- -- 1 row in set (0.002 sec)
+SELECT a.id, a.nombre, a.especie 
+ FROM animal a
+ LEFT JOIN cliente c on a.dni_cliente=c.dni
+ WHERE c.dni is null;
 ````
 \
-4. devuelveme el nombre de los empleados recepcionistas y su dni.
+4. devuelveme el nombre de los empleados recepcionistas y su DNI.
 ```sql
 SELECT e.nombre, e.dni FROM empleado e JOIN recepcionista r ON e.dni = r.dni;
  -- +-------------------+-----------+
