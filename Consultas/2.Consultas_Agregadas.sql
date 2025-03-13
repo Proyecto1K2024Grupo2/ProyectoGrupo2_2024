@@ -8,12 +8,12 @@ join animal a on c.dni=a.dni_cliente
 WHERE a.especie LIKE 'Gato'
 GROUP BY t.dni;
 
---Especies de animales que hemos atendido menos e 10 veces.
+--Especies de animales que hemos atendido menos de 10 veces.
 SELECT a.especie, count(h.id_animal)
 from animal a 
 join historial h on a.id=h.id_animal
 group by a.especie
-Having count(h.id_animal)>10;
+Having count(h.id_animal)<10;
 
 
 --Dinero  invertido en sueldos por cada centro.
@@ -40,10 +40,13 @@ gorup by a.id
 having count(t.id)>5;
 
 --Mostrar los historiales, nombres y tratamientos de cada animal.
-SELECT HISTORIAL.id, ANIMAL.nombre, TRATAMIENTO.tratamiento 
-FROM HISTORIAL
-JOIN ANIMAL ON HISTORIAL.id_animal = ANIMAL.id
-JOIN TRATAMIENTO ON HISTORIAL.id_tratamiento = TRATAMIENTO.id;
+Select e.dni, e.nombre, e.sueldo
+from empleado e
+join veterinario v on e.dni=v.dni
+join tratamiento t on v.dni=t.dni_veterinario
+where fechaVeterinario < (CURRENT_DATE, interval 1 MONTH)
+group by e.dni
+Having e.sueldo>2000;
 
 -- Devuelve los centros que no ha tenido citas en los ultimos 7 días.
 select c.cod from centro c
