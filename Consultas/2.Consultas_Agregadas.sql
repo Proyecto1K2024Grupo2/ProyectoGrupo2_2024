@@ -22,7 +22,7 @@ from trabajar t
 join empleado e on t.dniempleado=e.dni 
 GROUP BY t.codCentro;
 
---Todos los recepcionistas que han asignado más de 10 citas
+--Todos los recepcionistas que han asignado más de 10 citas.
 SELECT e.dni, e.nombre , COUNT(c.id) as CitasConcedidas
 FROM empleado e 
 JOIN recepcionista r ON e.dni=r.dni 
@@ -30,7 +30,7 @@ JOIN cita c on r.dni=c.dniRecepcionista
 GROUP BY r.dni 
 HAVING CitasConcedidas>10;
 
---Animales que han tenido más de 5 cirujías 
+--Animales que han tenido más de 5 cirujías.
 select a.nombre, a.especie, a.raza, count(t.id)
 from animal a 
 join historial h on a.id=h.id_animal
@@ -39,7 +39,7 @@ where dni_cirujano is not null
 group by a.id
 having count(t.id)>5;
 
---Los veterinarios que hayan trabajado en el último mes y que cobre más de 2000
+--Los veterinarios que hayan trabajado en el último mes y que cobre más de 2000.
 Select e.dni, e.nombre, e.sueldo
 from empleado e
 join veterinario v on e.dni=v.dni
@@ -49,12 +49,17 @@ group by e.dni
 Having e.sueldo>2000;
 
 -- Devuelve los centros que no ha tenido citas en los ultimos 7 días.
-select c.cod from centro c
-join sala s on c.cod=s.cod_centro
-LEFT join cita ci on s.nombre=ci.nombre_sala
-where fehca < DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY);
+Select t.medicamento
+from tratamiento t
 
--- FALTA CONSULTA --
+
+
+-- El número de citas que ha asignado el recepcionista con dni "123456789D" por cada sala.
+Select s.nombre, count(c.id)
+From sala s
+join cita c on s.nombre=c.nombre_sala
+where dniRecepcionista="123456789D"
+group by s.nombre;
 
 --Empleado que trabajan en más de un centro.
 SELECT e.dni, e.nombre, COUNT(t.codCentro) AS total_centros
@@ -64,7 +69,6 @@ GROUP BY e.dni, e.nombre
 HAVING COUNT(t.codCentro) > 1;
 
 -- Veterinarios que han realizado más de 5 tratamientos en el último año.
-
 SELECT v.dni, e.nombre, COUNT(t.id) AS total_tratamientos
 FROM veterinario v
 JOIN empleado e ON v.dni = e.dni
@@ -74,7 +78,6 @@ GROUP BY v.dni, e.nombre
 HAVING COUNT(t.id) > 5;
 
 -- Nombre de los cirujanos y la cantidad de citas que han tenido en los últimos 6 meses.
-
 SELECT c.dni, e.nombre, COUNT(ci.id) AS total_citas
 FROM cirujano c
 JOIN empleado e ON c.dni = e.dni
