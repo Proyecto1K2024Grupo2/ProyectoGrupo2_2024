@@ -8,14 +8,12 @@ join animal a on c.dni=a.dni_cliente
 WHERE a.especie LIKE 'Gato'
 GROUP BY t.dni;
 
---Todos los clientes que han tenido una cita el 25 de diciembre de 2024.
-SELECT e.nombre, e.telefono
-FROM empleado e
-JOIN cirujano c on e.dni=c.dni
-JOIN tratamiento t on c.dni=t.dni_cirujano
-JOIN historial h on t.id=h.id_cita
-JOIN animal a on h.id_animal=a.id
-WHERE a.especie='Gato'
+--Especies de animales que hemos atendido menos e 10 veces.
+SELECT a.especie, count(h.id_animal)
+from animal a 
+join historial h on a.id=h.id_animal
+group by a.especie
+Having count(h.id_animal)>10;
 
 
 --Dinero  invertido en sueldos por cada centro.
@@ -32,10 +30,14 @@ JOIN cita c on r.dni=c.dniRecepcionista
 GROUP BY r.dni 
 HAVING CitasConcedidas>10;
 
---Animal o animales que han tenido más cirujías 
-select h.* 
-  from historial h join tratamiento t on h.id_tratamiento = t.id 
-  where dni_cirujano is not null;
+--Animales que han tenido más de 5 cirujías 
+select a.nombre, a.especie, a.raza, count(t.id)
+from animal a 
+join historial h on a.id=h.id_animal
+join tratamiento t on h.id_tratamiento=t.id
+where dni_cirujano is not null
+gorup by a.id
+having count(t.id)>5;
 
 --Mostrar los historiales, nombres y tratamientos de cada animal.
 SELECT HISTORIAL.id, ANIMAL.nombre, TRATAMIENTO.tratamiento 
