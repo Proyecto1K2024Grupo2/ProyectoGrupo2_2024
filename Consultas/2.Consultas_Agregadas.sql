@@ -36,10 +36,10 @@ from animal a
 join historial h on a.id=h.id_animal
 join tratamiento t on h.id_tratamiento=t.id
 where dni_cirujano is not null
-gorup by a.id
+group by a.id
 having count(t.id)>5;
 
---Mostrar los historiales, nombres y tratamientos de cada animal.
+--Los veterinarios que hayan trabajado en el último mes y que cobre más de 2000
 Select e.dni, e.nombre, e.sueldo
 from empleado e
 join veterinario v on e.dni=v.dni
