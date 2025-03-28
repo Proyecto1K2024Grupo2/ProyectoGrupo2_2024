@@ -34,4 +34,4 @@ Inserción y comprobación de datos: Rubén, [Juan Carlos]\
   [Juan Carlos] Tablas: Cuidador, Veterinario, Cirujano\
   [Ruben] Tablas: Recepcionista, Cita\
   [Raul] Tablas: Cliente, Animal\
-  Entre todos: Tratamiento, Historial\
+  Entre todos: Tratamiento, Historial
