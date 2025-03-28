@@ -27,11 +27,11 @@ Inserción y comprobación de datos: Rubén, [Juan Carlos]\
   Consultas 1,3 y 7 [Juan Carlos]\
   Consutas 2,6 y 8 [Rubén]\
   Consultas 4 y 9 [Martin]\
-  Consultas 5 y 10 [Raul]\
+  Consultas 5 y 10 [Raul]
 
 ### Creación de DAO
-  [Martin] Tablas: Centro, Sala
-  [Juan Carlos] Tablas: Cuidador, Veterinario, Cirujano/
-  [Ruben] Tablas: Recepcionista, Cita
-  [Raul] Tablas: Cliente, Animal
-  Entre todos: Tratamiento, Historial
+  [Martin] Tablas: Centro, Sala\
+  [Juan Carlos] Tablas: Cuidador, Veterinario, Cirujano\
+  [Ruben] Tablas: Recepcionista, Cita\
+  [Raul] Tablas: Cliente, Animal\
+  Entre todos: Tratamiento, Historial\
