@@ -23,8 +23,15 @@ Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raul]\
 Inserción y comprobación de datos: Rubén, [Juan Carlos]\
 
-### Creacion y comprobacion de consultas:\
+### Creacion y comprobacion de consultas:
   Consultas 1,3 y 7 [Juan Carlos]\
   Consutas 2,6 y 8 [Rubén]\
   Consultas 4 y 9 [Martin]\
-  Consultas 5 y 10 [Raul]
+  Consultas 5 y 10 [Raul]\
+
+### Creación de DAO
+  [Martin] Tablas: Centro, Sala
+  [Juan Carlos] Tablas: Cuidador, Veterinario, Cirujano/
+  [Ruben] Tablas: Recepcionista, Cita
+  [Raul] Tablas: Cliente, Animal
+  Entre todos: Tratamiento, Historial
