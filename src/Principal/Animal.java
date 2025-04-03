@@ -11,21 +11,20 @@ public class Animal {
     private String nombreAnimal;
     private String especie;
     private String raza;
-    private LocalDate fnac;
+    private Date edad;
 
     //Constructor por defecto
     public Animal(String dni, String nombre, int telefono) {
     }
 
     /**
-     * @param id
      * @param dniCliente
      * @param nombre
      * @param especie
      * @param raza
-     * @param fnac
+     * @param edad
      */
-    public Animal(int id, String dniCliente, String nombre, String especie, String raza, Date fnac) {
+    public Animal(String dniCliente, String nombre, String especie, String raza, Date edad) {
         // TODO implement here
     }
 
@@ -70,12 +69,12 @@ public class Animal {
         this.raza = raza;
     }
 
-    public LocalDate getFnac() {
-        return fnac;
+    public LocalDate getEdad() {
+        return edad.toLocalDate();
     }
 
-    public void setFnac(LocalDate fnac) {
-        this.fnac = fnac;
+    public void setEdad(LocalDate edad) {
+        this.edad = Date.valueOf(edad);
     }
 
     /**
@@ -106,7 +105,7 @@ public class Animal {
                 .append("      <nombre>").append(nombreAnimal).append("</nombre>")
                 .append("      <especie>").append(especie).append("</especie>")
                 .append("      <raza>").append(raza).append("</raza>")
-                .append("      <fnac>").append(fnac).append("</fnac>");
+                .append("      <fnac>").append(edad).append("</fnac>");
         return xmlBuilder.toString();
     }
 
@@ -118,7 +117,7 @@ public class Animal {
                 .append("\"nombre\": \"").append(nombreAnimal).append("\", ")
                 .append("\"especie\": \"").append(especie).append("\", ")
                 .append("\"raza\": \"").append(raza).append("\", ")
-                .append("\"fnac\": \"").append(fnac).append("\"")
+                .append("\"fnac\": \"").append(edad).append("\"")
                 .append("}");
         return jsonBuilder.toString();
     }

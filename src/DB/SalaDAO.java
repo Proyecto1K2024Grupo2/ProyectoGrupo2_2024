@@ -1,5 +1,6 @@
 package DB;
 
+import Principal.Centro;
 import Principal.Sala;
 
 import java.sql.Connection;
@@ -8,6 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Clase SalaDAO - Maneja las operaciones de base de datos para la tabla Sala.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar las salas.
+ * Implementa el patrón Singleton para gestionar la conexión a la base de datos.
+ *
+ * @version 01-2025
+ * @author Martín Davia Mora
+ */
 
 public class SalaDAO {
     // Instancia única de SalaDAO

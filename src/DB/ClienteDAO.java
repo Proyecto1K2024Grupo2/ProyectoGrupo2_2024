@@ -9,6 +9,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase ClienteDAO - Maneja las operaciones de base de datos para la tabla Cliente.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar los clientes.
+ * Implementa el patrón Singleton para gestionar la conexión a la base de datos.
+ *
+ * @version 01-2025
+ * @author Raúl Quílez Ruiz
+ */
+
 public class ClienteDAO {
 
     // Creamos la instancia de ClienteDAO
@@ -23,16 +32,16 @@ public class ClienteDAO {
 
     // Sentencia SQL para crear la tabla en caso de que no exista
     public static final String CREATE_TABLE_CLIENTE = """
-                    CREATE TABLE if not exists Cliente(
-                        dni VARCHAR(9),
+                    CREATE TABLE IF NOT EXISTS Cliente(
+                        dni VARCHAR(9) PRIMARY KEY,
                         nombre VARCHAR(64),
-                        telefono INT(9)
-                        PRIMARY KEY(dni)
+                        telefono INT
                     );
+            
             """;
 
     // Sentencia para insertar un CLIENTE
-    private static final String INSERT_CLIENTE = "Insert into Cliente (dni, nombre, telefono) VALUES(?, ?)";
+    private static final String INSERT_CLIENTE = "INSERT INTO Cliente (dni, nombre, telefono) VALUES (?, ?, ?)";
 
     // Sentencia para seleccionar todos los CLIENTES
     private static final String SELECT_ALL_CLIENTE = "Select * from Cliente";
@@ -71,14 +80,15 @@ public class ClienteDAO {
      * @param cliente Cliente que se inserta
      * @throws SQLException Por si ocurre un error con la base de datos
      */
-    public void insrtCliente(Cliente cliente) throws SQLException {
+    public void insertCliente(Cliente cliente) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_CLIENTE)) {
-            statement.setString(1,cliente.getDniCliente());
-            statement.setString(2,cliente.getNombreCliente());
-            statement.setString(3, String.valueOf(cliente.getTelefono()));
+            statement.setString(1, cliente.getDniCliente());
+            statement.setString(2, cliente.getNombreCliente());
+            statement.setInt(3, cliente.getTelefono());
             statement.executeUpdate();
         }
     }
+
 
     /**
      * Obtiene los datos de todos los clientes
@@ -116,13 +126,15 @@ public class ClienteDAO {
      * @throws SQLException Por si ocurre un error con la base de datos
      */
     public void updateCliente(Cliente cliente) throws SQLException {
-        try ( PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENTE)) {
-            statement.setString(1,cliente.getDniCliente());
-            statement.setString(2,cliente.getNombreCliente());
-            statement.setString(3, String.valueOf(cliente.getTelefono()));
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENTE)) {
+            statement.setString(1, cliente.getNombreCliente());
+            statement.setInt(2, cliente.getTelefono());
+            statement.setString(3, cliente.getDniCliente());
             statement.executeUpdate();
         }
     }
+
+
 
     /**
      * Metodo que elimina un cliente por el DNI

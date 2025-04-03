@@ -9,6 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase AnimalDAO - Maneja las operaciones de base de datos para la tabla Animal.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar los Animales.
+ * Implementa el patrón Singleton para gestionar la conexión a la base de datos.
+ *
+ * @version 01-2025
+ * @author Raul Quilez
+ */
 public class AnimalDAO {
     // Creamos la instancia de AnimalDAO
     private static AnimalDAO instance;
@@ -37,7 +45,7 @@ public class AnimalDAO {
             """;
 
     // Sentencia para insertar un ANIMAL
-    private static final String INSERT_ANIMAL = "Insert into Animal (id, dni_cliente, nombre, especie, raza, edad) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_ANIMAL = "INSERT INTO animal (dni_cliente, nombre, especie, raza, edad) VALUES(?, ?, ?, ?, ?)";
 
     // Sentencia para seleccionar todos los ANIMALES
     private static final String SELECT_ALL_ANIMAL = "Select * from Animal";
@@ -78,15 +86,15 @@ public class AnimalDAO {
      */
     public void insertAnimal(Animal animal) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_ANIMAL)) {
-            statement.setString(1, String.valueOf(animal.getId()));
-            statement.setString(2,animal.getDni_cliente());
-            statement.setString(3, animal.getNombreAnimal());
-            statement.setString(4,animal.getEspecie());
-            statement.setString(5,animal.getRaza());
-            statement.setString(6, String.valueOf(animal.getFnac()));
+            statement.setString(1, animal.getDni_cliente());
+            statement.setString(2, animal.getNombreAnimal());
+            statement.setString(3, animal.getEspecie());
+            statement.setString(4, animal.getRaza());
+            statement.setDate(5, java.sql.Date.valueOf(animal.getEdad()));  // Debe ser un int, no un String
             statement.executeUpdate();
         }
     }
+
 
     /**
      * Obtiene los datos de todos los animales
@@ -108,44 +116,48 @@ public class AnimalDAO {
      * @return El objeto Animal al que le corresponde ese ID
      * @throws SQLException Por si ocurre un error con la base de datos
      */
-    public Animal getAnimalByID(String id) throws SQLException {
-        Animal c = null;
+    public Animal getAnimalByID(int id) throws SQLException {
+        Animal animal = null;
         try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_DNI_ANIMAL)) {
-            statement.setString(1, id);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) c = resultSetToAnimal(resultSet);
+            if (resultSet.next()) {
+                animal = resultSetToAnimal(resultSet);
+            }
         }
-        return c;
+        return animal;
     }
 
+
     /**
-     *  Metodo que actualiza los datos de un animal por su ID
+     * Metodo que actualiza los datos de un animal por su ID
      * @param animal Objeto con los datos actualizados
      * @throws SQLException Por si ocurre un error con la base de datos
      */
     public void updateAnimal(Animal animal) throws SQLException {
-        try ( PreparedStatement statement = connection.prepareStatement(UPDATE_ANIMAL)) {
-            statement.setString(1, String.valueOf(animal.getId()));
-            statement.setString(2,animal.getDni_cliente());
-            statement.setString(3, animal.getNombreAnimal());
-            statement.setString(4,animal.getEspecie());
-            statement.setString(5,animal.getRaza());
-            statement.setString(6, String.valueOf(animal.getFnac()));
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_ANIMAL)) {
+            statement.setString(1, animal.getDni_cliente());
+            statement.setString(2, animal.getNombreAnimal());
+            statement.setString(3, animal.getEspecie());
+            statement.setString(4, animal.getRaza());
+            statement.setDate(5, java.sql.Date.valueOf(animal.getEdad()));
             statement.executeUpdate();
         }
     }
+
 
     /**
      * Metodo que elimina un animal por el ID
      * @param id ID del animal que se quiere eliminar
      * @throws SQLException Por si ocurre un error con la base de datos
      */
-    public void deleteAnimal(String id) throws SQLException {
-        try (PreparedStatement statement=connection.prepareStatement(DELETE_ANIMAL)) {
-            statement.setString(1, id);
+    public void deleteAnimal(int id) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_ANIMAL)) {
+            statement.setInt(1, id);
             statement.executeUpdate();
         }
     }
+
 
     /**
      * Método que convierte que traduce un ResultSet a un objeto Animal
@@ -155,12 +167,11 @@ public class AnimalDAO {
      */
     private Animal resultSetToAnimal(ResultSet resultSet) throws SQLException {
         return new Animal(
-                resultSet.getInt("id"),
                 resultSet.getString("dni_cliente"),
                 resultSet.getString("nombre"),
                 resultSet.getString("especie"),
                 resultSet.getString("raza"),
-                resultSet.getDate("Fnac")
+                resultSet.getDate("edad")
         );
     }
 

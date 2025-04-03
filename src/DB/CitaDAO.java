@@ -10,6 +10,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase CitaDAO encargada de manejar las operaciones de base de datos relacionadas con las citas.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar las citas.
+ * Implementa el patrón Singleton para gestionar la conexión a la base de datos.
+ *
+ * @version 01-2025
+ * @author Rubén Expósito Vicente
+ */
 public class CitaDAO {
     // Instancia única de CitaDAO
     private static CitaDAO instance;
@@ -52,7 +60,6 @@ public class CitaDAO {
 
     /**
      * Método estático para obtener la única instancia de CitaDAO.
-     *
      * @return instancia única de CitaDAO.
      */
     public static synchronized CitaDAO getInstance() {

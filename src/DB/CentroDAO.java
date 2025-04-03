@@ -9,6 +9,15 @@ import java.util.List;
 
 import Principal.Centro;
 
+/**
+ * Clase CentroDAO - Maneja las operaciones de base de datos para la tabla Centro.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar los centros.
+ * Implementa el patrón Singleton para gestionar la conexión a la base de datos.
+ *
+ * @version 01-2025
+ * @author Martín Davia Mora
+ */
+
 public class CentroDAO {
     // Instancia única de CentroDAO
     private static CentroDAO instance;
