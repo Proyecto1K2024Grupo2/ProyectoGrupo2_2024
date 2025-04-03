@@ -11,6 +11,7 @@
 ### [Modelo Fisico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/Modelo%20Físico.md)
 ### [DDL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/DDL.sql)
 ### [DML](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/DML.sql)
+### [PL/SQL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/PLSQL/plSQL.sql)
 
 
 ## Posibes consultas para la BD
