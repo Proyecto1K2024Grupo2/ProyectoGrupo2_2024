@@ -19,6 +19,10 @@
 ### [Consultas_Agregadas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/2.Consultas_Agregadas.sql)
 ### [SubConsultas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/3.SubConsultas.sql)
 
+## Desarro de la aplicación en JAVA
+### [Código](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/tree/Master)
+### [Documentación Javadoc](https://proyecto1k2024grupo2.github.io/ProyectoGrupo2_2024)
+
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raul]\
