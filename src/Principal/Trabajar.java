@@ -1,7 +1,28 @@
+package Principal;
+
 public class Trabajar {
 
     public String dniEmpleado;
     public int codCentro;
+
+    //Getters y Setters
+
+
+    public String getDniEmpleado() {
+        return dniEmpleado;
+    }
+
+    public void setDniEmpleado(String dniEmpleado) {
+        this.dniEmpleado = dniEmpleado;
+    }
+
+    public int getCodCentro() {
+        return codCentro;
+    }
+
+    public void setCodCentro(int codCentro) {
+        this.codCentro = codCentro;
+    }
 
     /**
      * Default constructor

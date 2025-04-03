@@ -1,3 +1,4 @@
+package Principal;
 
 public class Historial {
 
@@ -12,6 +13,31 @@ public class Historial {
      */
     public Historial(int idCita, int idAnimal, int idTratamiento) {
         // TODO implement here
+    }
+
+    //Getters y Setters
+    public int getId_cita() {
+        return id_cita;
+    }
+
+    public void setId_cita(int id_cita) {
+        this.id_cita = id_cita;
+    }
+
+    public int getId_animal() {
+        return id_animal;
+    }
+
+    public void setId_animal(int id_animal) {
+        this.id_animal = id_animal;
+    }
+
+    public int getId_tratamiento() {
+        return id_tratamiento;
+    }
+
+    public void setId_tratamiento(int id_tratamiento) {
+        this.id_tratamiento = id_tratamiento;
     }
 
     /**

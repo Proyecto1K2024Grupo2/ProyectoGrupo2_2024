@@ -1,3 +1,4 @@
+package Principal;
 
 public class Veterinario extends Empleado {
 
@@ -21,8 +22,8 @@ public class Veterinario extends Empleado {
 
     public String veterinarioToXML(){
         StringBuilder xmlBuilder=new StringBuilder();
-        xmlBuilder.append("      <dni>").append(dni).append("</dni>")
-                .append("      <nombre>").append(nombre).append("</nombre>")
+        xmlBuilder.append("      <dni>").append(dniEmpleado).append("</dni>")
+                .append("      <nombre>").append(nombreEmpleado).append("</nombre>")
                 .append("      <telefono>").append(telefono).append("</telefono>")
                 .append("      <numCuenta>").append(numCuenta).append("</numCuenta>")
                 .append("      <sueldo>").append(sueldo).append("</sueldo>");
@@ -31,8 +32,8 @@ public class Veterinario extends Empleado {
 
     public String veterinarioToJSON() {
         return "{"
-                + "\"dni\":\"" + dni + "\","
-                + "\"nombre\":\"" + nombre + "\","
+                + "\"dni\":\"" + dniEmpleado + "\","
+                + "\"nombre\":\"" + nombreEmpleado + "\","
                 + "\"telefono\":\"" + telefono + "\","
                 + "\"numCuenta\":\"" + numCuenta + "\","
                 + "\"sueldo\":\"" + sueldo + "\""

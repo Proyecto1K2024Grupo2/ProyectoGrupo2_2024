@@ -1,7 +1,9 @@
+package Principal;
+
 public class Empleado {
 
-    protected String dni;
-    protected String nombre;
+    protected String dniEmpleado;
+    protected String nombreEmpleado;
     protected int telefono;
     protected String numCuenta;
     protected double sueldo;
@@ -15,10 +17,53 @@ public class Empleado {
      * @param sueldo
      */
     public Empleado(String dni, String nombre, int telefono, String numCuenta, double sueldo) {
-        this.dni = dni;
-        this.nombre = nombre;
+        this.dniEmpleado = dni;
+        this.nombreEmpleado = nombre;
         this.telefono = telefono;
         this.numCuenta = numCuenta;
+        this.sueldo = sueldo;
+    }
+
+    //Getters y Setters
+
+
+    public String getDniEmpleado() {
+        return dniEmpleado;
+    }
+
+    public void setDniEmpleado(String dniEmpleado) {
+        this.dniEmpleado = dniEmpleado;
+    }
+
+    public String getNombreEmpleado() {
+        return nombreEmpleado;
+    }
+
+    public void setNombreEmpleado(String nombreEmpleado) {
+        this.nombreEmpleado = nombreEmpleado;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getNumCuenta() {
+        return numCuenta;
+    }
+
+    public void setNumCuenta(String numCuenta) {
+        this.numCuenta = numCuenta;
+    }
+
+    public double getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(double sueldo) {
         this.sueldo = sueldo;
     }
 
@@ -52,8 +97,8 @@ public class Empleado {
 
     public String empleadoToXML() {
         StringBuilder xmlBuilder = new StringBuilder();
-        xmlBuilder.append("      <dni>").append(dni).append("</dni>")
-                .append("      <nombre>").append(nombre).append("</nombre>")
+        xmlBuilder.append("      <dni>").append(dniEmpleado).append("</dni>")
+                .append("      <nombre>").append(nombreEmpleado).append("</nombre>")
                 .append("      <telefono>").append(telefono).append("</telefono>")
                 .append("      <numCuenta>").append(numCuenta).append("</numCuenta>")
                 .append("      <sueldo>").append(sueldo).append("</sueldo>");
@@ -63,8 +108,8 @@ public class Empleado {
     public String empleadoToJSON() {
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{")
-                .append("\"dni\": \"").append(dni).append("\", ")
-                .append("\"nombre\": \"").append(nombre).append("\", ")
+                .append("\"dni\": \"").append(dniEmpleado).append("\", ")
+                .append("\"nombre\": \"").append(nombreEmpleado).append("\", ")
                 .append("\"telefono\": \"").append(telefono).append("\", ")
                 .append("\"numCuenta\": \"").append(numCuenta).append("\", ")
                 .append("\"sueldo\": ").append(sueldo)

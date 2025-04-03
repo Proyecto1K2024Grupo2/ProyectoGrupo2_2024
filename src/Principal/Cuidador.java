@@ -1,8 +1,11 @@
+package Principal;
+
 public class Cuidador extends Empleado {
 
     public Cuidador(String dni, String nombre, int telefono, String numCuenta, double sueldo) {
         super(dni, nombre, telefono, numCuenta, sueldo);
     }
+
 
     /**
      *
@@ -34,8 +37,8 @@ public class Cuidador extends Empleado {
 
     public String cuidadorToXML(){
         StringBuilder xmlBuilder=new StringBuilder();
-        xmlBuilder.append("      <dni>").append(dni).append("</dni>")
-                .append("      <nombre>").append(nombre).append("</nombre")
+        xmlBuilder.append("      <dni>").append(dniEmpleado).append("</dni>")
+                .append("      <nombre>").append(nombreEmpleado).append("</nombre")
                 .append("      <telefono>").append(telefono).append("</telefono>")
                 .append("      <numCuenta>").append(numCuenta).append("</numCuenta>")
                 .append("      <sueldo>").append(sueldo).append("</sueldo>");
@@ -45,8 +48,8 @@ public class Cuidador extends Empleado {
     public String cuidadorToJSON() {
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{")
-                .append("\"dni\": \"").append(dni).append("\", ")
-                .append("\"nombre\": \"").append(nombre).append("\", ")
+                .append("\"dni\": \"").append(dniEmpleado).append("\", ")
+                .append("\"nombre\": \"").append(nombreEmpleado).append("\", ")
                 .append("\"telefono\": \"").append(telefono).append("\", ")
                 .append("\"numCuenta\": \"").append(numCuenta).append("\", ")
                 .append("\"sueldo\": ").append(sueldo)

@@ -1,26 +1,15 @@
+package Principal;
+
 public class Cliente {
+    private String dniCliente;
+    private String nombreCliente;
+    private int telefono;
 
     /**
      * Default constructor
      */
     public Cliente() {
     }
-
-
-    /**
-     *
-     */
-    private String dni;
-
-    /**
-     *
-     */
-    private String nombre;
-
-    /**
-     *
-     */
-    private int telefono;
 
     /**
      * @param dni
@@ -29,6 +18,31 @@ public class Cliente {
      */
     public Cliente(String dni, String nombre, int telef) {
         // TODO implement here
+    }
+
+    //Getters y Setters
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getDniCliente() {
+        return dniCliente;
+    }
+
+    public void setDniCliente(String dniCliente) {
+        this.dniCliente = dniCliente;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
     /**
@@ -54,16 +68,16 @@ public class Cliente {
 
     public String clienteToXML(){
         StringBuilder xmlBuilder=new StringBuilder();
-        xmlBuilder.append("      <dni>").append(dni).append("</dni>")
-                .append("      <nombre>").append(nombre).append("</nombre>")
+        xmlBuilder.append("      <dni>").append(dniCliente).append("</dni>")
+                .append("      <nombre>").append(nombreCliente).append("</nombre>")
                 .append("      <telefono>").append(telefono).append("</telefono>");
         return xmlBuilder.toString();
     }
 
     public String clienteToJSON() {
         return "{"
-                + "\"dni\":\"" + dni + "\","
-                + "\"nombre\":\"" + nombre + "\","
+                + "\"dni\":\"" + dniCliente + "\","
+                + "\"nombre\":\"" + nombreCliente + "\","
                 + "\"telefono\":\"" + telefono + "\""
                 + "}";
     }
