@@ -15,7 +15,7 @@ import java.util.List;
  * Implementa el patrón Singleton para gestionar la conexión a la base de datos.
  *
  * @version 01-2025
- * @author Raul Quilez
+ * @author Raúl Quílez Ruiz
  */
 public class AnimalDAO {
     // Creamos la instancia de AnimalDAO
