@@ -136,26 +136,6 @@ public class Tratamiento {
         this.dni_cuidador = dni_cuidador;
     }
 
-    /**
-     *
-     */
-    public void añadirTratamiento() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void borrarTratamiento() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void actualizarTratamiento() {
-        // TODO implement here
-    }
 
     public String tratamientoToXML() {
         StringBuilder xmlBuilder = new StringBuilder();

@@ -40,26 +40,6 @@ public class Historial {
         this.id_tratamiento = id_tratamiento;
     }
 
-    /**
-     *
-     */
-    public void añadirHistorial() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void borrarHistorial() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void actualizarHistorial() {
-        // TODO implement here
-    }
 
     public String historialToXML() {
         StringBuilder xmlBuilder = new StringBuilder();

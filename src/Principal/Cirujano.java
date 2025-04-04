@@ -2,6 +2,8 @@ package Principal;
 
 public class Cirujano extends Empleado {
 
+    private String dni;
+
     public Cirujano(String dni, String nombre, int telefono, String numCuenta, double sueldo) {
         super(dni, nombre, telefono, numCuenta, sueldo);
     }
@@ -13,25 +15,6 @@ public class Cirujano extends Empleado {
 
     public void setDniEmpleado(String dniEmpleado) {
         this.dni = dniEmpleado;
-    }
-
-    /**
-     *
-     */
-    private String dni;
-
-    /**
-     *
-     */
-    public void asignar() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void desAsignar() {
-        // TODO implement here
     }
 
     public String cirujanoToXML(){

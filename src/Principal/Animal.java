@@ -1,7 +1,12 @@
 package Principal;
 
+import DB.AnimalDAO;
+
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Animal {
 
@@ -14,18 +19,14 @@ public class Animal {
     private Date edad;
 
     //Constructor por defecto
-    public Animal(String dni, String nombre, int telefono) {
-    }
 
-    /**
-     * @param dniCliente
-     * @param nombre
-     * @param especie
-     * @param raza
-     * @param edad
-     */
-    public Animal(String dniCliente, String nombre, String especie, String raza, Date edad) {
-        // TODO implement here
+
+    public Animal(String dni_cliente, String nombreAnimal, String especie, String raza, Date edad) {
+        this.dni_cliente = dni_cliente;
+        this.nombreAnimal = nombreAnimal;
+        this.especie = especie;
+        this.raza = raza;
+        this.edad = edad;
     }
 
     //Getters y Setters
@@ -77,26 +78,7 @@ public class Animal {
         this.edad = Date.valueOf(edad);
     }
 
-    /**
-     *
-     */
-    public void añadirAnimal() {
-        // TODO implement here
-    }
 
-    /**
-     *
-     */
-    public void borrarAnimal() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void actualizarAnimal() {
-        // TODO implement here
-    }
 
     public String animalToXML() {
         StringBuilder xmlBuilder = new StringBuilder();
@@ -120,6 +102,143 @@ public class Animal {
                 .append("\"fnac\": \"").append(edad).append("\"")
                 .append("}");
         return jsonBuilder.toString();
+    }
+
+    public static void main(String[] args) throws Exception {
+        AnimalDAO animalDAO = new AnimalDAO();
+        Scanner sc = new Scanner(System.in);
+
+        int resp = 7;
+        do {
+            System.out.println("1. Seleccionar todos los animales" +
+                    "2. Seleccionar animal por ID" +
+                    "3. Insertar animal" +
+                    "4. Actualizar animal" +
+                    "5. Borrar animal" +
+                    "6. Total animales" +
+                    "7. SALIR");
+
+            try{
+                 resp = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("Opción inválida");
+            }
+
+            switch (resp) {
+                case 1 ->   animalDAO.getAllAnimal();
+                case 2 ->   animalDAO.getAnimalByID(pedirIdAnimal());
+                case 3 ->   animalDAO.insertAnimal(crearAnimal());
+                case 4 ->   animalDAO.updateAnimal(crearAnimal());
+                case 5 ->   animalDAO.deleteAnimal(pedirIdAnimal());
+                case 6 ->   animalDAO.totalAnimales();
+            }
+        }while (resp != 7);
+    }
+
+    private static int pedirIdAnimal(){
+        Scanner sc = new Scanner(System.in);
+        boolean ejecucionCorrecta = true;
+        int id = 0;
+
+        System.out.println("Introduce el ID del animal: ");
+        try {
+            id = sc.nextInt();
+        } catch (Exception e) {
+            System.out.println("ERROR, formato de ID no válido.");
+            ejecucionCorrecta = false;
+            throw new RuntimeException(e);
+        }
+
+        if (ejecucionCorrecta){
+            return id;
+        }else {
+            return 0;
+        }
+    }
+
+    private static Animal crearAnimal() throws Exception{
+        Scanner sc = new Scanner(System.in);
+        boolean ejecucionCorrecta = true;
+
+        String dni;
+        String nombre;
+        String especie;
+        String raza;
+        Date edad;
+
+        System.out.println("Introduce el DNI del dueño del animal: ");
+        try {
+            dni = sc.next();
+            if (!dni.matches("\\d{8}[A-Z]")){
+                ejecucionCorrecta = false;
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR, DNI no válido.");
+            ejecucionCorrecta = false;
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Introduce el nombre del animal: ");
+        try {
+            nombre = sc.next();
+            if (!nombre.matches(".{0,64}")){
+                System.out.println("ERROR, nombre demasiado largo");
+                ejecucionCorrecta = false;
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR, nombre no válido.");
+            ejecucionCorrecta = false;
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Introduce la especie del animal: ");
+        try {
+            especie = sc.next();
+            if (!especie.matches(".{0,64}")){
+                System.out.println("ERROR, especie demasiado larga");
+                ejecucionCorrecta = false;
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR, especie no válida.");
+            ejecucionCorrecta = false;
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Introduce la raza del animal: ");
+        try {
+            raza = sc.next();
+            if (!raza.matches(".{0,64}")){
+                System.out.println("ERROR, raza demasiado larga");
+                ejecucionCorrecta = false;
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR, raza no válida.");
+            ejecucionCorrecta = false;
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Introduce la fecha de nacimiento del animal: ");
+        try {
+            edad = Date.valueOf(sc.next(Pattern.compile(
+                    "^[0,1]?\\d{1}\\/(([0-2]?\\d{1})|([3][0,1]{1}))\\/(([1]{1}[9]{1}[9]{1}\\d{1})|([2-9]{1}\\d{3}))$")));
+        } catch (Exception e) {
+            System.out.println("ERROR, fecha no válida (Formato = MM/DD/AAAA.");
+            ejecucionCorrecta = false;
+            throw new RuntimeException(e);
+        }
+
+        if (!ejecucionCorrecta){
+            throw new Exception("No se ha podido crear el animal.");
+        }
+
+        Animal animal;
+        try {
+            animal = new Animal(dni, nombre, especie, raza, edad);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return animal;
+
     }
 
 }

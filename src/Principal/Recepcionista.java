@@ -2,32 +2,10 @@ package Principal;
 
 public class Recepcionista extends Empleado {
 
-
-    public Recepcionista(String dni, String nombre, int telefono, String numCuenta, double sueldo, String dni1) {
+    public Recepcionista(String dni, String nombre, int telefono, String numCuenta, double sueldo) {
         super(dni, nombre, telefono, numCuenta, sueldo);
-
     }
 
-    /**
-     *
-     */
-    public void Operation1() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void asignar() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void desAsignar() {
-        // TODO implement here
-    }
 
     public String recepcionistaToXML(){
         StringBuilder xmlBuilder=new StringBuilder();

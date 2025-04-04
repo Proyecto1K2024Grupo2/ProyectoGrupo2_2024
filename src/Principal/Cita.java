@@ -69,26 +69,6 @@ public class Cita {
         this.dniRecepcionista = dniRecepcionista;
     }
 
-    /**
-     *
-     */
-    public void añadirCita() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void borrarCita() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void actualizarCita() {
-        // TODO implement here
-    }
 
     public String citaToXML() {
         StringBuilder xmlBuilder = new StringBuilder();

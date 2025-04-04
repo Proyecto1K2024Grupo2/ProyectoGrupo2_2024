@@ -6,19 +6,6 @@ public class Veterinario extends Empleado {
         super(dni, nombre, telefono, numCuenta, sueldo);
     }
 
-    /**
-     *
-     */
-    public void asignar() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void desAsignar() {
-        // TODO implement here
-    }
 
     public String veterinarioToXML(){
         StringBuilder xmlBuilder=new StringBuilder();

@@ -6,35 +6,6 @@ public class Cuidador extends Empleado {
         super(dni, nombre, telefono, numCuenta, sueldo);
     }
 
-
-    /**
-     *
-     */
-    public void asignar() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void borrarCuidador() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void actualizarCuidador() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void desAsignar() {
-        // TODO implement here
-    }
-
     public String cuidadorToXML(){
         StringBuilder xmlBuilder=new StringBuilder();
         xmlBuilder.append("      <dni>").append(dniEmpleado).append("</dni>")

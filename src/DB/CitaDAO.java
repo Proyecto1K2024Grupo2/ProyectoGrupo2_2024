@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase CitaDAO encargada de manejar las operaciones de base de datos relacionadas con las citas.
+ * Clase CitaDAO - Maneja las operaciones de base de datos para la tabla Cita.
  * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar las citas.
  * Implementa el patrón Singleton para gestionar la conexión a la base de datos.
  *
@@ -189,5 +189,8 @@ public class CitaDAO {
         return total;
     }
 
+    public static void main(String[] args) {
+
+    }
 }
 

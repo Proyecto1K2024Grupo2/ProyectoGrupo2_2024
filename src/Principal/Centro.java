@@ -45,26 +45,6 @@ public class Centro {
         this.cp = cp;
     }
 
-    /**
-     *
-     */
-    public void añadirCentro() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void borrarCentro() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void actualizarCentro() {
-        // TODO implement here
-    }
 
     public String centroToXML() {
         StringBuilder xmlBuilder = new StringBuilder();

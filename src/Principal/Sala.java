@@ -37,26 +37,6 @@ public class Sala {
         this.codCentro = codCentro;
     }
 
-    /**
-     *
-     */
-    public void añadirSala() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void borrarSala() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void actualizarSala() {
-        // TODO implement here
-    }
 
     public String salaToXML(){
         StringBuilder xmlBuilder=new StringBuilder();

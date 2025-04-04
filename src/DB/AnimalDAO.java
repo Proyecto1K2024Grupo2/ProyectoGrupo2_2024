@@ -66,7 +66,7 @@ public class AnimalDAO {
      * Constructor privado para evitar instancición interna
      * Obtine conexión con la base de datos
      */
-    private AnimalDAO(){
+    public AnimalDAO(){
         this.connection=DBConnection.getConnection();
     }
 
@@ -141,6 +141,7 @@ public class AnimalDAO {
             statement.setString(3, animal.getEspecie());
             statement.setString(4, animal.getRaza());
             statement.setDate(5, java.sql.Date.valueOf(animal.getEdad()));
+            statement.setInt(6, animal.getId());
             statement.executeUpdate();
         }
     }

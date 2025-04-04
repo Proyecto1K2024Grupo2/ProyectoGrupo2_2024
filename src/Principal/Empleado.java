@@ -1,6 +1,8 @@
 package Principal;
 
-public class Empleado {
+import java.sql.SQLException;
+
+public abstract class Empleado {
 
     protected String dniEmpleado;
     protected String nombreEmpleado;
@@ -8,6 +10,9 @@ public class Empleado {
     protected String numCuenta;
     protected double sueldo;
 
+    public Empleado() {
+
+    }
 
     /**
      * @param dni
@@ -24,9 +29,8 @@ public class Empleado {
         this.sueldo = sueldo;
     }
 
+
     //Getters y Setters
-
-
     public String getDniEmpleado() {
         return dniEmpleado;
     }
@@ -67,34 +71,6 @@ public class Empleado {
         this.sueldo = sueldo;
     }
 
-    /**
-     *
-     */
-    public void añadirEmpleado() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void borrarEmpleado() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void actualizarEmpleado() {
-        // TODO implement here
-    }
-
-    /**
-     *
-     */
-    public void Operation1() {
-        // TODO implement here
-    }
-
     public String empleadoToXML() {
         StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <dni>").append(dniEmpleado).append("</dni>")
@@ -116,7 +92,4 @@ public class Empleado {
                 .append("}");
         return jsonBuilder.toString();
     }
-
-
-
 }
