@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- *
+ * Clase Cita que necesita una Sala, y el DNI del empleado el cual va a tratar al animal.
+ * Sirve para tener registro de quien la ha asignado, donde ha ocurrido y se conecta con historial para tener más información que puede ser útil en un futuro.
  */
 public class Cita {
 
@@ -14,19 +15,28 @@ public class Cita {
     public LocalTime hora;
     public String dniRecepcionista;
 
-
+    /**
+     * Constructor por defecto de la clase Cita.
+     */
     public Cita() {
     }
 
     /**
-     * @param id
-     * @param nombreSala
-     * @param fecha
-     * @param hora
-     * @param dniRecep
+     * Constructor de Cita que permite crear una instancia de cita.
+     * @param nombreSala Nombre de la sala donde ha ocurrido la cita.
+     * @param fecha Fecha de la cita.
+     * @param hora Hora de la cita.
+     * @param dniRecepcionista DNI del recepcionista que ha asignado la cita.
      */
-    public Cita(int id, String nombreSala, LocalDate fecha, LocalTime hora, String dniRecep) {
+    public Cita(String nombreSala, LocalDate fecha, LocalTime hora, String dniRecepcionista) {
+        this.nombreSala = nombreSala;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.dniRecepcionista = dniRecepcionista;
     }
+
+
+
 
     //Getters y Setters
     public int getId() {
@@ -70,6 +80,10 @@ public class Cita {
     }
 
 
+    /**
+     * Convierte los datos de la Cita a XML.
+     * @return Devuelve un String con los datos de la Cita a XML.
+     */
     public String citaToXML() {
         StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <id>").append(id).append("</id>")
@@ -80,6 +94,10 @@ public class Cita {
         return xmlBuilder.toString();
     }
 
+    /**
+     * Convierte los datos de la Cita a JSON.
+     * @return Devuelve un String con los datos de la Cita a JSON.
+     */
     public String citaToJSON() {
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{")

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Clase EmpleadoDAO - Maneja las operaciones de base de datos para la tabla Recepcionista.
- * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar las citas.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar los Recepcionistas.
  * Implementa el patrón Singleton para asegurar una única instancia.
  * @version 01-2025
  * @author Rubén Expósito Vicente

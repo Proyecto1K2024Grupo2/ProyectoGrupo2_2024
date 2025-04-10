@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Clase CirujanoDAO - Maneja las operaciones de base de datos para la tabla Cirujano.
- * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar las citas.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar los cirujanos.
  * Implementa el patrón Singleton para asegurar una única instancia.
  * Extiende de EmpleadoDAO {@link EmpleadoDAO}
  *

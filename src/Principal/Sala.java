@@ -1,5 +1,9 @@
 package Principal;
 
+/**
+ * La clase Sala hace referencia a una sala de un Centro
+ * Sala está relacionada con su centro y tiene información identificativa
+ */
 public class Sala {
 
     private String nombre;
@@ -10,17 +14,19 @@ public class Sala {
     }
 
 
+
+
     /**
-     * @param nombre
-     * @param cod
+     * Constructor de Sala
+     * @param nombre Nombre de la Sala
+     * @param codCentro Código del centro en el que se encuentra la sala
      */
-    public Sala(String nombre, int cod) {
-        // TODO implement here
+    public Sala(String nombre, int codCentro) {
+        this.nombre = nombre;
+        this.codCentro = codCentro;
     }
 
     //Getters y Setters
-
-
     public String getNombre() {
         return nombre;
     }
@@ -38,6 +44,10 @@ public class Sala {
     }
 
 
+    /**
+     * Convierte los datos de la sala a XML.
+     * @return Devuelve un String con los datos de Sala a XML.
+     */
     public String salaToXML(){
         StringBuilder xmlBuilder=new StringBuilder();
         xmlBuilder.append("      <nombre>").append(nombre).append("</nombre>")
@@ -45,6 +55,10 @@ public class Sala {
         return xmlBuilder.toString();
     }
 
+    /**
+     * Convierte los datos de la sala a JSON.
+     * @return Devuelve un String con los datos de Sala a JSON.
+     */
     public String salaToJSON() {
         return "{"
                 + "\"nombre\":\"" + nombre + "\","

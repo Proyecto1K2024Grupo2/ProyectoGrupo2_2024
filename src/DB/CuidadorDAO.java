@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Clase CuidadorDAO - Maneja las operaciones de base de datos para la tabla Cuidador.
- * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar las citas.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar los cuidadores.
  * Implementa el patrón Singleton para asegurar una única instancia.
  * Extiende de EmpleadoDAO {@link EmpleadoDAO}
  *

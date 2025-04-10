@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Clase VeterinarioDAO - Maneja las operaciones de base de datos para la tabla Veterinario.
- * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar las citas.
+ * Implementa métodos CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar los veterinarios.
  * Implementa el patrón Singleton para asegurar una única instancia.
  * Extiende de EmpleadoDAO {@link EmpleadoDAO}
  *

@@ -3,6 +3,10 @@ package Principal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * La clase tratamiento está relacionada con Empleado e Historial.
+ * Esta clase sirve para proporcionar información sobre el tratamiento que se le ha realizado al Animal, quien ha sido y cuándo.
+ */
 public class Tratamiento {
 
     private int id;
@@ -20,15 +24,14 @@ public class Tratamiento {
     private String dni_cuidador;
 
     //Constructor por defecto
-    public Tratamiento() {
-    }
-
-    public Tratamiento(int id, String tratamiento, String medicamento, String posologia) {
-        this.id = id;
+    public Tratamiento(String tratamiento, String medicamento, String posologia) {
         this.tratamiento = tratamiento;
         this.medicamento = medicamento;
         this.posologia = posologia;
     }
+
+
+
 
 
     //Getters y Setters
@@ -136,7 +139,10 @@ public class Tratamiento {
         this.dni_cuidador = dni_cuidador;
     }
 
-
+    /**
+     * Convierte los datos del tratamiento a XML.
+     * @return Devuelve un String con los datos de Tratamiento a XML.
+     */
     public String tratamientoToXML() {
         StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <id>").append(id).append("</id>")
@@ -155,6 +161,11 @@ public class Tratamiento {
         return xmlBuilder.toString();
     }
 
+
+    /**
+     * Convierte los datos del tratamiento a JSON.
+     * @return Devuelve un String con los datos de Tratamiento a JSON.
+     */
     public String tratamientoToJSON() {
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{")

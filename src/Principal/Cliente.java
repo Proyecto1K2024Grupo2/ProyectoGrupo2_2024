@@ -10,21 +10,25 @@ public class Cliente {
     private String nombreCliente;
     private int telefono;
 
+    // Metodo que se utilizó para hacer pruebas de la conexión con la BD y se utiliza en el main de abajo.
     private static ClienteDAO clienteDAO;
 
     /**
-     * Default constructor
+     * Constructor sin parámetros de la clase Cliente
      */
     public Cliente() {
     }
 
     /**
-     * @param dni
-     * @param nombre
-     * @param telef
+     * Constructor para crear un Cliente
+     * @param dni DNI del cliente.
+     * @param nombre Nombre del cliente.
+     * @param telef Número de teléfono del cliente.
      */
     public Cliente(String dni, String nombre, int telef) {
-        // TODO implement here
+        dniCliente = dni;
+        nombreCliente = nombre;
+        telefono = telef;
     }
 
     //Getters y Setters
@@ -53,6 +57,10 @@ public class Cliente {
     }
 
 
+    /**
+     * Convierte los datos del Cliente a XML.
+     * @return Devuelve un String con los datos de Cliente a XML.
+     */
     public String clienteToXML(){
         StringBuilder xmlBuilder=new StringBuilder();
         xmlBuilder.append("      <dni>").append(dniCliente).append("</dni>")
@@ -61,6 +69,10 @@ public class Cliente {
         return xmlBuilder.toString();
     }
 
+    /**
+     * Convierte los datos del Cliente a JSON.
+     * @return Devuelve un String con los datos de Cliente a JSON.
+     */
     public String clienteToJSON() {
         return "{"
                 + "\"dni\":\"" + dniCliente + "\","

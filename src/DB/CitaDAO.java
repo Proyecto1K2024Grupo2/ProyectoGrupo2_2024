@@ -163,7 +163,6 @@ public class CitaDAO {
      */
     private Cita resultSetToCita(ResultSet resultSet) throws SQLException {
         return new Cita(
-                resultSet.getInt("id"),
                 resultSet.getString("nombre_sala"),
                 resultSet.getDate("fecha").toLocalDate(),  // Convierte java.sql.Date a LocalDate
                 resultSet.getTime("hora").toLocalTime(),  // Convierte java.sql.Time a LocalTime

@@ -2,6 +2,9 @@ package Principal;
 
 import java.sql.SQLException;
 
+/**
+ * Clase Empleado que sirve para guardar información de los empleados de la empresa.
+ */
 public abstract class Empleado {
 
     protected String dniEmpleado;
@@ -10,16 +13,20 @@ public abstract class Empleado {
     protected String numCuenta;
     protected double sueldo;
 
+    /**
+     * Construcor sin parámetros de la clase Empleado.
+     */
     public Empleado() {
 
     }
 
     /**
-     * @param dni
-     * @param nombre
-     * @param telefono
-     * @param numCuenta
-     * @param sueldo
+     * Constructor para crear un empleado con sus datos necesarios para inscribirlos en la empresa.
+     * @param dni DNI del empleado.
+     * @param nombre Nombre completo del empleado.
+     * @param telefono Teléfono del empleado.
+     * @param numCuenta Número de Cuenta del empleado.
+     * @param sueldo Sueldo del empleado.
      */
     public Empleado(String dni, String nombre, int telefono, String numCuenta, double sueldo) {
         this.dniEmpleado = dni;
@@ -71,6 +78,10 @@ public abstract class Empleado {
         this.sueldo = sueldo;
     }
 
+    /**
+     * Convierte los datos del empleado a XML.
+     * @return Devuelve un String con los datos de Empleado a XML.
+     */
     public String empleadoToXML() {
         StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("      <dni>").append(dniEmpleado).append("</dni>")
@@ -81,6 +92,10 @@ public abstract class Empleado {
         return xmlBuilder.toString();
     }
 
+    /**
+     * Convierte los datos del empleado a JSON.
+     * @return Devuelve un String con los datos de Empleado a JSON.
+     */
     public String empleadoToJSON() {
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{")
