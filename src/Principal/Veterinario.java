@@ -36,7 +36,7 @@ public class Veterinario extends Empleado {
 
     /**
      * Convierte los datos del veterinario a JSON.
-     * @return Devuelve un String con los datos de Veterinario a JSON.
+     * @return Devuelve un String con los datos de Veterinario a JSON .
      */
     public String veterinarioToJSON() {
         return "{"
