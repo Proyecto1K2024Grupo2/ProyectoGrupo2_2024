@@ -73,7 +73,7 @@ public class TratamientoDAO {
      * Constructor privado para evitar instanciación externa.
      * Obtiene la conexión a la base de datos desde DBConnection.
      */
-    private TratamientoDAO() {
+    public TratamientoDAO() {
         this.connection = DBConnection.getConnection();
     }
 
@@ -156,25 +156,43 @@ public class TratamientoDAO {
      * Actualiza los datos de un tratamiento en la base de datos.
      *
      * @param tratamiento Objeto Tratamiento con los datos actualizados.
-     * @param id ID del tratamiento a actualizar.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
-    public void updateTratamiento(Tratamiento tratamiento, int id) throws SQLException {
-        try (PreparedStatement stmt = connection.prepareStatement(UPDATE_TRATAMIENTO_QUERY)) {
-            stmt.setString(1, tratamiento.getTratamiento());
-            stmt.setString(2, tratamiento.getMedicamento());
-            stmt.setString(3, tratamiento.getPosologia());
-            stmt.setDate(4, Date.valueOf(tratamiento.getFechaCuidador()));
-            stmt.setTime(5, Time.valueOf(tratamiento.getHoraCuidador()));
-            stmt.setDate(6, Date.valueOf(tratamiento.getFechaVeterinario()));
-            stmt.setTime(7, Time.valueOf(tratamiento.getHoraVeterinario()));
-            stmt.setDate(8, Date.valueOf(tratamiento.getFechaCirujano()));
-            stmt.setTime(9, Time.valueOf(tratamiento.getHoraCirujano()));
-            stmt.setString(10, tratamiento.getDni_veterinario());
-            stmt.setString(11, tratamiento.getDni_cirujano());
-            stmt.setString(12, tratamiento.getDni_cuidador());
-            stmt.setInt(13, id);
-            stmt.executeUpdate();
+    public void updateTratamiento(Tratamiento tratamiento) {
+        try {
+            // Verificar si el tratamiento existe
+            Tratamiento existingTratamiento = getTratamientoById(tratamiento.getId());
+            if (existingTratamiento == null) {
+                System.out.println("Tratamiento con ID " + tratamiento.getId() + " no encontrado.");
+                return;
+            }
+
+            // Proceder a actualizar el tratamiento en la base de datos
+            try (PreparedStatement stmt = connection.prepareStatement(UPDATE_TRATAMIENTO_QUERY)) {
+                stmt.setString(1, tratamiento.getTratamiento());
+                stmt.setString(2, tratamiento.getMedicamento());
+                stmt.setString(3, tratamiento.getPosologia());
+                stmt.setDate(4, Date.valueOf(tratamiento.getFechaCuidador()));
+                stmt.setTime(5, Time.valueOf(tratamiento.getHoraCuidador()));
+                stmt.setDate(6, Date.valueOf(tratamiento.getFechaVeterinario()));
+                stmt.setTime(7, Time.valueOf(tratamiento.getHoraVeterinario()));
+                stmt.setDate(8, Date.valueOf(tratamiento.getFechaCirujano()));
+                stmt.setTime(9, Time.valueOf(tratamiento.getHoraCirujano()));
+                stmt.setString(10, tratamiento.getDni_veterinario());
+                stmt.setString(11, tratamiento.getDni_cirujano());
+                stmt.setString(12, tratamiento.getDni_cuidador());
+                stmt.setInt(13, tratamiento.getId());
+
+                int rowsUpdated = stmt.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    System.out.println("Tratamiento actualizado correctamente.");
+                } else {
+                    System.out.println("No se pudo actualizar el tratamiento.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el tratamiento: " + e.getMessage());
         }
     }
 
@@ -201,12 +219,31 @@ public class TratamientoDAO {
      * @throws SQLException Si ocurre un error en la conversión.
      */
     private Tratamiento resultSetToTratamiento(ResultSet resultSet) throws SQLException {
+        Date fechaCui = resultSet.getDate("fechaCuidador");
+        Time horaCui = resultSet.getTime("horaCuidador");
+        Date fechaVet = resultSet.getDate("fechaVeterinario");
+        Time horaVet = resultSet.getTime("horaVeterinario");
+        Date fechaCir = resultSet.getDate("fechaCirujano");
+        Time horaCir = resultSet.getTime("horaCirujano");
+
         return new Tratamiento(
+                resultSet.getInt("id"),
                 resultSet.getString("tratamiento"),
                 resultSet.getString("medicamento"),
-                resultSet.getString("posologia")
+                resultSet.getString("posologia"),
+                fechaCui != null ? fechaCui.toLocalDate() : null,
+                horaCui != null ? horaCui.toLocalTime() : null,
+                resultSet.getString("dni_cuidador"),
+                fechaVet != null ? fechaVet.toLocalDate() : null,
+                horaVet != null ? horaVet.toLocalTime() : null,
+                resultSet.getString("dni_veterinario"),
+                fechaCir != null ? fechaCir.toLocalDate() : null,
+                horaCir != null ? horaCir.toLocalTime() : null,
+                resultSet.getString("dni_cirujano")
         );
     }
+
+
 
 
     /**

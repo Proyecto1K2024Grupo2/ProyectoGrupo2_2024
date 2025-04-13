@@ -33,28 +33,28 @@ public class ClienteDAO {
 
     // Sentencia SQL para crear la tabla en caso de que no exista
     public static final String CREATE_TABLE_CLIENTE = """
-                    CREATE TABLE IF NOT EXISTS Cliente(
+                    CREATE TABLE IF NOT EXISTS cliente(
                         dni VARCHAR(9) PRIMARY KEY,
                         nombre VARCHAR(64),
-                        telefono INT
+                        telefono VARCHAR(9)
                     );
             
             """;
 
     // Sentencia para insertar un CLIENTE
-    private static final String INSERT_CLIENTE = "INSERT INTO Cliente (dni, nombre, telefono) VALUES (?, ?, ?)";
+    private static final String INSERT_CLIENTE = "INSERT INTO cliente (dni, nombre, telefono) VALUES (?, ?, ?)";
 
     // Sentencia para seleccionar todos los CLIENTES
-    private static final String SELECT_ALL_CLIENTE = "Select * from Cliente";
+    private static final String SELECT_ALL_CLIENTE = "Select * from cliente";
 
     // Sentencia para buscar un CLIENTE por su DNI
-    private static final String SELECT_BY_DNI_CLIENTE = "Select * from Cliente where dni=?";
+    private static final String SELECT_BY_DNI_CLIENTE = "Select * from cliente where dni=?";
 
     // Sentencia para actualizar un CLIENTE
-    private static final String UPDATE_CLIENTE = "Update Cliente set nombre=?, telefono=? where dni=?";
+    private static final String UPDATE_CLIENTE = "Update cliente set nombre=?, telefono=? where dni=?";
 
     // Sentencia para borrar un CLIENTE
-    private static final String DELETE_CLIENTE = "Delete From Cliente where dni=?";
+    private static final String DELETE_CLIENTE = "Delete From cliente where dni=?";
 
     // Sentencia par obtener el total de CLIENTES
     private static final String TOTAL_CLIENTE = "Select Count(dni) from cliente";
@@ -63,7 +63,7 @@ public class ClienteDAO {
      * Constructor privado para evitar instancición interna
      * Obtine conexión con la base de datos
      */
-    private ClienteDAO(){
+    public ClienteDAO(){
         this.connection=DBConnection.getConnection();
     }
 
@@ -85,7 +85,7 @@ public class ClienteDAO {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_CLIENTE)) {
             statement.setString(1, cliente.getDniCliente());
             statement.setString(2, cliente.getNombreCliente());
-            statement.setInt(3, cliente.getTelefono());
+            statement.setString(3, cliente.getTelefono());
             statement.executeUpdate();
         }
     }
@@ -126,14 +126,33 @@ public class ClienteDAO {
      * @param cliente Objeto con los datos actualizados
      * @throws SQLException Por si ocurre un error con la base de datos
      */
-    public void updateCliente(Cliente cliente) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENTE)) {
-            statement.setString(1, cliente.getNombreCliente());
-            statement.setInt(2, cliente.getTelefono());
-            statement.setString(3, cliente.getDniCliente());
-            statement.executeUpdate();
+    public void updateCliente(Cliente cliente) {
+        try {
+            // Verificar si el cliente existe
+            Cliente existingCliente = getClienteByDNI(cliente.getDniCliente());
+            if (existingCliente == null) {
+                System.out.println("Cliente con DNI " + cliente.getDniCliente() + " no encontrado.");
+                return;
+            }
+
+            // Proceder a actualizar el cliente en la base de datos
+            try (PreparedStatement statement = connection.prepareStatement(UPDATE_CLIENTE))  {
+                statement.setString(1, cliente.getNombreCliente());
+                statement.setString(2, cliente.getTelefono());
+                statement.setString(3, cliente.getDniCliente());
+                int rowsUpdated = statement.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    System.out.println("Cliente actualizado correctamente.");
+                } else {
+                    System.out.println("No se pudo actualizar el cliente.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el cliente: " + e.getMessage());
         }
     }
+
 
 
 
@@ -159,7 +178,7 @@ public class ClienteDAO {
         return new Cliente(
                 resultSet.getString("dni"),
                 resultSet.getString("nombre"),
-                resultSet.getInt("telefono")
+                resultSet.getString("telefono")
         );
     }
 

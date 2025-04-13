@@ -1,7 +1,10 @@
 package Principal;
 
+import DB.TratamientoDAO;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Scanner;
 
 /**
  * La clase tratamiento está relacionada con Empleado e Historial.
@@ -30,8 +33,54 @@ public class Tratamiento {
         this.posologia = posologia;
     }
 
+    public Tratamiento(String tratamiento, String medicamento, String posologia, LocalDate fechaCuidador,
+                       LocalTime horaCuidador, String dni_cuidador) {
+        this.tratamiento = tratamiento;
+        this.medicamento = medicamento;
+        this.posologia = posologia;
+        this.fechaCuidador = fechaCuidador;
+        this.horaCuidador = horaCuidador;
+        this.dni_cuidador = dni_cuidador;
+    }
 
+    public Tratamiento(String tratamiento, String medicamento, String posologia,
+                       LocalDate fechaVeterinario, LocalTime horaVeterinario, String dni_veterinario, boolean esVeterinario) {
+        this.tratamiento = tratamiento;
+        this.medicamento = medicamento;
+        this.posologia = posologia;
+        this.fechaVeterinario = fechaVeterinario;
+        this.horaVeterinario = horaVeterinario;
+        this.dni_veterinario = dni_veterinario;
+    }
 
+    public Tratamiento(String tratamiento, String medicamento, String posologia,
+                       LocalDate fechaCirujano, LocalTime horaCirujano, String dni_cirujano, int esCirujano) {
+        this.tratamiento = tratamiento;
+        this.medicamento = medicamento;
+        this.posologia = posologia;
+        this.fechaCirujano = fechaCirujano;
+        this.horaCirujano = horaCirujano;
+        this.dni_cirujano = dni_cirujano;
+    }
+
+    public Tratamiento(int id, String tratamiento, String medicamento, String posologia,
+                       LocalDate fechaCuidador, LocalTime horaCuidador, String dni_cuidador,
+                       LocalDate fechaVeterinario, LocalTime horaVeterinario, String dni_veterinario,
+                       LocalDate fechaCirujano, LocalTime horaCirujano, String dni_cirujano) {
+        this.id = id;
+        this.tratamiento = tratamiento;
+        this.medicamento = medicamento;
+        this.posologia = posologia;
+        this.fechaCuidador = fechaCuidador;
+        this.horaCuidador = horaCuidador;
+        this.dni_cuidador = dni_cuidador;
+        this.fechaVeterinario = fechaVeterinario;
+        this.horaVeterinario = horaVeterinario;
+        this.dni_veterinario = dni_veterinario;
+        this.fechaCirujano = fechaCirujano;
+        this.horaCirujano = horaCirujano;
+        this.dni_cirujano = dni_cirujano;
+    }
 
 
     //Getters y Setters
@@ -141,6 +190,7 @@ public class Tratamiento {
 
     /**
      * Convierte los datos del tratamiento a XML.
+     *
      * @return Devuelve un String con los datos de Tratamiento a XML.
      */
     public String tratamientoToXML() {
@@ -164,6 +214,7 @@ public class Tratamiento {
 
     /**
      * Convierte los datos del tratamiento a JSON.
+     *
      * @return Devuelve un String con los datos de Tratamiento a JSON.
      */
     public String tratamientoToJSON() {
@@ -184,6 +235,140 @@ public class Tratamiento {
                 .append("\"dni_cirujano\": \"").append(dni_cirujano).append("\"")
                 .append("}");
         return jsonBuilder.toString();
+    }
+
+    public String toString() {
+        return """
+                ───────────────────────────────────────────────
+                --------------- TRATAMIENTO -------------------
+                ID:                  %d
+                Tratamiento:         %s
+                Medicamento:         %s
+                Posología:           %s
+                
+                --- Cuidador ---
+                DNI:                 %s
+                Fecha:               %s
+                Hora:                %s
+                
+                --- Veterinario ---
+                DNI:                 %s
+                Fecha:               %s
+                Hora:                %s
+                
+                --- Cirujano ---
+                DNI:                 %s
+                Fecha:               %s
+                Hora:                %s
+                """.formatted(
+                id,
+                tratamiento,
+                medicamento,
+                posologia,
+                dni_cuidador != null ? dni_cuidador : "N/A",
+                fechaCuidador != null ? fechaCuidador : "N/A",
+                horaCuidador != null ? horaCuidador : "N/A",
+                dni_veterinario != null ? dni_veterinario : "N/A",
+                fechaVeterinario != null ? fechaVeterinario : "N/A",
+                horaVeterinario != null ? horaVeterinario : "N/A",
+                dni_cirujano != null ? dni_cirujano : "N/A",
+                fechaCirujano != null ? fechaCirujano : "N/A",
+                horaCirujano != null ? horaCirujano : "N/A"
+        );
+    }
+
+    public static void mostrarMenu() throws Exception {
+        TratamientoDAO tratamientoDAO = new TratamientoDAO();
+        Scanner sc = new Scanner(System.in);
+        int opc = 0;
+
+        do {
+            System.out.println("""
+                    ===== MENÚ TRATAMIENTOS =====
+                    1. Mostrar todos los tratamientos
+                    2. Buscar tratamiento por ID
+                    3. Insertar nuevo tratamiento
+                    4. Actualizar tratamiento
+                    5. Eliminar tratamiento
+                    6. Total de tratamientos
+                    7. Salir
+                    """);
+            System.out.print("Selecciona una opción: ");
+            while (!sc.hasNextInt()) {
+                System.out.println("Por favor, ingresa un número válido.");
+                sc.next();
+            }
+            opc = sc.nextInt();
+
+            switch (opc) {
+                case 1 -> System.out.println(tratamientoDAO.getAllTratamientos());
+                case 2 -> System.out.println(tratamientoDAO.getTratamientoById(pedirId(sc)));
+                case 3 -> tratamientoDAO.insertTratamiento(crearTratamiento(sc));
+                case 4 -> tratamientoDAO.updateTratamiento(crearTratamiento(sc));
+                case 5 -> tratamientoDAO.deleteTratamientoById(pedirId(sc));
+                case 6 -> System.out.println("Total de tratamientos: " + tratamientoDAO.totalTratamientos());
+                case 7 -> System.out.println("Saliendo del menú de tratamientos...");
+                default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
+            }
+
+        } while (opc != 7);
+    }
+
+    private static int pedirId(Scanner sc) {
+        System.out.print("Introduce el ID del tratamiento: ");
+        while (!sc.hasNextInt()) {
+            System.out.println("Por favor, introduce un número válido.");
+            sc.next();
+        }
+        return sc.nextInt();
+    }
+
+    private static Tratamiento crearTratamiento(Scanner sc) {
+        sc.nextLine(); // Limpiar buffer
+        System.out.print("Tratamiento: ");
+        String tratamiento = sc.nextLine();
+
+        System.out.print("Medicamento: ");
+        String medicamento = sc.nextLine();
+
+        System.out.print("Posología: ");
+        String posologia = sc.nextLine();
+
+        System.out.println("""
+                ¿Quién realiza el tratamiento?
+                1. Cuidador
+                2. Veterinario
+                3. Cirujano
+                """);
+
+        int tipo;
+        while (true) {
+            System.out.print("Selecciona una opción (1-3): ");
+            if (sc.hasNextInt()) {
+                tipo = sc.nextInt();
+                sc.nextLine(); // Limpiar buffer
+                if (tipo >= 1 && tipo <= 3) break;
+            } else {
+                sc.next(); // Limpiar entrada incorrecta
+            }
+            System.out.println("Opción no válida.");
+        }
+
+        System.out.print("Fecha (YYYY-MM-DD): ");
+        LocalDate fecha = LocalDate.parse(sc.nextLine());
+
+        System.out.print("Hora (HH:MM): ");
+        LocalTime hora = LocalTime.parse(sc.nextLine());
+
+        System.out.print("DNI del profesional: ");
+        String dni = sc.nextLine();
+
+        return switch (tipo) {
+            case 1 -> new Tratamiento(tratamiento, medicamento, posologia, fecha, hora, dni);
+            case 2 -> new Tratamiento(tratamiento, medicamento, posologia, fecha, hora, dni, true);
+            case 3 -> new Tratamiento(tratamiento, medicamento, posologia, fecha, hora, dni, 1);
+            default -> null;
+        };
     }
 
 }

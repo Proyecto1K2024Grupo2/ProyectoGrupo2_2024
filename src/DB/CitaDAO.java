@@ -1,5 +1,6 @@
 package DB;
 
+import Principal.Animal;
 import Principal.Cita;
 
 import java.sql.Connection;
@@ -44,7 +45,7 @@ public class CitaDAO {
     // Consultas SQL predefinidas para operaciones CRUD
     private static final String INSERT_QUERY = "INSERT INTO cita (nombre_sala, fecha, hora, dniRecepcionista) VALUES (?, ?, ?, ?)";
     private static final String SELECT_ALL_QUERY = "SELECT * FROM cita";
-    private static final String SELECT_BY_FECHA = "SELECT * FROM cita WHERE fecha = ?";
+    private static final String SELECT_BY_ID = "SELECT * FROM cita WHERE id = ?";
     private static final String UPDATE_CITA_QUERY = "UPDATE cita SET nombre_sala = ?, fecha = ?, hora = ?, dniRecepcionista = ? WHERE id = ?";
     private static final String DELETE_CITA_QUERY = "DELETE FROM cita WHERE id = ?";
     private static final String TOTAL_CITAS_QUERY = "SELECT COUNT(*) FROM cita";
@@ -54,7 +55,7 @@ public class CitaDAO {
      * Constructor privado para evitar instanciación externa.
      * Obtiene la conexión a la base de datos desde DBConnection.
      */
-    private CitaDAO() {
+    public CitaDAO() {
         this.connection = DBConnection.getConnection();
     }
 
@@ -106,20 +107,20 @@ public class CitaDAO {
     /**
      * Obtiene una lista de citas a partir de una fecha específica.
      *
-     * @param fecha Fecha de las citas a buscar.
+     * @param id Id de las citas a buscar.
      * @return Lista de objetos Cita si se encuentran, lista vacía si no hay citas.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
-    public List<Cita> getCitasByFecha(LocalDate fecha) throws SQLException {
-        List<Cita> citas = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_FECHA)) {
-            statement.setDate(1, java.sql.Date.valueOf(fecha)); // Convertir LocalDate a java.sql.Date
+    public Cita getCitaByID(int id) throws SQLException {
+        Cita cita = null;
+        try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID)) {
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                citas.add(resultSetToCita(resultSet));
+            if (resultSet.next()) {
+                cita = resultSetToCita(resultSet);
             }
         }
-        return citas;
+        return cita;
     }
 
     /**
@@ -163,6 +164,7 @@ public class CitaDAO {
      */
     private Cita resultSetToCita(ResultSet resultSet) throws SQLException {
         return new Cita(
+                resultSet.getInt("id"),
                 resultSet.getString("nombre_sala"),
                 resultSet.getDate("fecha").toLocalDate(),  // Convierte java.sql.Date a LocalDate
                 resultSet.getTime("hora").toLocalTime(),  // Convierte java.sql.Time a LocalTime

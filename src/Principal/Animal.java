@@ -1,12 +1,11 @@
 package Principal;
 
 import DB.AnimalDAO;
+import DB.ClienteDAO;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /**
  * Representa un animal asociado a un cliente en una base de datos veterinaria.
@@ -18,24 +17,34 @@ public class Animal {
     private String nombreAnimal;
     private String especie;
     private String raza;
-    private Date edad;
+    private Date fnac;
 
 
-    /**
-     * Constructor para crear un objeto Animal sin ID (ID se asigna automáticamente).
-     *
-     * @param dni_cliente  DNI del cliente dueño del animal.
-     * @param nombreAnimal Nombre del animal.
-     * @param especie      Especie del animal.
-     * @param raza         Raza del animal.
-     * @param edad         Fecha de nacimiento del animal.
-     */
-    public Animal(String dni_cliente, String nombreAnimal, String especie, String raza, Date edad) {
+    public Animal(String dni_cliente, String nombreAnimal, String especie, String raza, Date fnac) {
         this.dni_cliente = dni_cliente;
         this.nombreAnimal = nombreAnimal;
         this.especie = especie;
         this.raza = raza;
-        this.edad = edad;
+        this.fnac = fnac;
+    }
+
+    /**
+     * Constructor para crear un objeto Animal sin ID (ID se asigna automáticamente).
+     *
+     * @param id
+     * @param dni_cliente  DNI del cliente dueño del animal.
+     * @param nombreAnimal Nombre del animal.
+     * @param especie      Especie del animal.
+     * @param raza         Raza del animal.
+     * @param fnac         Fecha de nacimiento del animal.
+     */
+    public Animal(int id, String dni_cliente, String nombreAnimal, String especie, String raza, Date fnac) {
+        this.id = id;
+        this.dni_cliente = dni_cliente;
+        this.nombreAnimal = nombreAnimal;
+        this.especie = especie;
+        this.raza = raza;
+        this.fnac = fnac;
     }
 
     //Getters y Setters
@@ -79,12 +88,12 @@ public class Animal {
         this.raza = raza;
     }
 
-    public LocalDate getEdad() {
-        return edad.toLocalDate();
+    public LocalDate getFnac() {
+        return fnac.toLocalDate();
     }
 
-    public void setEdad(LocalDate edad) {
-        this.edad = Date.valueOf(edad);
+    public void setFnac(LocalDate fnac) {
+        this.fnac = Date.valueOf(fnac);
     }
 
 
@@ -100,7 +109,7 @@ public class Animal {
                 .append("      <nombre>").append(nombreAnimal).append("</nombre>")
                 .append("      <especie>").append(especie).append("</especie>")
                 .append("      <raza>").append(raza).append("</raza>")
-                .append("      <edad>").append(edad).append("</edad>");
+                .append("      <fnac>").append(fnac).append("</fnac>");
         return xmlBuilder.toString();
     }
 
@@ -117,9 +126,24 @@ public class Animal {
                 .append("\"nombre\": \"").append(nombreAnimal).append("\", ")
                 .append("\"especie\": \"").append(especie).append("\", ")
                 .append("\"raza\": \"").append(raza).append("\", ")
-                .append("\"edad\": \"").append(edad).append("\"")
+                .append("\"fnac\": \"").append(fnac).append("\"")
                 .append("}");
         return jsonBuilder.toString();
+    }
+
+    @Override
+    public String toString() {
+        return """
+                ────────────────────────────────
+                -------Animal-------
+                ID:             %d
+                DNI Cliente:    %s
+                Nombre:         %s
+                Especie:        %s
+                Raza:           %s
+                F. Nacimiento:  %s
+                
+                """.formatted(id, dni_cliente, nombreAnimal, especie, raza, fnac);
     }
 
     /**
@@ -128,145 +152,110 @@ public class Animal {
      * @param args Argumentos introducidos por usuario.
      * @throws Exception Si ocurre algún error en la creación o manipulación de animales.
      */
-    public static void main(String[] args) throws Exception {
+    public static void mostrarMenu() throws Exception {
         AnimalDAO animalDAO = new AnimalDAO();
+        ClienteDAO clienteDAO = new ClienteDAO(); // ← Añadido
         Scanner sc = new Scanner(System.in);
+        int opc;
 
-        int resp = 0;
         do {
             System.out.println("""
-                    1. Seleccionar todos los animales
-                    2. Seleccionar animal por ID
+                    ===== MENÚ ANIMALES =====
+                    1. Mostrar datos de todos los animales
+                    2. Mostrar datos de un animal por ID
                     3. Insertar animal
-                    4. Actualizar animal
-                    5. Borrar animal
-                    6. Total animales
-                    7. SALIR"""
-            );
+                    4. Actualizar datos de animal
+                    5. Eliminar un animal
+                    6. Numero total de animales
+                    7. SALIR
+                    """);
 
-            try {
-                resp = sc.nextInt();
-            } catch (Exception e) {
-                System.out.println("Opción inválida");
+            System.out.print("Selecciona una opción: ");
+            while (!sc.hasNextInt()) {
+                System.out.println("Por favor, ingresa un número válido.");
+                sc.next();
             }
+            opc = sc.nextInt();
 
-            switch (resp) {
+            switch (opc) {
                 case 1 -> System.out.println(animalDAO.getAllAnimal());
-                case 2 -> animalDAO.getAnimalByID(pedirIdAnimal());
-                case 3 -> animalDAO.insertAnimal(crearAnimal());
-                case 4 -> animalDAO.updateAnimal(crearAnimal());
-                case 5 -> animalDAO.deleteAnimal(pedirIdAnimal());
-                case 6 -> animalDAO.totalAnimales();
-                case 7 -> System.out.println("Saliendo");
-                default -> System.out.println("Opción no válida");
+                case 2 -> System.out.println(animalDAO.getAnimalByID(pedirIdAnimal(sc)));
+                case 3 -> animalDAO.insertAnimal(crearAnimal(sc, clienteDAO)); // ← pasa DAO
+                case 4 -> animalDAO.updateAnimal(crearAnimal(sc, clienteDAO));
+                case 5 -> animalDAO.deleteAnimal(pedirIdAnimal(sc));
+                case 6 -> System.out.println(animalDAO.totalAnimales());
+                case 7 -> System.out.println("Saliendo del menú de animales...");
+                default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
             }
-        } while (resp != 7);
+        } while (opc != 7);
     }
 
-    private static int pedirIdAnimal() {
-        Scanner sc = new Scanner(System.in);
-        boolean ejecucionCorrecta = true;
-        int id = 0;
-
+    private static int pedirIdAnimal(Scanner sc) {
         System.out.println("Introduce el ID del animal: ");
         try {
-            id = sc.nextInt();
+            return sc.nextInt();
         } catch (Exception e) {
+            sc.nextLine(); // Limpiar buffer
             System.out.println("ERROR, formato de ID no válido.");
-            ejecucionCorrecta = false;
             throw new RuntimeException(e);
-        }
-
-        if (ejecucionCorrecta) {
-            return id;
-        } else {
-            return 0;
         }
     }
 
-    private static Animal crearAnimal() throws Exception {
-        Scanner sc = new Scanner(System.in);
-        boolean ejecucionCorrecta = true;
-
-        String dni;
-        String nombre;
-        String especie;
-        String raza;
-        Date edad;
-
+    private static Animal crearAnimal(Scanner sc, ClienteDAO clienteDAO) throws Exception {
         System.out.println("Introduce el DNI del dueño del animal: ");
-        try {
-            dni = sc.next();
-            if (!dni.matches("\\d{8}[A-Z]")) {
-                ejecucionCorrecta = false;
+        String dni = sc.next();
+        if (!dni.matches("\\d{8}[A-Z]")) {
+            throw new IllegalArgumentException("DNI no válido.");
+        }
+
+        // Verificar existencia del cliente
+        if (clienteDAO.getClienteByDNI(dni) == null) {
+            System.out.println("No existe ningún cliente con ese DNI. ¿Deseas añadirlo? (s/n)");
+            String respuesta = sc.next();
+            if (respuesta.equalsIgnoreCase("s")) {
+                Cliente nuevoCliente = crearCliente(sc, dni);
+                clienteDAO.insertCliente(nuevoCliente);
+                System.out.println("Cliente añadido con éxito.");
+            } else {
+                throw new IllegalStateException("No se puede continuar sin un cliente válido.");
             }
-        } catch (Exception e) {
-            System.out.println("ERROR, DNI no válido.");
-            ejecucionCorrecta = false;
-            throw new RuntimeException(e);
         }
 
         System.out.println("Introduce el nombre del animal: ");
-        try {
-            nombre = sc.next();
-            if (!nombre.matches(".{0,64}")) {
-                System.out.println("ERROR, nombre demasiado largo");
-                ejecucionCorrecta = false;
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR, nombre no válido.");
-            ejecucionCorrecta = false;
-            throw new RuntimeException(e);
+        String nombre = sc.next();
+        if (!nombre.matches(".{1,64}")) {
+            throw new IllegalArgumentException("Nombre no válido.");
         }
 
         System.out.println("Introduce la especie del animal: ");
-        try {
-            especie = sc.next();
-            if (!especie.matches(".{0,64}")) {
-                System.out.println("ERROR, especie demasiado larga");
-                ejecucionCorrecta = false;
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR, especie no válida.");
-            ejecucionCorrecta = false;
-            throw new RuntimeException(e);
+        String especie = sc.next();
+        if (!especie.matches(".{1,64}")) {
+            throw new IllegalArgumentException("Especie no válida.");
         }
 
         System.out.println("Introduce la raza del animal: ");
-        try {
-            raza = sc.next();
-            if (!raza.matches(".{0,64}")) {
-                System.out.println("ERROR, raza demasiado larga");
-                ejecucionCorrecta = false;
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR, raza no válida.");
-            ejecucionCorrecta = false;
-            throw new RuntimeException(e);
+        String raza = sc.next();
+        if (!raza.matches(".{1,64}")) {
+            throw new IllegalArgumentException("Raza no válida.");
         }
 
-        System.out.println("Introduce la fecha de nacimiento del animal: ");
-        try {
-            edad = Date.valueOf(sc.next(Pattern.compile(
-                    "^[0,1]?\\d{1}\\/(([0-2]?\\d{1})|([3][0,1]{1}))\\/(([1]{1}[9]{1}[9]{1}\\d{1})|([2-9]{1}\\d{3}))$")));
-        } catch (Exception e) {
-            System.out.println("ERROR, fecha no válida (Formato = MM/DD/AAAA.");
-            ejecucionCorrecta = false;
-            throw new RuntimeException(e);
+        System.out.println("Introduce la fecha de nacimiento del animal (YYYY-MM-DD): ");
+        String fechaInput = sc.next();
+        if (!fechaInput.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new IllegalArgumentException("Formato de fecha inválido.");
         }
 
-        if (!ejecucionCorrecta) {
-            throw new Exception("No se ha podido crear el animal.");
-        }
-
-        Animal animal;
-        try {
-            animal = new Animal(dni, nombre, especie, raza, edad);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return animal;
-
+        Date fnac = Date.valueOf(fechaInput);
+        return new Animal(dni, nombre, especie, raza, fnac);
     }
 
+    private static Cliente crearCliente(Scanner sc, String dni) {
+        System.out.println("Introduce el nombre del cliente: ");
+        String nombre = sc.next();
+
+        System.out.println("Introduce el teléfono del cliente: ");
+        String telefono = sc.next();
+
+        return new Cliente(dni, nombre, telefono);
+    }
 }
