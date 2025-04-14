@@ -1,5 +1,10 @@
 package Principal;
 
+import DB.CentroDAO;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+
 /**
  * Representa un centro (local físico).
  * A un centro estan asociaciadas las salas de este, sus empleados y las citas.
@@ -84,5 +89,58 @@ public class Centro {
                 .append("}");
         return jsonBuilder.toString();
     }
+
+    /*public static void main(String[] args) throws SQLException {
+        CentroDAO centroDAO = new CentroDAO();
+        Scanner sc = new Scanner(System.in);
+        int opc;
+
+        do {
+            System.out.println("""
+                    ===== MENÚ CENTROS =====
+                    1. Mostrar datos de todos los centros
+                    2. Mostrar datos de un centro por ID
+                    3. Insertar centro
+                    4. Actualizar datos de centro
+                    5. Eliminar un centro
+                    6. Numero total de centros
+                    7. SALIR
+                    """);
+            opc= sc.nextInt();
+
+            switch (opc) {
+            case 1 -> System.out.println(centroDAO.getAllCentros());
+            case 2 -> System.out.println(centroDAO.getCentroByCod(pedirCentro(sc)));
+            case 3 ->
+            }
+        } while (opc!=7);
+    }
+
+    public static int pedirCentro(Scanner sc) {
+        System.out.println("Introduce el ID del centro: ");
+        try {
+            return sc.nextInt();
+        } catch (Exception e) {
+            sc.nextLine(); // Limpiar buffer
+            System.out.println("ERROR, formato de ID no válido.");
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Centro crearCentro(Scanner sc) {
+        System.out.println("Introduce el nombre del centro");
+        String nomCen=sc.next();
+        if (!nomCen.matches(".{1,64}")) throw new IllegalArgumentException("Nombre del centro no válido".");
+
+        System.out.println("Introduce la dirección del centro");
+        String direc=sc.next();
+        if (!direc.matches(".{1,64}")) throw new IllegalArgumentException("Dirección del centro no válida".");
+
+        System.out.println("Introduce el código postal del centro");
+        String cp=sc.next();
+        if (!nomCen.matches("\\d{5}")) throw new IllegalArgumentException("Código postal del centro no válido"."));
+
+        return new Centro(nomCen, direc, cp);
+        }*/
 
 }

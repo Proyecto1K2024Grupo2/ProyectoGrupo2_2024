@@ -6,13 +6,12 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         int opc;
-
         do {
             System.out.println("""
                 === MENÚ PRINCIPAL ===
                 1. Gestionar ANIMALES
                 2. Gestionar CLIENTES
-                3. Gestionar TRATAMIENTOS3
+                3. Gestionar TRATAMIENTOS
                 4. Gestionar CITAS
                 5. Gestionar HISTORIAL
                 6. Gestionar VETERINARIOS
@@ -36,7 +35,9 @@ public class Main {
                 case 2 -> Cliente.mostrarMenu();
                 case 3 -> Tratamiento.mostrarMenu();
                 case 4 -> Cita.mostrarMenu();
-                case 5 -> System.out.println("Saliendo del programa...");
+                case 5 -> Historial.mostrarMenu();
+                case 6 -> Veterinario.mostrarMenu();
+                case 12 -> System.out.println("Saliendo del programa...");
                 default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
             }
 

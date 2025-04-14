@@ -1,8 +1,6 @@
 package DB;
 
-import Principal.Cuidador;
 import Principal.Empleado;
-import Principal.Recepcionista;
 
 import java.sql.SQLException;
 
@@ -14,9 +12,10 @@ import java.sql.SQLException;
  * @author Juan Carlos Garcia
  */
 public abstract class EmpleadoDAO {
+
     public abstract void insertEmpleado(Empleado empleado) throws SQLException;
 
-    public abstract void updateEmpleado(Empleado empleado) throws SQLException;
+    public abstract void updateVeterinario(Empleado empleado) throws SQLException;
 
-    public abstract void deleteEmpleadoByDni(String dni) throws SQLException;
+    public abstract void deleteVeterinarioByDni(String dni) throws SQLException;
 }

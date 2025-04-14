@@ -138,7 +138,7 @@ public class RecepcionistaDAO extends EmpleadoDAO{
      */
 
     @Override
-    public void updateEmpleado(Empleado empleado) throws SQLException {
+    public void updateVeterinario(Empleado empleado) throws SQLException {
         boolean autocommit = true;
         autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
@@ -173,7 +173,7 @@ public class RecepcionistaDAO extends EmpleadoDAO{
      */
 
     @Override
-    public void deleteEmpleadoByDni(String dni) throws SQLException {
+    public void deleteVeterinarioByDni(String dni) throws SQLException {
         boolean autocommit = true;
 
         autocommit = connection.getAutoCommit();

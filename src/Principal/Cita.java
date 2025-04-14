@@ -163,7 +163,7 @@ public class Cita {
 
             switch (opc) {
                 case 1 -> System.out.println(citaDAO.getAllCitas());
-                case 2 -> System.out.println(citaDAO.getCitaByID(pedirIdCita(sc)));
+                case 2 -> System.out.println(citaDAO.getCitaById(pedirIdCita(sc)));
                 case 3 -> citaDAO.insertCita(crearCita(sc, clienteDAO));
                 case 4 -> citaDAO.updateCita(crearCita(sc, clienteDAO));
                 case 5 -> citaDAO.deleteCitaById(pedirIdCita(sc));

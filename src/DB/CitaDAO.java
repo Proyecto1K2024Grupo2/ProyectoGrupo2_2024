@@ -1,13 +1,11 @@
 package DB;
 
-import Principal.Animal;
 import Principal.Cita;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +109,7 @@ public class CitaDAO {
      * @return Lista de objetos Cita si se encuentran, lista vacía si no hay citas.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
-    public Cita getCitaByID(int id) throws SQLException {
+    public Cita getCitaById(int id) throws SQLException {
         Cita cita = null;
         try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID)) {
             statement.setInt(1, id);

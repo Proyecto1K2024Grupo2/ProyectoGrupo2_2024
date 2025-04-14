@@ -46,7 +46,7 @@ public class CentroDAO {
      * Constructor privado para evitar instanciación externa.
      * Obtiene la conexión a la base de datos desde DBConnection.
      */
-    private CentroDAO() {
+    public CentroDAO() {
         this.connection = DBConnection.getConnection();
     }
 

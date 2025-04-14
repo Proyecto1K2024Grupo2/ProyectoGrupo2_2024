@@ -1,5 +1,7 @@
 package DB;
 
+import Principal.Animal;
+import Principal.Cita;
 import Principal.Historial;
 import Principal.Tratamiento;
 
@@ -19,12 +21,12 @@ import java.util.List;
  *
  * @version 01-2025
  */
-public class HistrialDAO {
+public class HistorialDAO {
 
-    private static DB.HistrialDAO instance;
+    private static HistorialDAO instance;
     private Connection connection;
 
-    public static final String CREAT_TABLE_HISTRIAL = """
+    public static final String CREAT_TABLE_HISTORIAL = """
             CREATE TABLE historial(
                 id_cita INT UNSIGNED,
                 id_animal INT UNSIGNED,
@@ -44,7 +46,7 @@ public class HistrialDAO {
 
     private static final String INSERT_HISTRORIAL_QUERY = "INSERT INTO historial (id_cita, id_animal, id_tratamiento) VALUES(?, ?, ?)";
     private static final String SELECT_ALL_QUERY = "Select * From historial";
-    private static final String SELECT_HISTORIAL_BY_ID_QUERY = "Select * From historial where id=?";
+    private static final String SELECT_HISTORIAL_BY_ID_QUERY = "Select * From historial where id_cita=?";
     private static final String UPDATE_HISTORIAL_QUERY = "Update historial set id_animal=?, id_tratamiento=? where id_cita=?";
     private static final String DELETE_HISTORIAL_QUERY = "Delete from histrial where id_cita=?";
     private static final String COUNT_QUERY = "SELECT COUNT(*) From historial";
@@ -52,11 +54,11 @@ public class HistrialDAO {
     /**
      * Constructor privado para aplicar el patrón Singleton.
      */
-    private HistrialDAO() { this.connection = DBConnection.getConnection(); }
+    private HistorialDAO() { this.connection = DBConnection.getConnection(); }
 
-    public static synchronized HistrialDAO getInstance() {
+    public static synchronized HistorialDAO getInstance() {
         if (instance == null) {
-            instance = new HistrialDAO();
+            instance = new HistorialDAO();
         }
         return instance;
     }
@@ -110,11 +112,15 @@ public class HistrialDAO {
     }
 
     private Historial resultSetToHistorial(ResultSet resultSet) throws SQLException {
-        return new Historial(
-                resultSet.getInt("id_cita"),
-                resultSet.getInt("id_animal"),
-                resultSet.getInt("id_tratamiento")
-        );
+        int idCita = resultSet.getInt("id_cita");
+        int idAnimal = resultSet.getInt("id_animal");
+        int idTratamiento = resultSet.getInt("id_tratamiento");
+
+        Cita cita = CitaDAO.getInstance().getCitaById(idCita);
+        Animal animal = AnimalDAO.getInstance().getAnimalById(idAnimal);
+        Tratamiento tratamiento = TratamientoDAO.getInstance().getTratamientoById(idTratamiento);
+
+        return new Historial(idCita, idAnimal, idTratamiento, cita, animal, tratamiento);
     }
 
     public int totalHistorial() throws SQLException {

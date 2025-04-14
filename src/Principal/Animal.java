@@ -179,7 +179,7 @@ public class Animal {
 
             switch (opc) {
                 case 1 -> System.out.println(animalDAO.getAllAnimal());
-                case 2 -> System.out.println(animalDAO.getAnimalByID(pedirIdAnimal(sc)));
+                case 2 -> System.out.println(animalDAO.getAnimalById(pedirIdAnimal(sc)));
                 case 3 -> animalDAO.insertAnimal(crearAnimal(sc, clienteDAO)); // ← pasa DAO
                 case 4 -> animalDAO.updateAnimal(crearAnimal(sc, clienteDAO));
                 case 5 -> animalDAO.deleteAnimal(pedirIdAnimal(sc));

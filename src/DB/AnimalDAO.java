@@ -121,7 +121,7 @@ public class AnimalDAO {
      * @return El objeto Animal al que le corresponde ese ID
      * @throws SQLException Por si ocurre un error con la base de datos
      */
-    public Animal getAnimalByID(int id) throws SQLException {
+    public Animal getAnimalById(int id) throws SQLException {
         Animal animal = null;
         try (PreparedStatement statement = connection.prepareStatement(SELECT_ANIMAL_BY_ID)) {
             statement.setInt(1, id);
@@ -142,7 +142,7 @@ public class AnimalDAO {
     public void updateAnimal(Animal animal) {
         try {
             // Verificar si el animal existe
-            Animal existingAnimal = getAnimalByID(animal.getId());
+            Animal existingAnimal = getAnimalById(animal.getId());
             if (existingAnimal == null) {
                 System.out.println("Animal con ID " + animal.getId() + " no encontrado.");
                 return;

@@ -142,7 +142,7 @@ public class CuidadorDAO extends EmpleadoDAO{
      * @throws SQLException Si ocurre un error en la base de datos.
      */
     @Override
-    public void updateEmpleado(Empleado empleado) throws SQLException {
+    public void updateVeterinario(Empleado empleado) throws SQLException {
         boolean autocommit = true;
 
         autocommit = connection.getAutoCommit();
@@ -178,7 +178,7 @@ public class CuidadorDAO extends EmpleadoDAO{
      * @throws SQLException Si ocurre un error en la base de datos.
      */
     @Override
-    public void deleteEmpleadoByDni(String dni) throws SQLException {
+    public void deleteVeterinarioByDni(String dni) throws SQLException {
         boolean autocommit = true;
         autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
