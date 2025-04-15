@@ -2,10 +2,7 @@ package DB;
 
 import Principal.Cita;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,10 +127,10 @@ public class CitaDAO {
     public void updateCita(Cita cita) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_CITA_QUERY)) {
             statement.setString(1, cita.getNombreSala());
-            statement.setDate(2, java.sql.Date.valueOf(cita.getFecha())); // Convierte LocalDate a sql.Date
-            statement.setTime(3, java.sql.Time.valueOf(cita.getHora())); // Convierte LocalTime a sql.Time
+            statement.setDate(2, Date.valueOf(cita.getFecha()));
+            statement.setTime(3, Time.valueOf(cita.getHora()));
             statement.setString(4, cita.getDniRecepcionista());
-            statement.setInt(5, cita.getId()); // Se usa el ID para actualizar la cita correcta
+            statement.setInt(5, cita.getId());
             statement.executeUpdate();
         }
     }
@@ -186,10 +183,6 @@ public class CitaDAO {
             }
         }
         return total;
-    }
-
-    public static void main(String[] args) {
-
     }
 }
 

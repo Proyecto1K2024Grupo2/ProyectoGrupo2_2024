@@ -90,37 +90,48 @@ public class Sala {
     public static void mostrarMenu() throws SQLException {
         SalaDAO salaDAO = new SalaDAO();
         Scanner sc = new Scanner(System.in);
-        int opc;
+        String opc = "";
 
         do {
-            System.out.println("""
-                    ===== MENÚ SALAS =====
-                    1. Mostrar datos de todos las salas
-                    2. Mostrar datos de una sala por nombre
-                    3. Insertar sala
-                    4. Actualizar datos de sala
-                    5. Eliminar una sala
-                    6. Numero total de salas
-                    7. SALIR
-                    """);
-            opc = sc.nextInt();
+            try {
+                System.out.println("""
+                        ===== MENÚ SALAS =====
+                        1. Mostrar datos de todas las salas
+                        2. Mostrar datos de una sala por nombre
+                        3. Insertar sala
+                        4. Actualizar datos de sala
+                        5. Eliminar una sala
+                        6. Numero total de salas
+                        7. SALIR
+                        """);
+                System.out.print("Selecciona una opción: ");
+                opc = sc.nextLine();
 
-            switch (opc) {
-                case 1 -> System.out.println(salaDAO.getAllSalas());
-                case 2 -> System.out.println(salaDAO.getSalaByNombre(pedirSala(sc)));
-                case 3 -> salaDAO.insertSala(crearSala(sc));
-                case 4 -> salaDAO.updateSala(crearSala(sc));
-                case 5 -> salaDAO.deleteSalaByNombre(pedirSala(sc));
-                case 6 -> salaDAO.totalSalas();
-                case 7 -> System.out.println("Saliendo del menú de salas...");
-                default -> System.out.println("Opcion no valida");
+                switch (opc) {
+                    case "1" -> System.out.println(salaDAO.getAllSalas());
+                    case "2" -> System.out.println(salaDAO.getSalaByNombre(pedirSala(sc)));
+                    case "3" -> salaDAO.insertSala(crearSala(sc));
+                    case "4" -> salaDAO.updateSala(crearSala(sc));
+                    case "5" -> salaDAO.deleteSalaByNombre(pedirSala(sc));
+                    case "6" -> System.out.println("Total de salas: " + salaDAO.totalSalas());
+                    case "7" -> System.out.println("Saliendo del menú de salas...");
+                    default -> System.out.println("Opcion no valida");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error de formato de entrada: Debes ingresar un número.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error de validación: " + e.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Error en la base de datos: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("ERROR inesperado: " + e.getMessage());
             }
-        } while (opc != 7);
+        } while (!opc.equals("7"));
     }
 
     private static String pedirSala(Scanner sc){
         System.out.println("Introduce el nombre de la sala: ");
-        String nomSal = sc.next();
+        String nomSal = sc.nextLine();
         if (!nomSal.matches(".{1,32}")) throw new IllegalArgumentException("Nombre de la sala no válido.");
         return nomSal;
     }
@@ -129,8 +140,8 @@ public class Sala {
     private static Sala crearSala(Scanner sc) throws SQLException {
         CentroDAO centroDAO = new CentroDAO();
 
-        System.out.println("Introduce el nombre de la nueva sala: ");
-        String nomSal = sc.next();
+        System.out.println("Introduce el nombre de la sala: ");
+        String nomSal = sc.nextLine();
         if (!nomSal.matches(".{1,32}")) throw new IllegalArgumentException("Nombre de la sala no válido.");
 
         System.out.println("Introduce el código del centro de la sala: ");

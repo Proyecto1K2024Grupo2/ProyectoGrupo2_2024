@@ -3,8 +3,10 @@ package Principal;
 import DB.CitaDAO;
 import DB.ClienteDAO;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -41,6 +43,7 @@ public class Cita {
     }
 
     public Cita(int id, String nombreSala, LocalDate fecha, LocalTime hora, String dniRecepcionista) {
+        this.id = id;
         this.nombreSala = nombreSala;
         this.fecha = fecha;
         this.hora = hora;
@@ -126,7 +129,7 @@ public class Cita {
     public String toString() {
         return """
                 ────────────────────────────────
-                -------Animal-------
+                -------Cita-------
                 ID Cita:              %d
                 Sala:                 %s
                 Fecha:                %s
@@ -138,40 +141,49 @@ public class Cita {
 
     public static void mostrarMenu() throws Exception {
         CitaDAO citaDAO = new CitaDAO(); // Asumiendo que tienes una clase CitaDAO
-        ClienteDAO clienteDAO = new ClienteDAO(); // Asumiendo que necesitas los clientes también
         Scanner sc = new Scanner(System.in);
-        int opc;
+        String opc = "";
 
         do {
-            System.out.println("""
-                    ===== MENÚ CITAS =====
-                    1. Mostrar todas las citas
-                    2. Mostrar cita por ID
-                    3. Insertar nueva cita
-                    4. Actualizar cita
-                    5. Eliminar cita
-                    6. Número total de citas
-                    7. SALIR
-                    """);
+            try {
+                System.out.println("""
+                        ===== MENÚ CITAS =====
+                        1. Mostrar todas las citas
+                        2. Mostrar cita por ID
+                        3. Insertar nueva cita
+                        4. Actualizar cita
+                        5. Eliminar cita
+                        6. Número total de citas
+                        7. SALIR
+                        """);
 
-            System.out.print("Selecciona una opción: ");
-            while (!sc.hasNextInt()) {
-                System.out.println("Por favor, ingresa un número válido.");
-                sc.next();
-            }
-            opc = sc.nextInt();
+                System.out.print("Selecciona una opción: ");
+                opc = sc.nextLine();
 
-            switch (opc) {
-                case 1 -> System.out.println(citaDAO.getAllCitas());
-                case 2 -> System.out.println(citaDAO.getCitaById(pedirIdCita(sc)));
-                case 3 -> citaDAO.insertCita(crearCita(sc, clienteDAO));
-                case 4 -> citaDAO.updateCita(crearCita(sc, clienteDAO));
-                case 5 -> citaDAO.deleteCitaById(pedirIdCita(sc));
-                case 6 -> System.out.println(citaDAO.totalCitas());
-                case 7 -> System.out.println("Saliendo del menú de citas...");
-                default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
+                switch (opc) {
+                    case "1" -> System.out.println(citaDAO.getAllCitas());
+                    case "2" -> System.out.println(citaDAO.getCitaById(pedirIdCita(sc)));
+                    case "3" -> citaDAO.insertCita(crearCita(sc));
+                    case "4" -> {
+                        Cita c = crearCita(sc);
+                        c.setId(pedirIdCita(sc));
+                        citaDAO.updateCita(c);
+                    }
+                    case "5" -> citaDAO.deleteCitaById(pedirIdCita(sc));
+                    case "6" -> System.out.println(citaDAO.totalCitas());
+                    case "7" -> System.out.println("Saliendo del menú de citas...");
+                    default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
+                }
+            }catch (NumberFormatException e) {
+                System.out.println("Error de formato de entrada: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error de validación: " + e.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Error en la base de datos: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("ERROR inesperado: " + e.getMessage());
             }
-        } while (opc != 7);
+        } while (!opc.equals("7"));
     }
 
     private static int pedirIdCita(Scanner sc) {
@@ -185,33 +197,40 @@ public class Cita {
         }
     }
 
-    private static Cita crearCita(Scanner sc, ClienteDAO clienteDAO) throws Exception {
-        System.out.println("Introduce el DNI del recepcionista: ");
-        String dni = sc.next();
-        if (!dni.matches("\\d{8}[A-Z]")) {
+    private static Cita crearCita(Scanner sc) throws Exception {
+        System.out.print("Introduce el DNI del recepcionista: ");
+        String dni = sc.nextLine();
+        if (!dni.matches("\\d{8}[A-ZÑ]")) {
             throw new IllegalArgumentException("DNI no válido.");
         }
 
-        System.out.println("Introduce el nombre de la sala: ");
-        String nombreSala = sc.next();
+        System.out.print("Introduce el nombre de la sala: ");
+        String nombreSala = sc.nextLine();
         if (!nombreSala.matches(".{1,64}")) {
             throw new IllegalArgumentException("Nombre de la sala no válido.");
         }
 
-        System.out.println("Introduce la fecha de la cita (YYYY-MM-DD): ");
-        String fechaInput = sc.next();
-        if (!fechaInput.matches("\\d{4}-\\d{2}-\\d{2}")) {
+        System.out.print("Introduce la fecha de la cita (YYYY-MM-DD): ");
+        String fechaInput = sc.nextLine();
+        LocalDate fecha;
+        try {
+            fecha = LocalDate.parse(fechaInput);
+        } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Formato de fecha inválido.");
         }
-        LocalDate fecha = LocalDate.parse(fechaInput);
 
-        System.out.println("Introduce la hora de la cita (HH:MM): ");
-        String horaInput = sc.next();
-        if (!horaInput.matches("\\d{2}:\\d{2}")) {
+        System.out.print("Introduce la hora de la cita (HH:MM): ");
+        String horaInput = sc.nextLine();
+        horaInput += ":00";
+        LocalTime hora;
+        try {
+            hora = LocalTime.parse(horaInput);
+        } catch (DateTimeParseException e) {
             throw new IllegalArgumentException("Formato de hora inválido.");
         }
-        LocalTime hora = LocalTime.parse(horaInput);
 
         return new Cita(nombreSala, fecha, hora, dni);
     }
+
+
 }

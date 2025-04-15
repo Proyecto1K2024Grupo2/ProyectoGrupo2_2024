@@ -306,8 +306,8 @@ public class Tratamiento {
             switch (opc) {
                 case 1 -> System.out.println(tratamientoDAO.getAllTratamientos());
                 case 2 -> System.out.println(tratamientoDAO.getTratamientoById(pedirId(sc)));
-                case 3 -> tratamientoDAO.insertTratamiento(crearTratamiento(sc));
-                case 4 -> tratamientoDAO.updateTratamiento(crearTratamiento(sc));
+                //case 3 -> tratamientoDAO.insertTratamiento(crearTratamiento(sc));
+                //case 4 -> tratamientoDAO.updateTratamiento(crearTratamiento(sc));
                 case 5 -> tratamientoDAO.deleteTratamientoById(pedirId(sc));
                 case 6 -> System.out.println("Total de tratamientos: " + tratamientoDAO.totalTratamientos());
                 case 7 -> System.out.println("Saliendo del menú de tratamientos...");
@@ -334,7 +334,7 @@ public class Tratamiento {
         return sc.nextInt();
     }
 
-    private static Tratamiento crearTratamiento(Scanner sc) {
+    /*private static Tratamiento crearTratamiento(Scanner sc) {
         sc.nextLine(); // Limpiar buffer
 
         // Tratamiento
@@ -441,11 +441,16 @@ public class Tratamiento {
             }
         }
         return switch (tipo) {
-            case 1 -> new Tratamiento(tratamiento, medicamento, posologia, fecha, hora, dni);
-            case 2 -> new Tratamiento(tratamiento, medicamento, posologia, fecha, hora, dni, true);
-            case 3 -> new Tratamiento(tratamiento, medicamento, posologia, fecha, hora, dni, 1);
+            case 1 -> {
+                Tratamiento t = new Tratamiento(tratamiento,medicamento,posologia);
+                t.setFechaCuidador(fecha);
+                t.setHoraCuidador(hora);
+
+            }
+            case 2 ->
+            case 3 ->
             default -> null;
         };
-    }
+    }*/
 
 }

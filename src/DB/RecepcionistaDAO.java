@@ -35,7 +35,7 @@ public class RecepcionistaDAO extends EmpleadoDAO{
     private static final String SELECT_ALL_QUERY = "SELECT e.dni, e.nombre, e.telefono, e.numcuenta, e.Sueldo FROM recepcionista r JOIN empleado e ON r.dni = e.dni";
     private static final String SELECT_BY_DNI_QUERY = "SELECT e.dni, e.nombre, e.telefono, e.numcuenta, e.Sueldo FROM recepcionista r JOIN empleado e ON r.dni = e.dni WHERE e.dni = ?";
     private static final String UPDATE_QUERY = "UPDATE recepcionista SET dni = ? WHERE dni = ?";
-    private static final String UPDATE_QUERY_EMPLEADO = "UPDATE empleado SET dni = ?, nombre = ?, telefono = ? , numcuenta = ?  WHERE dni = ?";
+    private static final String UPDATE_QUERY_EMPLEADO = "UPDATE empleado SET nombre = ?, telefono = ? , numcuenta = ?, saldo = ?  WHERE dni = ?";
     private static final String DELETE_QUERY = "DELETE FROM recepcionista WHERE dni = ?";
     private static final String DELETE_QUERY_EMPLEADO = "DELETE FROM empleado WHERE dni = ?";
     private static final String TOTAL_PERSONAS_QUERY = "SELECT COUNT(*) FROM recepcionista";
@@ -142,19 +142,14 @@ public class RecepcionistaDAO extends EmpleadoDAO{
         boolean autocommit = true;
         autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
-        try (PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
-            statement.setString(1, empleado.getDniEmpleado());
-            statement.setString(2, empleado.getNombreEmpleado());
-            statement.setInt(3, empleado.getTelefono());
-            statement.setString(4, empleado.getNumCuenta());
-            statement.setDouble(5,empleado.getSueldo());
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY_EMPLEADO)) {
 
-            PreparedStatement statement2 = connection.prepareStatement(UPDATE_QUERY_EMPLEADO);
-            statement2.setString(1, empleado.getDniEmpleado());
-            statement2.setString(2, empleado.getNombreEmpleado());
-            statement2.setInt(3, empleado.getTelefono());
-            statement2.setString(4, empleado.getNumCuenta());
-            statement2.setDouble(5,empleado.getSueldo());
+            statement.setString(1, empleado.getNombreEmpleado());
+            statement.setInt(2, empleado.getTelefono());
+            statement.setString(3, empleado.getNumCuenta());
+            statement.setDouble(4,empleado.getSueldo());
+            statement.setString(5, empleado.getDniEmpleado());
+
 
             statement.executeUpdate();
             connection.commit();
