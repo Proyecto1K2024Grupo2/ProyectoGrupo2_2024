@@ -148,8 +148,6 @@ public class Animal {
 
     /**
      * Menú principal para gestionar animales mediante consola.
-     *
-     * @param args Argumentos introducidos por usuario.
      * @throws Exception Si ocurre algún error en la creación o manipulación de animales.
      */
     public static void mostrarMenu() throws Exception {
@@ -179,10 +177,10 @@ public class Animal {
 
             switch (opc) {
                 case 1 -> System.out.println(animalDAO.getAllAnimal());
-                case 2 -> System.out.println(animalDAO.getAnimalById(pedirIdAnimal(sc)));
+                case 2 -> System.out.println(animalDAO.getAnimalById(pedirIdAnimal()));
                 case 3 -> animalDAO.insertAnimal(crearAnimal(sc, clienteDAO)); // ← pasa DAO
                 case 4 -> animalDAO.updateAnimal(crearAnimal(sc, clienteDAO));
-                case 5 -> animalDAO.deleteAnimal(pedirIdAnimal(sc));
+                case 5 -> animalDAO.deleteAnimal(pedirIdAnimal());
                 case 6 -> System.out.println(animalDAO.totalAnimales());
                 case 7 -> System.out.println("Saliendo del menú de animales...");
                 default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
@@ -190,16 +188,27 @@ public class Animal {
         } while (opc != 7);
     }
 
-    private static int pedirIdAnimal(Scanner sc) {
-        System.out.println("Introduce el ID del animal: ");
-        try {
-            return sc.nextInt();
-        } catch (Exception e) {
-            sc.nextLine(); // Limpiar buffer
-            System.out.println("ERROR, formato de ID no válido.");
-            throw new RuntimeException(e);
-        }
+    private static int pedirIdAnimal() {
+        Scanner sc = new Scanner(System.in);
+        int id = -1;
+        boolean valido;
+
+        do {
+            System.out.print("Introduce el ID del animal: ");
+            valido = true;
+
+            try {
+                id = Integer.parseInt(sc.next());
+
+            } catch (NumberFormatException e) {
+                valido = false;
+                System.out.println("ERROR: Formato de ID no válido. Debe ser un número entero.");
+            }
+        } while (valido == false);
+
+        return id;
     }
+
 
     private static Animal crearAnimal(Scanner sc, ClienteDAO clienteDAO) throws Exception {
         System.out.println("Introduce el DNI del dueño del animal: ");

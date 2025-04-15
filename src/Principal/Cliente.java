@@ -101,48 +101,55 @@ public class Cliente {
         int opc = 0;
 
         while (opc != 7) {
-            // Menú interactivo
-            System.out.println("""
-                    ===== MENÚ TRATAMIENTOS =====
-                    1. Mostrar datos de todos los clientes
-                    2. Mostrar datos de un cliente por el DNI
-                    3. Insertar cliente
-                    4. Actualizar datos del cliente
-                    5. Eliminar un cliente
-                    6. Número total de clientes
-                    7. Salir
-                    """);
+            try {
+                System.out.println("""
+                        ===== MENÚ TRATAMIENTOS =====
+                        1. Mostrar datos de todos los clientes
+                        2. Mostrar datos de un cliente por el DNI
+                        3. Insertar cliente
+                        4. Actualizar datos del cliente
+                        5. Eliminar un cliente
+                        6. Número total de clientes
+                        7. Salir
+                        """);
 
-            System.out.print("Selecciona una opción: ");
-            while (!sc.hasNextInt()) {
-                System.out.println("Por favor, ingresa un número válido.");
-                sc.next();
-            }
-            opc = sc.nextInt();
+                System.out.print("Selecciona una opción: ");
+                while (!sc.hasNextInt()) {
+                    System.out.println("Por favor, ingresa un número válido.");
+                    sc.next();
+                }
+                opc = sc.nextInt();
+                sc.nextLine(); // limpiar el búfer
 
-            switch (opc) {
-                case 1 -> System.out.println(clienteDAO.getAllClientes());
-                case 2 -> System.out.println(clienteDAO.getClienteByDNI(pedirDniClienteSinComprobar(sc)));
-                case 3 -> clienteDAO.insertCliente(crearCliente(sc));
-                case 4 -> clienteDAO.updateCliente(crearCliente(sc));
-                case 5 -> clienteDAO.deleteCliente(pedirDniCliente(sc));
-                case 6 -> System.out.println(clienteDAO.totalClientes());
-                case 7 -> System.out.println("Saliendo del menú de clientes...");
-                default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
+                switch (opc) {
+                    case 1 -> System.out.println(clienteDAO.getAllClientes());
+                    case 2 -> System.out.println(clienteDAO.getClienteByDNI(pedirDni(sc)));
+                    case 3 -> clienteDAO.insertCliente(crearCliente(sc));
+                    case 4 -> clienteDAO.updateCliente(crearCliente(sc));
+                    case 5 -> clienteDAO.deleteCliente(pedirDni(sc));
+                    case 6 -> System.out.println(clienteDAO.totalClientes());
+                    case 7 -> System.out.println("Saliendo del menú de clientes...");
+                    default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error de formato de entrada: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error de validación: " + e.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Error en la base de datos: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("ERROR inesperado: " + e.getMessage());
             }
         }
     }
 
-    private static String pedirDniClienteSinComprobar(Scanner sc) {
-        System.out.print("Introduce el DNI del cliente: ");
-        String dni = sc.next();
-        try {
-            return dni;
-        } catch (Exception e) {
-            sc.nextLine();
-            System.out.println("ERROR, DNI no válido.");
-            throw new RuntimeException(e);
+    private static String pedirDni(Scanner sc) {
+        System.out.print("Introduce el DNI: ");
+        String dni = sc.nextLine().trim();
+        if (!dni.matches("\\d{8}[A-Z]")) {
+            throw new IllegalArgumentException("DNI no válido.");
         }
+        return dni;
     }
 
     private static String pedirDniCliente(Scanner sc) {

@@ -31,9 +31,9 @@ public class VeterinarioDAO extends EmpleadoDAO {
     // Consultas SQL predefinidas para operaciones CRUD
     private static final String INSERT_QUERY = "INSERT INTO veterinario (dni) VALUES (?)";
     private static final String INSERT_QUERY_EMPLEADO = "INSERT INTO empleado(dni, nombre, telefono, numcuenta, sueldo) VALUES (?, ?, ?, ?,?)";
-    private static final String SELECT_ALL_QUERY = "SELECT e.dni, e.nombre, e.telefono, e.numcuenta, e.Sueldo\n FROM veterinario v JOIN empleado e ON v.dni = e.dni";
-    private static final String SELECT_BY_DNI_QUERY = "SELECT e.dni, e.nombre, e.telefono, e.numcuenta, e.Sueldo\n FROM veterinario v JOIN empleado e ON v.dni = e.dni WHERE e.dni = ?";
-    private static final String UPDATE_QUERY = "UPDATE veterinario SET dni = ?, nombre = ?, telefono = ? , numcuenta = ?  WHERE dni = ?";
+    private static final String SELECT_ALL_QUERY = "SELECT e.dni, e.nombre, e.telefono, e.numcuenta, e.Sueldo FROM veterinario v JOIN empleado e ON v.dni = e.dni";
+    private static final String SELECT_BY_DNI_QUERY = "SELECT e.dni, e.nombre, e.telefono, e.numcuenta, e.Sueldo FROM veterinario v JOIN empleado e ON v.dni = e.dni WHERE e.dni = ?";
+    private static final String UPDATE_QUERY = "UPDATE veterinario SET dni = ? WHERE dni = ?";
     private static final String UPDATE_QUERY_EMPLEADO = "UPDATE empleado SET dni = ?, nombre = ?, telefono = ? , numcuenta = ?  WHERE dni = ?";
     private static final String DELETE_QUERY = "DELETE FROM veterinario WHERE dni = ?";
     private static final String DELETE_QUERY_EMPLEADO = "DELETE FROM empleado WHERE dni = ?";
@@ -89,19 +89,16 @@ public class VeterinarioDAO extends EmpleadoDAO {
         autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
 
-        try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY)) {
+        try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY_EMPLEADO)) {
             statement.setString(1, empleado.getDniEmpleado());
             statement.setString(2, empleado.getNombreEmpleado());
             statement.setInt(3, empleado.getTelefono());
             statement.setString(4, empleado.getNumCuenta());
             statement.setDouble(5, empleado.getSueldo());
             statement.executeUpdate();
-            PreparedStatement statement2 = connection.prepareStatement(INSERT_QUERY_EMPLEADO);
+
+            PreparedStatement statement2 = connection.prepareStatement(INSERT_QUERY);
             statement2.setString(1, empleado.getDniEmpleado());
-            statement2.setString(2, empleado.getNombreEmpleado());
-            statement2.setInt(3, empleado.getTelefono());
-            statement2.setString(4, empleado.getNumCuenta());
-            statement2.setDouble(5, empleado.getSueldo());
             statement2.executeUpdate();
 
             connection.commit();
@@ -145,8 +142,9 @@ public class VeterinarioDAO extends EmpleadoDAO {
             }
         }
         if (persona == null) {
-            System.out.println("Este empleado no está registrado como veterinario en la base de datos.");
+            System.err.println("Este empleado no está registrado como veterinario en la base de datos.");
         }
+
         return persona;
     }
 
@@ -157,7 +155,7 @@ public class VeterinarioDAO extends EmpleadoDAO {
      * @throws SQLException Si ocurre un error en la base de datos.
      */
     @Override
-    public void updateVeterinario(Empleado persona) throws SQLException {
+    public void updateEmpleado(Empleado persona) throws SQLException {
         boolean autocommit = true;
 
         autocommit = connection.getAutoCommit();
@@ -193,7 +191,7 @@ public class VeterinarioDAO extends EmpleadoDAO {
      * @throws SQLException Si ocurre un error en la base de datos.
      */
     @Override
-    public void deleteVeterinarioByDni(String dni) throws SQLException {
+    public void deleteEmpleadoByDni(String dni) throws SQLException {
         boolean autocommit = true;
         autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);

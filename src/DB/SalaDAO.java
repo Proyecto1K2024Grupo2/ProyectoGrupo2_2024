@@ -50,7 +50,7 @@ public class SalaDAO {
      * Constructor privado para evitar instanciación externa.
      * Obtiene la conexión a la base de datos desde DBConnection.
      */
-    private SalaDAO() {
+    public SalaDAO() {
         this.connection = DBConnection.getConnection();
     }
 

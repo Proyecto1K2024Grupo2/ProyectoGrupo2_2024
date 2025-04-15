@@ -2,8 +2,10 @@ package Principal;
 
 import DB.TratamientoDAO;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -283,6 +285,7 @@ public class Tratamiento {
         int opc = 0;
 
         do {
+            try {
             System.out.println("""
                     ===== MENÚ TRATAMIENTOS =====
                     1. Mostrar todos los tratamientos
@@ -310,7 +313,15 @@ public class Tratamiento {
                 case 7 -> System.out.println("Saliendo del menú de tratamientos...");
                 default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
             }
-
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha u hora incorrecto. Usa el formato YYYY-MM-DD para la fecha y HH:MM para la hora.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error de validación: " + e.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Error en la base de datos: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("ERROR inesperado: " + e.getMessage());
+            }
         } while (opc != 7);
     }
 
@@ -318,51 +329,117 @@ public class Tratamiento {
         System.out.print("Introduce el ID del tratamiento: ");
         while (!sc.hasNextInt()) {
             System.out.println("Por favor, introduce un número válido.");
-            sc.next();
+            sc.nextInt();
         }
         return sc.nextInt();
     }
 
     private static Tratamiento crearTratamiento(Scanner sc) {
         sc.nextLine(); // Limpiar buffer
-        System.out.print("Tratamiento: ");
-        String tratamiento = sc.nextLine();
 
-        System.out.print("Medicamento: ");
-        String medicamento = sc.nextLine();
+        // Tratamiento
+        String tratamiento = "";
+        boolean tratamientoValido = false;
+        while (!tratamientoValido) {
+            System.out.print("Tratamiento: ");
+            tratamiento = sc.nextLine();
+            if (!tratamiento.isEmpty()) {
+                tratamientoValido = true;
+            } else {
+                System.out.println("El nombre del tratamiento no puede estar vacío.");
+            }
+        }
 
-        System.out.print("Posología: ");
-        String posologia = sc.nextLine();
+        // Medicamento
+        String medicamento = "";
+        boolean medicamentoValido = false;
+        while (!medicamentoValido) {
+            System.out.print("Medicamento: ");
+            medicamento = sc.nextLine();
+            if (!medicamento.isEmpty()) {
+                medicamentoValido = true;
+            } else {
+                System.out.println("El medicamento no puede estar vacío.");
+            }
+        }
 
-        System.out.println("""
+        // Posología
+        String posologia = "";
+        boolean posologiaValida = false;
+        while (!posologiaValida) {
+            System.out.print("Posología: ");
+            posologia = sc.nextLine();
+            if (!posologia.isEmpty()) {
+                posologiaValida = true;
+            } else {
+                System.out.println("La posología no puede estar vacía.");
+            }
+        }
+
+        // Tipo de tratamiento
+        int tipo = 0;
+        boolean tipoValido = false;
+        while (!tipoValido) {
+            System.out.println("""
                 ¿Quién realiza el tratamiento?
                 1. Cuidador
                 2. Veterinario
                 3. Cirujano
                 """);
-
-        int tipo;
-        while (true) {
             System.out.print("Selecciona una opción (1-3): ");
             if (sc.hasNextInt()) {
                 tipo = sc.nextInt();
                 sc.nextLine(); // Limpiar buffer
-                if (tipo >= 1 && tipo <= 3) break;
+                if (tipo >= 1 && tipo <= 3) {
+                    tipoValido = true;
+                } else {
+                    System.out.println("Opción no válida.");
+                }
             } else {
                 sc.next(); // Limpiar entrada incorrecta
+                System.out.println("Opción no válida.");
             }
-            System.out.println("Opción no válida.");
         }
 
-        System.out.print("Fecha (YYYY-MM-DD): ");
-        LocalDate fecha = LocalDate.parse(sc.nextLine());
+        // Fecha
+        LocalDate fecha = null;
+        boolean fechaValida = false;
+        while (!fechaValida) {
+            try {
+                System.out.print("Fecha (YYYY-MM-DD): ");
+                String fechaStr = sc.nextLine();
+                fecha = LocalDate.parse(fechaStr);
+                fechaValida = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de fecha incorrecto. Usa el formato YYYY-MM-DD.");
+            }
+        }
 
-        System.out.print("Hora (HH:MM): ");
-        LocalTime hora = LocalTime.parse(sc.nextLine());
+        // Hora
+        LocalTime hora = null;
+        boolean horaValida = false;
+        while (!horaValida) {
+            try {
+                System.out.print("Hora (HH:MM): ");
+                String horaStr = sc.nextLine();
+                hora = LocalTime.parse(horaStr);
+                horaValida = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato de hora incorrecto. Usa el formato HH:MM.");
+            }
+        }
 
-        System.out.print("DNI del profesional: ");
-        String dni = sc.nextLine();
-
+        String dni = "";
+        boolean dniValido = false;
+        while (!dniValido) {
+            System.out.print("DNI del profesional: ");
+            dni = sc.nextLine();
+            if (dni.matches("\\d{8}[A-Z]")) {
+                dniValido = true;
+            } else {
+                System.out.println("DNI no válido. Debe tener 8 dígitos seguidos de una letra mayúscula.");
+            }
+        }
         return switch (tipo) {
             case 1 -> new Tratamiento(tratamiento, medicamento, posologia, fecha, hora, dni);
             case 2 -> new Tratamiento(tratamiento, medicamento, posologia, fecha, hora, dni, true);

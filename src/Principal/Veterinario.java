@@ -1,6 +1,5 @@
 package Principal;
 
-import DB.EmpleadoDAO;
 import DB.VeterinarioDAO;
 
 import java.sql.SQLException;
@@ -80,43 +79,54 @@ public class Veterinario extends Empleado {
     public static void mostrarMenu() throws Exception {
         VeterinarioDAO veterinarioDAO = new VeterinarioDAO();
         Scanner sc = new Scanner(System.in);
-        int opc;
+        int opc = 0;
 
         do {
-            System.out.println("""
-                    ===== MENÚ VETERINARIOS =====
-                    1. Mostrar todos los veterinarios
-                    2. Mostrar veterinario por DNI
-                    3. Insertar veterinario
-                    4. Actualizar veterinario
-                    5. Eliminar veterinario
-                    6. Total de veterinarios
-                    7. SALIR
-                    """);
+            try {
+                System.out.println("""
+                ===== MENÚ VETERINARIOS =====
+                1. Mostrar todos los veterinarios
+                2. Mostrar veterinario por DNI
+                3. Insertar veterinario
+                4. Actualizar veterinario
+                5. Eliminar veterinario
+                6. Total de veterinarios
+                7. SALIR
+                """);
 
-            System.out.print("Selecciona una opción: ");
-            while (!sc.hasNextInt()) {
-                System.out.println("Por favor, ingresa un número válido.");
-                sc.next();
-            }
-            opc = sc.nextInt();
-            sc.nextLine(); // limpiar buffer
+                System.out.print("Selecciona una opción: ");
+                while (!sc.hasNextInt()) {
+                    System.out.println("Por favor, ingresa un número válido.");
+                    sc.next();
+                }
+                opc = sc.nextInt();
+                sc.nextLine();
 
-            switch (opc) {
-                case 1 -> System.out.println(veterinarioDAO.getAllVeterinarios());
-                case 2 -> System.out.println(veterinarioDAO.getVeterinarioByDni(pedirDni(sc)));
-                case 3 -> veterinarioDAO.insertEmpleado(crearVeterinario(sc));
-                case 4 -> veterinarioDAO.updateVeterinario(crearVeterinario(sc));
-                case 5 -> veterinarioDAO.deleteVeterinarioByDni(pedirDni(sc));
-                case 6 -> System.out.println("Total de veterinarios: " + veterinarioDAO.totalVeterinarios());
-                case 7 -> System.out.println("Saliendo del menú de veterinarios...");
-                default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
+                switch (opc) {
+                    case 1 -> System.out.println(veterinarioDAO.getAllVeterinarios());
+                    case 2 -> System.out.println(veterinarioDAO.getVeterinarioByDni(pedirDni(sc)));
+                    case 3 -> veterinarioDAO.insertEmpleado(crearVeterinario(sc));
+                    case 4 -> veterinarioDAO.updateEmpleado(crearVeterinario(sc));
+                    case 5 -> veterinarioDAO.deleteEmpleadoByDni(pedirDni(sc));
+                    case 6 -> System.out.println("Total de veterinarios: " + veterinarioDAO.totalVeterinarios());
+                    case 7 -> System.out.println("Saliendo del menú de veterinarios...");
+                    default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error de formato de entrada: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error de validación: " + e.getMessage());
+            } catch (SQLException e) {
+                System.out.println("Error en la base de datos: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("ERROR inesperado: " + e.getMessage());
             }
         } while (opc != 7);
     }
 
     private static String pedirDni(Scanner sc) {
-        System.out.print("Introduce el DNI del veterinario: ");
+        System.out.print("Introduce el DNI: ");
         String dni = sc.nextLine().trim();
         if (!dni.matches("\\d{8}[A-Z]")) {
             throw new IllegalArgumentException("DNI no válido.");

@@ -2,7 +2,6 @@ package DB;
 
 import Principal.Cuidador;
 import Principal.Empleado;
-import org.sqlite.core.DB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +20,7 @@ import java.util.List;
  * @author Juan Carlos Garcia
  */
 public class CuidadorDAO extends EmpleadoDAO{
-    // Instancia única de PersonaDAO
+    // Instancia única de CuidadorDAO
     private static CuidadorDAO instance;
 
     // Conexión a la base de datos
@@ -30,21 +29,21 @@ public class CuidadorDAO extends EmpleadoDAO{
     //Sentencia SQL para crear la si no existe
 
     // Consultas SQL predefinidas para operaciones CRUD
-    private static final String INSERT_QUERY = "INSERT INTO Cuidador (dni, nombre, telefono, NumeroCuenta, Sueldo) VALUES (?, ?, ?, ?,?)";
-    private static final String INSERT_QUERY_EMPLEADO = "INSERT INTO Empleado(dni, nombre, telefono, NumeroCuenta, Sueldo) VALUES (?, ?, ?, ?,?)";
-    private static final String SELECT_ALL_QUERY = "SELECT * FROM Cuidador";
-    private static final String SELECT_BY_DNI_QUERY = "SELECT * FROM Cuidador WHERE dni = ?";
-    private static final String UPDATE_QUERY = "UPDATE Cuidador SET dni = ?, nombre = ?, telefono = ? , NumeroCuenta = ?  WHERE dni = ?";
-    private static final String UPDATE_QUERY_EMPLEADO = "UPDATE Cuidador SET dni = ?, nombre = ?, telefono = ? , NumeroCuenta = ?  WHERE dni = ?";
-    private static final String DELETE_QUERY = "DELETE FROM Cuidador WHERE dni = ?";
-    private static final String DELETE_QUERY_EMPLEADO = "DELETE FROM Cuidador WHERE dni = ?";
-    private static final String TOTAL_PERSONAS_QUERY = "SELECT COUNT(*) FROM Cuidador";
+    private static final String INSERT_QUERY = "INSERT INTO cuidador (dni) VALUES (?, ?, ?, ?,?)";
+    private static final String INSERT_QUERY_EMPLEADO = "INSERT INTO empleado(dni) VALUES (?)";
+    private static final String SELECT_ALL_QUERY = "SELECT e.dni, e.nombre, e.telefono, e.numcuenta, e.Sueldo FROM empleado e JOIN cuidador cu ON cu.dni = e.dni";
+    private static final String SELECT_BY_DNI_QUERY = "SELECT e.dni, e.nombre, e.telefono, e.numcuenta, e.Sueldo FROM cuidador cu JOIN empleado e ON cu.dni = e.dni WHERE cu.dni = ?";
+    private static final String UPDATE_QUERY = "UPDATE cuidador SET dni = ? WHERE dni = ?";
+    private static final String UPDATE_QUERY_EMPLEADO = "UPDATE empleado SET dni = ?, nombre = ?, telefono = ? , numcuenta = ?  WHERE dni = ?";
+    private static final String DELETE_QUERY = "DELETE FROM cuidador WHERE dni = ?";
+    private static final String DELETE_QUERY_EMPLEADO = "DELETE FROM empleado WHERE dni = ?";
+    private static final String TOTAL_PERSONAS_QUERY = "SELECT COUNT(*) FROM cuidador";
 
     /**
      * Constructor privado para evitar instanciación externa.
      * Obtiene la conexión a la base de datos desde DBConnection.
      */
-    private CuidadorDAO() {
+    public CuidadorDAO() {
         super();
         this.connection = DBConnection.getConnection();
 
@@ -53,7 +52,7 @@ public class CuidadorDAO extends EmpleadoDAO{
     /**
      * Método estático para obtener la única instancia de PersonaDAO.
      *
-     * @return instancia única de PersonaDAO.
+     * @return instancia única de CuidadorDAO.
      */
     public static synchronized CuidadorDAO getInstance() {
         if (instance == null) {
@@ -63,9 +62,9 @@ public class CuidadorDAO extends EmpleadoDAO{
     }
 
     /**
-     * Inserta una nueva empleado en la base de datos.
+     * Inserta un nuevo cuidador en la base de datos.
      *
-     * @param empleado Objeto Persona a insertar.
+     * @param empleado Objeto Cuidador a insertar.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
     @Override
@@ -74,19 +73,15 @@ public class CuidadorDAO extends EmpleadoDAO{
         autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
 
-        try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY)) {
+        try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY_EMPLEADO)) {
             statement.setString(1, empleado.getDniEmpleado());
             statement.setString(2, empleado.getNombreEmpleado());
             statement.setInt(3, empleado.getTelefono());
             statement.setString(4, empleado.getNumCuenta());
             statement.setDouble(5, empleado.getSueldo());
             statement.executeUpdate();
-            PreparedStatement statement2 = connection.prepareStatement(INSERT_QUERY_EMPLEADO);
+            PreparedStatement statement2 = connection.prepareStatement(INSERT_QUERY);
             statement2.setString(1, empleado.getDniEmpleado());
-            statement2.setString(2, empleado.getNombreEmpleado());
-            statement2.setInt(3, empleado.getTelefono());
-            statement2.setString(4, empleado.getNumCuenta());
-            statement2.setDouble(5, empleado.getSueldo());
             statement2.executeUpdate();
 
             connection.commit();
@@ -99,50 +94,53 @@ public class CuidadorDAO extends EmpleadoDAO{
     }
 
     /**
-     * Obtiene todas las personas almacenadas en la base de datos.
+     * Obtiene todos los cuidadores almacenados en la base de datos.
      *
-     * @return Lista de objetos Persona.
+     * @return Lista de objetos Cuidador.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
 
-    public List<Cuidador> getAllPersonas() throws SQLException {
+    public List<Cuidador> getAllCuidadores() throws SQLException {
         List<Cuidador> personas = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_QUERY)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                personas.add(resultSetToPersona(resultSet));
+                personas.add(resultSetToCuidador(resultSet));
             }
         }
         return personas;
     }
 
     /**
-     * Obtiene una persona a partir de su DNI.
+     * Obtiene un cuidador a partir de su DNI.
      *
-     * @param dni Identificador único de la persona.
-     * @return Objeto Persona si se encuentra, null si no.
+     * @param dni Identificador único del cuidador.
+     * @return Objeto Cuidador si se encuentra, null si no.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
-    public Cuidador getPersonaByDni(String dni) throws SQLException {
+    public Cuidador getCuidadorByDni(String dni) throws SQLException {
         Cuidador persona = null;
         try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_DNI_QUERY)) {
             statement.setString(1, dni);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                persona = resultSetToPersona(resultSet);
+                persona = resultSetToCuidador(resultSet);
             }
+        }
+        if (persona == null) {
+            System.err.println("Este empleado no está registrado como cuidador en la base de datos.");
         }
         return persona;
     }
 
     /**
-     * Actualiza los datos de una empleado en la base de datos.
+     * Actualiza los datos de un cuidador en la base de datos.
      *
-     * @param empleado Objeto Persona con los datos actualizados.
+     * @param empleado Objeto Cuidador con los datos actualizados.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
     @Override
-    public void updateVeterinario(Empleado empleado) throws SQLException {
+    public void updateEmpleado(Empleado empleado) throws SQLException {
         boolean autocommit = true;
 
         autocommit = connection.getAutoCommit();
@@ -172,13 +170,13 @@ public class CuidadorDAO extends EmpleadoDAO{
     }
 
     /**
-     * Elimina una persona de la base de datos por su DNI.
+     * Elimina un cuidador de la base de datos por su DNI.
      *
-     * @param dni Identificador único de la persona a eliminar.
+     * @param dni Identificador único del cuidador a eliminar.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
     @Override
-    public void deleteVeterinarioByDni(String dni) throws SQLException {
+    public void deleteEmpleadoByDni(String dni) throws SQLException {
         boolean autocommit = true;
         autocommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
@@ -198,28 +196,28 @@ public class CuidadorDAO extends EmpleadoDAO{
     }
 
     /**
-     * Convierte un ResultSet en un objeto Persona.
+     * Convierte un ResultSet en un objeto Cuidador.
      *
      * @param resultSet Resultado de la consulta SQL.
-     * @return Objeto Persona con los datos del ResultSet.
+     * @return Objeto Cuidador con los datos del ResultSet.
      * @throws SQLException Si ocurre un error en la conversión.
      */
-    private Cuidador resultSetToPersona(ResultSet resultSet) throws SQLException {
+    private Cuidador resultSetToCuidador(ResultSet resultSet) throws SQLException {
         return new Cuidador(
                 resultSet.getString("DNI"),
                 resultSet.getString("Nombre"),
                 resultSet.getInt("Telefono"),
-                resultSet.getString("Cuenta"),
+                resultSet.getString("numCuenta"),
                 resultSet.getInt("Sueldo"));
     }
 
     /**
-     * Obtiene el total de personas almacenadas en la base de datos.
+     * Obtiene el total de cuidadores almacenados en la base de datos.
      *
-     * @return Número total de personas.
+     * @return Número total de cuidadores.
      * @throws SQLException Si ocurre un error en la base de datos.
      */
-    public int totalPersonas() throws SQLException {
+    public int totalCuidador() throws SQLException {
         int total = 0;
         try (PreparedStatement statement = connection.prepareStatement(TOTAL_PERSONAS_QUERY)) {
             ResultSet resultSet = statement.executeQuery();

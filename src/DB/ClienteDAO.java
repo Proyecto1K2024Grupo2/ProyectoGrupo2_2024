@@ -118,6 +118,9 @@ public class ClienteDAO {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) c = resultSetToCliente(resultSet);
         }
+        if (c == null) {
+            System.err.println("Este cliente no está registrado en la base de datos.");
+        }
         return c;
     }
 

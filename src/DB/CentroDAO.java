@@ -156,6 +156,7 @@ public class CentroDAO {
      */
     private Centro resultSetToCentro(ResultSet resultSet) throws SQLException {
         return new Centro(
+                resultSet.getInt("cod"),
                 resultSet.getString("nombre"),    // Obtiene el nombre del centro
                 resultSet.getString("direccion"), // Obtiene la dirección
                 resultSet.getString("cp")         // Obtiene el código postal

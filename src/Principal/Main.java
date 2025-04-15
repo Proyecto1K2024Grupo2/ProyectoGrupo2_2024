@@ -11,7 +11,7 @@ public class Main {
                 === MENÚ PRINCIPAL ===
                 1. Gestionar ANIMALES
                 2. Gestionar CLIENTES
-                3. Gestionar TRATAMIENTOS
+                3. Gestionar TRATAMIENTOS 
                 4. Gestionar CITAS
                 5. Gestionar HISTORIAL
                 6. Gestionar VETERINARIOS
@@ -37,6 +37,11 @@ public class Main {
                 case 4 -> Cita.mostrarMenu();
                 case 5 -> Historial.mostrarMenu();
                 case 6 -> Veterinario.mostrarMenu();
+                case 7 -> Cirujano.mostrarMenu();
+                case 8 -> Cuidador.mostrarMenu();
+                case 9 -> Recepcionista.mostrarMenu();
+                case 10 -> Centro.mostrarMenu();
+                case 11 -> Sala.mostrarMenu();
                 case 12 -> System.out.println("Saliendo del programa...");
                 default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
             }
