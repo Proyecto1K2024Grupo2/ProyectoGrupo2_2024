@@ -26,7 +26,7 @@
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raul]\
-Inserción y comprobación de datos: Rubén, [Juan Carlos]\
+Inserción y comprobación de datos: Rubén, [Juan Carlos]
 
 ### Creacion y comprobacion de consultas:
   Consultas 1,3 y 7 [Juan Carlos]\
