@@ -22,6 +22,7 @@
 ## Desarrollo de la aplicación en JAVA
 ### [Código](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/tree/Master)
 ### [Documentación Javadoc](https://proyecto1k2024grupo2.github.io/ProyectoGrupo2_2024)
+### [Repositorio JavaFX](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2JavaFX)
 
 ## Reparto De Trabajo
 Creación de tablas y comprobación: [Martín, Juan Carlos, Raúl, Rubén]\
