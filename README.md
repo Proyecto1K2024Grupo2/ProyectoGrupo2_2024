@@ -6,20 +6,20 @@
 [**Raul Quilez Ruiz**](https://github.com/Quilez42) \
 [**Rubén Expósito Vicente**](https://github.com/Rebirzt)
 
-## Indice De Contenidos
-### [Modelo Logico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/Modelo%20Logico.md)
-### [Modelo Fisico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/Modelo%20Físico.md)
+## Índice De Contenidos
+### [Modelo Lógico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/Modelo%20Logico.md)
+### [Modelo Físico](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/Modelo%20Físico.md)
 ### [DDL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/DDL.sql)
 ### [DML](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Creación/DML.sql)
 ### [PL/SQL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/PLSQL/plSQL.sql)
 
 
-## Posibes consultas para la BD
+## Posibles consultas para la BD
 ### [Consultas_Sencillas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/1.Consultas_Sencillas.sql)
 ### [Consultas_Agregadas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/2.Consultas_Agregadas.sql)
 ### [SubConsultas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/3.SubConsultas.sql)
 
-## Desarro de la aplicación en JAVA
+## Desarrollo de la aplicación en JAVA
 ### [Código](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/tree/Master)
 ### [Documentación Javadoc](https://proyecto1k2024grupo2.github.io/ProyectoGrupo2_2024)
 
