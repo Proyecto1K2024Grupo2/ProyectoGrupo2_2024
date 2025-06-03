@@ -14,7 +14,7 @@
 ### [PL/SQL](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/PLSQL/plSQL.sql)
 
 
-## Posibles consultas para la BD
+## Posibles consultas para la Base de Datos
 ### [Consultas_Sencillas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/1.Consultas_Sencillas.sql)
 ### [Consultas_Agregadas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/2.Consultas_Agregadas.sql)
 ### [SubConsultas](https://github.com/Proyecto1K2024Grupo2/ProyectoGrupo2_2024/blob/main/Consultas/3.SubConsultas.sql)
@@ -26,15 +26,15 @@
 ## Reparto De Trabajo
 Creación de tablas y comprobación: Martín, [Juan Carlos, Raúl, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raúl]\
-Inserción y comprobación de datos: Rubén, [Juan Carlos]
+Inserción y comprobación de datos: [Rubén, Juan Carlos]
 
-### Creacion y comprobacion de consultas:
+### Creación y comprobación de consultas:
   Consultas 1, 3 y 7 [Juan Carlos]\
   Consutas 2, 6 y 8 [Rubén]\
   Consultas 4 y 9 [Martín]\
   Consultas 5 y 10 [Raúl]
 
-### Creación de DAO
+### Creación del DAO
   [Martín] Tablas: Centro, Sala\
   [Juan Carlos] Tablas: Cuidador, Veterinario, Cirujano\
   [Rubén] Tablas: Recepcionista, Cita\
