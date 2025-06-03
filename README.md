@@ -29,8 +29,8 @@ Creación y comprobación de restricciones: [Martín, Raul]\
 Inserción y comprobación de datos: Rubén, [Juan Carlos]
 
 ### Creacion y comprobacion de consultas:
-  Consultas 1,3 y 7 [Juan Carlos]\
-  Consutas 2,6 y 8 [Rubén]\
+  Consultas 1, 3 y 7 [Juan Carlos]\
+  Consutas 2, 6 y 8 [Rubén]\
   Consultas 4 y 9 [Martin]\
   Consultas 5 y 10 [Raul]
 
