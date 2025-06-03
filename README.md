@@ -2,8 +2,8 @@
 
 ## Miembros
 [**Juan Carlos Garcia Andreu**](https://github.com/JuanCarlosgarcia86) \
-[**Martin Davia Mora**](https://github.com/Apolonelche) \
-[**Raul Quilez Ruiz**](https://github.com/Quilez42) \
+[**Martín Davia Mora**](https://github.com/Apolonelche) \
+[**Raúl Quilez Ruiz**](https://github.com/Quilez42) \
 [**Rubén Expósito Vicente**](https://github.com/Rebirzt)
 
 ## Índice De Contenidos
@@ -24,19 +24,19 @@
 ### [Documentación Javadoc](https://proyecto1k2024grupo2.github.io/ProyectoGrupo2_2024)
 
 ## Reparto De Trabajo
-Creación de tablas y comprobación: Martin, [Juan Carlos, Raul, Rubén]\
-Creación y comprobación de restricciones: [Martín, Raul]\
+Creación de tablas y comprobación: Martín, [Juan Carlos, Raúl, Rubén]\
+Creación y comprobación de restricciones: [Martín, Raúl]\
 Inserción y comprobación de datos: Rubén, [Juan Carlos]
 
 ### Creacion y comprobacion de consultas:
   Consultas 1, 3 y 7 [Juan Carlos]\
   Consutas 2, 6 y 8 [Rubén]\
-  Consultas 4 y 9 [Martin]\
-  Consultas 5 y 10 [Raul]
+  Consultas 4 y 9 [Martín]\
+  Consultas 5 y 10 [Raúl]
 
 ### Creación de DAO
-  [Martin] Tablas: Centro, Sala\
+  [Martín] Tablas: Centro, Sala\
   [Juan Carlos] Tablas: Cuidador, Veterinario, Cirujano\
-  [Ruben] Tablas: Recepcionista, Cita\
-  [Raul] Tablas: Cliente, Animal\
+  [Rubén] Tablas: Recepcionista, Cita\
+  [Raúl] Tablas: Cliente, Animal\
   Entre todos: Tratamiento, Historial
