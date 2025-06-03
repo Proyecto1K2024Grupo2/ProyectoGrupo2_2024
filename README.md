@@ -24,7 +24,7 @@
 ### [Documentación Javadoc](https://proyecto1k2024grupo2.github.io/ProyectoGrupo2_2024)
 
 ## Reparto De Trabajo
-Creación de tablas y comprobación: Martín, [Juan Carlos, Raúl, Rubén]\
+Creación de tablas y comprobación: [Martín, Juan Carlos, Raúl, Rubén]\
 Creación y comprobación de restricciones: [Martín, Raúl]\
 Inserción y comprobación de datos: [Rubén, Juan Carlos]
 
