@@ -3,8 +3,11 @@ package Principal;
 import DB.AnimalDAO;
 import DB.ClienteDAO;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -98,37 +101,95 @@ public class Animal {
 
 
     /**
-     * Convierte los datos del animal en formato XML.
+     * Convierte los datos de una lista de animales en formato XML.
      *
-     * @return Representación en XML del animal.
+     * @param lista Lista de objetos Animal a convertir.
+     * @return Representación en XML de la lista de animales.
      */
-    public String animalToXML() {
+    public static String animalesToXML(List<Animal> lista) {
         StringBuilder xmlBuilder = new StringBuilder();
-        xmlBuilder.append("      <id>").append(id).append("</id>")
-                .append("      <dni_cliente>").append(dni_cliente).append("</dni_cliente>")
-                .append("      <nombre>").append(nombreAnimal).append("</nombre>")
-                .append("      <especie>").append(especie).append("</especie>")
-                .append("      <raza>").append(raza).append("</raza>")
-                .append("      <fnac>").append(fnac).append("</fnac>");
+        // Añade la declaración XML para una mejor práctica
+        xmlBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        xmlBuilder.append("<animales>\n");
+        for (Animal a : lista) {
+            xmlBuilder.append("   <animal>\n")
+                    .append("      <id>").append(a.id).append("</id>\n")
+                    .append("      <dni_cliente>").append(a.dni_cliente).append("</dni_cliente>\n")
+                    .append("      <nombre>").append(a.nombreAnimal).append("</nombre>\n")
+                    .append("      <especie>").append(a.especie).append("</especie>\n")
+                    .append("      <raza>").append(a.raza).append("</raza>\n")
+                    .append("      <fnac>").append(a.fnac).append("</fnac>\n") // fnac ya es Date, toString() funciona bien
+                    .append("   </animal>\n");
+        }
+        xmlBuilder.append("</animales>\n");
         return xmlBuilder.toString();
     }
 
     /**
-     * Convierte los datos del animal en formato JSON.
+     * Convierte los datos de una lista de animales en formato JSON.
      *
-     * @return Representación en JSON del animal.
+     * @param lista Lista de objetos Animal a convertir.
+     * @return Representación en JSON de la lista de animales.
      */
-    public String animalToJSON() {
+    public static String animalesToJSON(List<Animal> lista) {
         StringBuilder jsonBuilder = new StringBuilder();
-        jsonBuilder.append("{")
-                .append("\"id\": \"").append(id).append("\", ")
-                .append("\"dni_cliente\": \"").append(dni_cliente).append("\", ")
-                .append("\"nombre\": \"").append(nombreAnimal).append("\", ")
-                .append("\"especie\": \"").append(especie).append("\", ")
-                .append("\"raza\": \"").append(raza).append("\", ")
-                .append("\"fnac\": \"").append(fnac).append("\"")
-                .append("}");
+        jsonBuilder.append("[\n"); // Abrir un array JSON para múltiples objetos
+        for (int i = 0; i < lista.size(); i++) {
+            Animal a = lista.get(i);
+            jsonBuilder.append("   {\n")
+                    .append("      \"id\": ").append(a.id).append(",\n") // ID como número, no string
+                    .append("      \"dni_cliente\": \"").append(a.dni_cliente).append("\",\n")
+                    .append("      \"nombre\": \"").append(a.nombreAnimal).append("\",\n")
+                    .append("      \"especie\": \"").append(a.especie).append("\",\n")
+                    .append("      \"raza\": \"").append(a.raza).append("\",\n")
+                    .append("      \"fnac\": \"").append(a.fnac).append("\"\n") // Fecha como string
+                    .append("   }");
+            if (i < lista.size() - 1) {
+                jsonBuilder.append(",\n"); // Añadir coma si no es el último elemento
+            } else {
+                jsonBuilder.append("\n"); // Nueva línea para el último
+            }
+        }
+        jsonBuilder.append("]\n"); // Cerrar el array JSON
         return jsonBuilder.toString();
+    }
+
+    /**
+     * Genera un archivo XML con los datos de una lista de animales, con nombre predeterminado.
+     * El archivo se llamará "animales.xml".
+     * @param lista Lista de objetos Animal a exportar.
+     * @return true si el archivo se generó con éxito, false en caso contrario.
+     */
+    public static boolean exportarAnimalesXML(List<Animal> lista) {
+        String nombreArchivo = "animales.xml"; // Nombre de archivo predeterminado
+        String xmlContent = animalesToXML(lista);
+        try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
+            fileWriter.write(xmlContent);
+            System.out.println("Archivo XML '" + nombreArchivo + "' generado con éxito.");
+            return true;
+        } catch (IOException e) {
+            System.err.println("Error al escribir el archivo XML '" + nombreArchivo + "': " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Genera un archivo JSON con los datos de una lista de animales, con nombre predeterminado.
+     * El archivo se llamará "animales.json".
+     * @param lista Lista de objetos Animal a exportar.
+     * @return true si el archivo se generó con éxito, false en caso contrario.
+     */
+    public static boolean exportarAnimalesJSON(List<Animal> lista) {
+        String nombreArchivo = "animales.json"; // Nombre de archivo predeterminado
+        String jsonContent = animalesToJSON(lista);
+        try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
+            fileWriter.write(jsonContent);
+            System.out.println("Archivo JSON '" + nombreArchivo + "' generado con éxito.");
+            return true;
+        } catch (IOException e) {
+            System.err.println("Error al escribir el archivo JSON '" + nombreArchivo + "': " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -160,12 +221,14 @@ public class Animal {
             System.out.println("""
                     ===== MENÚ ANIMALES =====
                     1. Mostrar datos de todos los animales
-                    2. Mostrar datos de un animal por ID
+                    2. Mostrar datos de un animal por DNI Cliente
                     3. Insertar animal
                     4. Actualizar datos de animal
                     5. Eliminar un animal
                     6. Numero total de animales
-                    7. SALIR
+                    7. Pasar a XML
+                    8. Pasar a JSON
+                    9. SALIR
                     """);
 
             System.out.print("Selecciona una opción: ");
@@ -177,12 +240,14 @@ public class Animal {
 
             switch (opc) {
                 case 1 -> System.out.println(animalDAO.getAllAnimal());
-                case 2 -> System.out.println(animalDAO.getAnimalById(pedirIdAnimal()));
+                case 2 -> System.out.println(animalDAO.getAnimalByDni(pedirDniCliente()));
                 case 3 -> animalDAO.insertAnimal(crearAnimal(sc, clienteDAO)); // ← pasa DAO
                 case 4 -> animalDAO.updateAnimal(crearAnimal(sc, clienteDAO));
                 case 5 -> animalDAO.deleteAnimal(pedirIdAnimal());
                 case 6 -> System.out.println(animalDAO.totalAnimales());
-                case 7 -> System.out.println("Saliendo del menú de animales...");
+                case 7 -> System.out.println(exportarAnimalesXML(animalDAO.getAllAnimal()));
+                case 8 -> System.out.println(exportarAnimalesJSON(animalDAO.getAllAnimal()));
+                case 9 -> System.out.println("Saliendo del menú de animales...");
                 default -> System.out.println("Opción no válida. Inténtalo de nuevo.");
             }
         } while (opc != 7);
@@ -209,6 +274,25 @@ public class Animal {
         return id;
     }
 
+    private static String pedirDniCliente() {
+        Scanner sc = new Scanner(System.in);
+        String dni = "";
+        boolean valido;
+
+        do {
+            System.out.print("Introduce el DNI del cliente: ");
+            dni = sc.nextLine(); // Leemos la línea completa para el DNI
+            valido = true; // Asumimos que es válido inicialmente
+
+            // Validación de formato del DNI (8 dígitos + 1 letra)
+            if (!dni.matches("\\d{8}[A-Z]")) {
+                valido = false;
+                System.out.println("ERROR: Formato de DNI no válido. Debe ser 8 números seguidos de una letra (ej. 12345678A).");
+            }
+        } while (!valido); // El bucle continúa mientras el DNI no sea válido
+
+        return dni;
+    }
 
     private static Animal crearAnimal(Scanner sc, ClienteDAO clienteDAO) throws Exception {
         System.out.println("Introduce el DNI del dueño del animal: ");

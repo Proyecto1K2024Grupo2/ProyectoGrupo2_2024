@@ -11,9 +11,9 @@ public class Main {
                 === MENÚ PRINCIPAL ===
                 1. Gestionar ANIMALES
                 2. Gestionar CLIENTES
-                3. Gestionar TRATAMIENTOS iu
-                4. Gestionar CITAS iu
-                5. Gestionar HISTORIAL N/A
+                3. Gestionar TRATAMIENTOS
+                4. Gestionar CITAS
+                5. Gestionar HISTORIAL
                 6. Gestionar VETERINARIOS
                 7. Gestionar CIRUJANOS
                 8. Gestionar CUIDADORES

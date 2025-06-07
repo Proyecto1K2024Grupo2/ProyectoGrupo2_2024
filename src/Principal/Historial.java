@@ -118,12 +118,12 @@ public class Historial {
                     .append("    </cita>\n");
         }
 
-        if (animal != null) {
+       /* if (animal != null) {
             xmlBuilder.append("    <animal>\n")
                     .append(animal.animalToXML())  // Este método debe existir en la clase Animal
                     .append("    </animal>\n");
         }
-
+*/
         if (tratamiento != null) {
             xmlBuilder.append("    <tratamiento>\n")
                     .append(tratamiento.tratamientoToXML())  // Este método debe existir en la clase Tratamiento
@@ -150,9 +150,9 @@ public class Historial {
             jsonBuilder.append(", \"cita\": ").append(cita.citaToJSON()); // Este método debe devolver JSON válido
         }
 
-        if (animal != null) {
+        /*if (animal != null) {
             jsonBuilder.append(", \"animal\": ").append(animal.animalToJSON());
-        }
+        }*/
 
         if (tratamiento != null) {
             jsonBuilder.append(", \"tratamiento\": ").append(tratamiento.tratamientoToJSON());
