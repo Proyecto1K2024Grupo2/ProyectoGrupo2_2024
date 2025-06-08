@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -240,9 +241,19 @@ public class Animal {
 
             switch (opc) {
                 case 1 -> System.out.println(animalDAO.getAllAnimal());
-                case 2 -> System.out.println(animalDAO.getAnimalByDni(pedirDniCliente()));
+                case 2 -> {
+                    String dniBuscar = pedirDniCliente();
+                    // Obtener la lista de animales para ese DNI
+                    List<Animal> animalesDelCliente = Collections.singletonList(animalDAO.getAnimalByDni(dniBuscar)); // Asume que tienes este método en AnimalDAO
+
+                    if (animalesDelCliente != null && !animalesDelCliente.isEmpty()) {
+                        System.out.println("El cliente con DNI " + dniBuscar + " no tiene ningún animal registrado.");
+                    } else {
+
+                    }
+                }
                 case 3 -> animalDAO.insertAnimal(crearAnimal(sc, clienteDAO)); // ← pasa DAO
-                case 4 -> animalDAO.updateAnimal(crearAnimal(sc, clienteDAO));
+                case 4 -> animalDAO.updateAnimal(ActualizacionAnimal(sc, clienteDAO, animalDAO));
                 case 5 -> animalDAO.deleteAnimal(pedirIdAnimal());
                 case 6 -> System.out.println(animalDAO.totalAnimales());
                 case 7 -> System.out.println(exportarAnimalesXML(animalDAO.getAllAnimal()));
@@ -341,6 +352,80 @@ public class Animal {
         Date fnac = Date.valueOf(fechaInput);
         return new Animal(dni, nombre, especie, raza, fnac);
     }
+
+    /**
+     * Pide los datos necesarios para actualizar un animal existente.
+     * Primero solicita el ID del animal a actualizar y luego los nuevos datos.
+     * @param sc Scanner para la entrada de usuario.
+     * @param clienteDAO DAO para verificar la existencia del cliente.
+     * @param animalDAO DAO para obtener el animal existente.
+     * @return Un objeto Animal con el ID y los datos actualizados, o null si el animal no se encuentra.
+     * @throws Exception Si hay errores de validación o no se puede añadir el cliente.
+     */
+    private static Animal ActualizacionAnimal(Scanner sc, ClienteDAO clienteDAO, AnimalDAO animalDAO) throws Exception {
+        int idAnimal = pedirIdAnimal(); // Pedimos el ID del animal a actualizar
+
+        // Intentamos obtener el animal existente por su ID
+        Animal animalExistente = animalDAO.getAnimalById(idAnimal);
+
+        if (animalExistente == null) {
+            System.out.println("Animal con ID " + idAnimal + " no encontrado.");
+            return null;
+        }
+
+        System.out.println("\n--- Introduzca los nuevos datos para el animal con ID " + idAnimal + " ---");
+
+        sc.nextLine(); // Limpiamos el buffer antes de leer el DNI
+
+        System.out.println("Introduce el DNI del dueño actual del animal (actual: " + animalExistente.getDni_cliente() + "): ");
+        String dni = sc.nextLine();
+        if (!dni.matches("\\d{8}[A-Z]")) {
+            throw new IllegalArgumentException("DNI no válido.");
+        }
+
+        // Verificar existencia del cliente (misma lógica que en crearAnimal)
+        if (clienteDAO.getClienteByDNI(dni) == null) {
+            System.out.println("No existe ningún cliente con ese DNI. ¿Deseas añadirlo? (s/n)");
+            String respuesta = sc.nextLine();
+            if (respuesta.equalsIgnoreCase("s")) {
+                Cliente nuevoCliente = crearCliente(sc, dni);
+                clienteDAO.insertCliente(nuevoCliente);
+                System.out.println("Cliente añadido con éxito.");
+            } else {
+                throw new IllegalStateException("No se puede continuar sin un cliente válido.");
+            }
+        }
+
+        System.out.println("Introduce el nuevo nombre del animal (actual: " + animalExistente.getNombreAnimal() + "): ");
+        String nombre = sc.nextLine();
+        if (!nombre.matches(".{1,64}")) {
+            throw new IllegalArgumentException("Nombre no válido.");
+        }
+
+        System.out.println("Introduce la nueva especie del animal (actual: " + animalExistente.getEspecie() + "): ");
+        String especie = sc.nextLine();
+        if (!especie.matches(".{1,64}")) {
+            throw new IllegalArgumentException("Especie no válida.");
+        }
+
+        System.out.println("Introduce la nueva raza del animal (actual: " + animalExistente.getRaza() + "): ");
+        String raza = sc.nextLine();
+        if (!raza.matches(".{1,64}")) {
+            throw new IllegalArgumentException("Raza no válida.");
+        }
+
+        System.out.println("Introduce la nueva fecha de nacimiento del animal (YYYY-MM-DD) (actual: " + animalExistente.getFnac() + "): ");
+        String fechaInput = sc.nextLine();
+        if (!fechaInput.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new IllegalArgumentException("Formato de fecha inválido.");
+        }
+
+        Date fnac = Date.valueOf(fechaInput);
+
+        // Creamos un nuevo objeto Animal con el ID original y los nuevos datos
+        return new Animal(idAnimal, dni, nombre, especie, raza, fnac);
+    }
+
 
     private static Cliente crearCliente(Scanner sc, String dni) {
         System.out.println("Introduce el nombre del cliente: ");
